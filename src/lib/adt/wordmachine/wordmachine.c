@@ -68,7 +68,7 @@ void CopyWord(){
     // ALGORITMA
     IgnoreBlanks(); // Skip blank-blank
     currentWord.Length = 0; // Menginisiasi variabel panjang kata
-    while(currentChar != BLANK && currentChar != MARK && currentWord.Length < NMax){ // Looping ketika character != ' ' dan != MARK dan panjang belum melebihi maksimum
+    while(currentChar != BLANK && currentChar != MARK && currentWord.Length < NMax && currentChar != '\n'){ // Looping ketika character != ' ' dan != MARK dan panjang belum melebihi maksimum
         currentWord.TabWord[currentWord.Length] = currentChar;
         currentWord.Length++;
         ADV();

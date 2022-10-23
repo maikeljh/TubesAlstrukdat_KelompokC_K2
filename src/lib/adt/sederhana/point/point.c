@@ -3,13 +3,14 @@
 
 #include "point.h"
 #include <math.h>
+#include <stdio.h>
         
 /* *** Konstruktor membentuk POINT *** */
-void CreatePoint (POINT * P, float X, float Y) {
+void CreatePoint (POINT * P, int X, int Y) {
    /* Kamus Lokal */
     /* Algoritma */
-   Absis(*P) = X;
-   Ordinat(*P) = Y;
+   Ordinat(*P) = X;
+   Absis(*P) = Y;
 };
 /* Membentuk sebuah POINT dari komponen-komponennya */
 
@@ -32,7 +33,7 @@ void BacaPOINT (POINT * P) {
 void TulisPOINT (POINT P){
    /* Kamus Lokal */
     /* Algoritma */
-   printf("(%.2f,%.2f)", Absis(P), Ordinat(P));
+   printf("(%d,%d)", Absis(P), Ordinat(P));
 };
 /* Nilai P ditulis ke layar dengan format "(X,Y)" 
    tanpa spasi, enter, atau karakter lain di depan, belakang, 
@@ -109,7 +110,7 @@ POINT NextY (POINT P) {
    return P2;
 };
 /* Mengirim salinan P dengan ordinat ditambah satu */
-POINT PlusDelta (POINT P, float deltaX, float deltaY) {
+POINT PlusDelta (POINT P, int deltaX, int deltaY) {
    /* Kamus Lokal */
    POINT P2;
    /* Algoritma */
@@ -149,10 +150,10 @@ float Panjang (POINT P1, POINT P2){
 /* Menghitung panjang garis yang dibentuk P1 dan P2 */
 /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
 /* Tuliskan spec fungsi yang lebih tepat. */
-void Geser (POINT *P, float deltaX, float deltaY) {
+void Geser (POINT *P, int deltaX, int deltaY) {
    /* Kamus Lokal */
     /* Algoritma */
-   CreatePoint(P, Absis(*P) + deltaX, Ordinat(*P) + deltaY);
+   CreatePoint(P, Ordinat(*P) + deltaX, Absis(*P) + deltaY);
 };
 /* I.S. P terdefinisi */
 /* F.S. P digeser, absisnya sebesar deltaX dan ordinatnya sebesar deltaY */
