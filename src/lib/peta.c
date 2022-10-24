@@ -2,7 +2,7 @@
 #include "./adt/matrix/matrix.c"
 #include "./adt/point/point.c"
 #include "./adt/boolean.h"
-
+#include "./commandparser.c"
 // sementara input manual, blm bisa dari eksternal
 void bacaPeta (Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/
@@ -128,9 +128,39 @@ boolean isNearby(POINT target, POINT S) {
 int main () {
   Matrix peta;
   POINT S,T,M,C,F,B;
-
+  int command;
+  boolean isValid;
   bacaPeta(&peta, &S, &T, &M, &C, &F, &B);
-  printf("current loc: ");
+  printf("\n");
+  STARTWORD();
+
+  while(true){
+    printf("\nBNMO di posisi: ");
+    TulisPOINT(S);
+    displayPeta(peta);
+    isValid = false;
+    while(!isValid){
+      printf("Enter Command: ");
+      command = readCommand();
+      if(command == 5){
+        move (&peta, 1, &S);
+        isValid = true;
+      } else if(command == 6){
+        move (&peta, 2, &S);
+        isValid = true;
+      } else if(command == 8){
+        move (&peta, 3, &S);
+        isValid = true;
+      } else if(command == 7){
+        move (&peta, 4, &S);
+        isValid = true;
+      } else {
+        printf("\nCommand tidak valid. Silahkan input kembali.\n\n");
+      }
+    }
+  }
+  
+  /*printf("current loc: ");
   TulisPOINT(S);
   printf("Telephone loc: ");
   TulisPOINT(T);
@@ -141,12 +171,12 @@ int main () {
   move (&peta, 2, &S);
   move (&peta, 2, &S);
   move (&peta, 2, &S);
-  printf("current loc: ")
+  printf("current loc: ");
   TulisPOINT(S);
   displayPeta(peta);
   if (isNearby(T, S)) {
     printf("deket telepon");
   } else {
     printf("gak deket telepon");
-  }
+  } */
 }
