@@ -47,6 +47,8 @@ boolean isKataSama(Word W1, Word W2){
 */
 
 int readCommand(){
+    // Mengembalikan nomor command sesuai yang ada di list command di atas.
+    
     Word Start = CreateWord("START", 5);
     Word Exit = CreateWord("EXIT", 4);
     Word Buy = CreateWord("BUY", 3);
