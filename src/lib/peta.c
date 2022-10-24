@@ -3,7 +3,7 @@
 #include "./adt/point/point.c"
 #include "./adt/boolean.h"
 
-
+// sementara input manual, blm bisa dari eksternal
 void bacaPeta (Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/
   /*F.S. Membaca peta sesuai dengan inputan*/
