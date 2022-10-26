@@ -120,15 +120,18 @@ void readList(ListStatik *l){
     CreateListStatik(l);
 
     while(true){
+        printf("Silahkan input jumlah elemen : ");
         scanf("%d", &n);
         if(n >= IDX_MIN && n <= CAPACITY){
             break;
         } else {
+            printf("Jumlah elemen tidak valid. Silahkan input kembali.\n");
             continue;
         }
     }
 
     for(idx = 0; idx < n; idx++){
+        printf("Elemen ke-%d: ", idx+1);
         scanf("%d", &element);
         ELMT(*l, idx) = element;
     }
