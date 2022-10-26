@@ -3,8 +3,28 @@
 #include "./adt/point/point.c"
 #include "./adt/boolean.h"
 #include "./commandparser.c"
-// sementara input manual, blm bisa dari eksternal
-void bacaPeta (Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
+#include "./adt/wordfilemachine/wordfilemachine.c"
+
+/***  UTILITIES ***/
+int pangkat (int x, int y) {
+  int ret = 1;
+  for (int i = 1; i <= y; i++){
+    ret = ret*x;
+  }
+  return ret;
+}
+
+int wordToInt (WordFile str) {
+   int val = 0;
+   int k = 0;
+   for (int i= str.Length-1; i >= 0; i--) {
+      val += (str.TabWord[i]-48) * pangkat(10,k);
+      k++;
+   }
+   return val;
+}
+
+void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/
   /*F.S. Membaca peta sesuai dengan inputan*/
   /*Proses: membaca inputan jumlah baris dan kolom*/
@@ -13,8 +33,11 @@ void bacaPeta (Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, P
   int col, row, i ,j;
   char element;
 
-  scanf("%d", &col);
-  scanf("%d", &row);
+  startWordFile(fileName);
+  row =wordToInt(currentWordFile);
+  advWordFile();
+  col = wordToInt(currentWordFile);
+
   createMatrix(row+2, col+2, peta);
   
   // membuat kerangka (batas)
@@ -30,8 +53,9 @@ void bacaPeta (Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, P
   
   // membaca peta
   for (i = 1; i< row+1; i++){
-    for (j = 0; j<col+1; j++) { 
-      scanf("%c", &element);
+    for (j = 1; j<col+1; j++) { 
+      advCharFile();
+      element = currentCharFile;
       if (element != '#' && element != '\n') {
         ELMT(*peta, i,j) = element;
 
@@ -65,7 +89,7 @@ void displayPeta(Matrix peta) {
   /*Menampilkan peta pada layar*/
   int i,j;
   for (i = 0; i <= getLastIdxRow(peta); i++){
-    for (j = 0; j <= getLastIdxRow(peta); j++){
+    for (j = 0; j <= getLastIdxCol(peta); j++){
       if (j == getLastIdxCol(peta)) {
         printf("%c\n", ELMT(peta,i,j));
       } else {
@@ -112,25 +136,31 @@ void move (Matrix *peta, int direction, POINT *S) {
     Ordinat(*S) = y - 1;
     // kaitin sama ADT Time
   } else {
-    printf("gabisa lewatt\n\n");
+    printf("*BNMO tidak bisa lewat\n\n");
   }
 
 }
 
 boolean isNearby(POINT target, POINT S) {
-  /*Memeriksa apakah S bersebelahan pada target*/
-  // return (Absis(target)-1 <= Absis(S) && Absis(S) <= Absis(target)+1) && (Ordinat(target)-1 <= Ordinat(S) && Ordinat(S) <= Ordinat(target)+1); 
-
-  
+  /*Memeriksa apakah S bersebelahan (adjacent) pada target*/ 
+  if (Absis(target) == Absis(S)) {
+    if (Ordinat(target)-1 == Ordinat(S) || Ordinat(target)+1 == Ordinat(S)) {
+      return true;
+    }
+  } else if (Ordinat(target) == Ordinat(S)) {
+    if (Absis(target)-1 == Absis(S) || Absis(target)+1 == Absis(S)) {
+      return true;
+    }
+  }
 }
-
 
 int main () {
   Matrix peta;
   POINT S,T,M,C,F,B;
   int command;
   boolean isValid;
-  bacaPeta(&peta, &S, &T, &M, &C, &F, &B);
+  char path[50] = "../../config/testPeta.txt";
+  bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
   printf("\n");
   STARTWORD();
 
@@ -154,29 +184,39 @@ int main () {
       } else if(command == 7){
         move (&peta, 4, &S);
         isValid = true;
+      } else if(command == 3){
+        if (isNearby(T,S)) {
+          printf("**BUY**\n");
+        } else {
+          printf("Tidak berada dekat telephone.\n");
+        }
+      } else if(command == 9){
+        if (isNearby(M,S)) {
+          printf("**MIX**\n");
+        } else {
+          printf("Tidak berada dekat tempat Mix.\n");
+        }
+      } else if(command == 10){
+        if (isNearby(C,S)) {
+          printf("**CHOP**\n");
+        } else {
+          printf("Tidak berada dekat tempat Chop.\n");
+        }
+      } else if(command == 11){
+        if (isNearby(F,S)) {
+          printf("**FRY**\n");
+        } else {
+          printf("Tidak berada dekat tempat Fry.\n");
+        }
+      } else if(command == 12){
+        if (isNearby(B,S)) {
+          printf("**BOIL**\n");
+        } else {
+          printf("Tidak berada dekat tempat Boil.\n");
+        }
       } else {
         printf("\nCommand tidak valid. Silahkan input kembali.\n\n");
       }
     }
   }
-  
-  /*printf("current loc: ");
-  TulisPOINT(S);
-  printf("Telephone loc: ");
-  TulisPOINT(T);
-  printf("Mixing loc: ");
-  TulisPOINT(M);
-
-  displayPeta(peta);
-  move (&peta, 2, &S);
-  move (&peta, 2, &S);
-  move (&peta, 2, &S);
-  printf("current loc: ");
-  TulisPOINT(S);
-  displayPeta(peta);
-  if (isNearby(T, S)) {
-    printf("deket telepon");
-  } else {
-    printf("gak deket telepon");
-  } */
 }
