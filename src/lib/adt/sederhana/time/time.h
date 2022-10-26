@@ -1,5 +1,4 @@
 /* File: time.h */
-/* Tanggal: 3 September 2022 */
 /* Definisi ADT TIME */
 
 #ifndef TIME_H
