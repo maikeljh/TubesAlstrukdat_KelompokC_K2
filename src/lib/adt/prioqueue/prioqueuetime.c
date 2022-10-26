@@ -48,7 +48,7 @@ void MakeEmpty (PrioQueueTime * Q, int Max){
 	/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 	/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
-	(*Q).T = (infotype*)malloc((Max)*sizeof(infotype));
+	(*Q).T = (Makanan*)malloc((Max)*sizeof(Makanan));
 	if ((*Q).T != NULL){
 		MaxEl(*Q) = Max;
 		Head(*Q) = Nil;
@@ -71,7 +71,7 @@ void DeAlokasi(PrioQueueTime * Q){
 }
 
 /* *** Primitif Add/Delete *** */
-void Enqueue (PrioQueueTime * Q, infotype X){
+void Enqueue (PrioQueueTime * Q, Makanan X){
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
@@ -83,20 +83,21 @@ void Enqueue (PrioQueueTime * Q, infotype X){
 		InfoTail(*Q) = X;
 	} else {
 		Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
-		int time = Time(X);
 		int idx = Tail(*Q)-1;
-		while(idx != Head(*Q)-1 & time < Time(Elmt(*Q, idx))){
+		while(idx != Head(*Q)-1 && TIMEToDetik(Expire(X)) < TIMEToDetik(Expire(Elmt(*Q, idx)))){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
+            // Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
             (*Q).T[(idx+1) % MaxEl(*Q)] = (*Q).T[idx];
             idx--;
         }
+        // Elmt(*Q, idx+1) = X;
 		(*Q).T[idx+1] = X;
 	}
 }
 
-void Dequeue (PrioQueueTime * Q, infotype * X){
+void Dequeue (PrioQueueTime * Q, Makanan * X){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -133,10 +134,10 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             if(idx == MaxEl(Q)){
                 idx %= MaxEl(Q);
             }
-            printf("%d %c\n", Time((Q).T[idx]), Info((Q).T[idx]));
+            printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
             idx++;
         }
-        printf("%d %c\n", Time((Q).T[idx]), Info((Q).T[idx]));
+        printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
         printf("#\n");
     }
 }
