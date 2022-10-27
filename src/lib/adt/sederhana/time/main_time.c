@@ -1,4 +1,4 @@
-/* File: main_time.c */
+/* Fail: main_time.c */
 /* Driver ADT TIME */
 
 #include <stdio.h>
@@ -9,8 +9,8 @@ void printHeading(char msg[]);
 /* Mencetak heading */
 void printMenu(void);
 /* Mencetak menu */
-void getHMS(int *H, int *M, int *S);
-/* Membaca jam, menit, dan detik */
+void getDHM(int *D, int *H, int *M);
+/* Membaca hari, jam, dan menit */
 void getT1(TIME *T1);
 /* Membaca T1 */
 void getT1T2(TIME *T1, TIME *T2);
@@ -25,7 +25,7 @@ int main(void)
 {
     /* KAMUS */
     TIME T1, T2;
-    int pilihan, H, M, S, N;
+    int pilihan, D, H, M, N;
 
     /* ALGORITMA */
     printMenu();
@@ -34,20 +34,20 @@ int main(void)
         if (pilihan != 0)
             printf("...\n");
         if (pilihan == 1) {
-            printHeading("1. IsTIMEValid(H, M, S)");
-            getHMS(&H, &M, &S);
-            printf("IsTIMEValid(%d, %d, %d)? ", H, M, S);
-            if (IsTIMEValid(H,M,S))
+            printHeading("1. IsTIMEValid(D, H, M)");
+            getDHM(&D, &H, &M);
+            printf("IsTIMEValid(%d, %d, %d)? ", D, H, M);
+            if (IsTIMEValid(D,H,M))
                 printTrueMsg("TIME valid");
             else
                 printFalseMsg("TIME tidak valid");
         }
         else if (pilihan == 2) {
-            printHeading("2. CreateTime(*T1, H, M, S)");
-            getHMS(&H, &M, &S);
-            if (IsTIMEValid(H,M,S)) {
-                printf("CreateTime(&T1, %d, %d, %d)\n", H, M, S);
-                CreateTime(&T1, H, M, S);
+            printHeading("2. CreateTime(*T1, D, H, M)");
+            getDHM(&D, &H, &M);
+            if (IsTIMEValid(D,H,M)) {
+                printf("CreateTime(&T1, %d, %d, %d)\n", D, H, M);
+                CreateTime(&T1, D, H, M);
                 printf("T1 = "); TulisTIME(T1); printf("\n");
             }
             else
@@ -64,14 +64,14 @@ int main(void)
             printf("T1 = "); TulisTIME(T1); printf("\n");
         }
         else if (pilihan == 5) {
-            printHeading("5. TIMEToDetik(T1)");
+            printHeading("5. TIMEToMenit(T1)");
             getT1(&T1);
-            printf("T1 dalam detik = 3600 * %i + 60 * %i + %i = %li\n", Hour(T1), Minute(T1), Second(T1), TIMEToDetik(T1));
+            printf("T1 dalam menit = 24 * 60 * %i + 60 * %i + %i = %li\n", Day(T1), Hour(T1), Minute(T1), TIMEToMenit(T1));
         }
         else if (pilihan == 6) {
-            printHeading("6. DetikToTIME(N)");
-            printf("Masukkan detik N yang ingin diubah ke TIME: \n");scanf("%d", &N);
-            printf("Detik %i dalam TIME = ", N); TulisTIME(DetikToTIME(N)); printf("\n");
+            printHeading("6. MenitToTIME(N)");
+            printf("Masukkan jumlah menit N yang ingin diubah ke TIME: \n");scanf("%d", &N);
+            printf("%i menit dalam TIME = ", N); TulisTIME(MenitToTIME(N)); printf("\n");
         }
         else if (pilihan == 7) {
             printHeading("7. TEQ(T1, T2)");
@@ -110,26 +110,26 @@ int main(void)
                 printFalseMsg("T1 tidak lebih besar daripada T2");
         }
         else if (pilihan == 11) {
-            printHeading("11. NextDetik(T1)");
+            printHeading("11. NextMenit(T1)");
             getT1(&T1);
-            printf("NextDetik(T1) = "); TulisTIME(NextDetik(T1)); printf("\n");
+            printf("NextMenit(T1) = "); TulisTIME(NextMenit(T1)); printf("\n");
         }
         else if (pilihan == 12) {
-            printHeading("12. NextNDetik(T1, N)");
+            printHeading("12. NextNMenit(T1, N)");
             getT1(&T1);
-            printf("Masukkan N detik yang ingin ditambahkan ke T1: \n");scanf("%d", &N);
-            printf("NextNDetik(T1, %i) = ", N); TulisTIME(NextNDetik(T1, N)); printf("\n");
+            printf("Masukkan N menit yang ingin ditambahkan ke T1: \n");scanf("%d", &N);
+            printf("NextNMenit(T1, %i) = ", N); TulisTIME(NextNMenit(T1, N)); printf("\n");
         }
         else if (pilihan == 13) {
-            printHeading("13. PrevDetik(T1)");
+            printHeading("13. PrevMenit(T1)");
             getT1(&T1);
-            printf("PrevDetik(T1) = "); TulisTIME(PrevDetik(T1)); printf("\n");
+            printf("PrevMenit(T1) = "); TulisTIME(PrevMenit(T1)); printf("\n");
         }
         else if (pilihan == 14) {
-            printHeading("14. PrevNDetik(T1, N)");
+            printHeading("14. PrevNMenit(T1, N)");
             getT1(&T1);
-            printf("Masukkan N detik yang ingin dikurangi dari T1: \n");scanf("%d", &N);
-            printf("PrevNDetik(T1, %i) = ", N); TulisTIME(PrevNDetik(T1, N)); printf("\n");
+            printf("Masukkan N menit yang ingin dikurangi dari T1: \n");scanf("%d", &N);
+            printf("PrevNMenit(T1, %i) = ", N); TulisTIME(PrevNMenit(T1, N)); printf("\n");
         }
         else if (pilihan == 15) {
             printHeading("15. Durasi(T1, T2)");
@@ -157,32 +157,32 @@ void printMenu(void)
     /* ALGORITMA */
     printHeading("MENU");
     printf(" 0. Keluar\n");
-    printf(" 1. isTIMEValid(H, M, S)\n");
-    printf(" 2. CreateTime(*T, HH, MM, SS)\n");
+    printf(" 1. isTIMEValid(D, H, M)\n");
+    printf(" 2. CreateTime(*T, DD, HH, MM)\n");
     printf(" 3. BacaTIME(*T)\n");
     printf(" 4. TulisTIME(T)\n");
-    printf(" 5. TIMEToDetik(T)\n");
-    printf(" 6. DetikToTIME(N)\n");
+    printf(" 5. TIMEToMenit(T)\n");
+    printf(" 6. MenitToTIME(N)\n");
     printf(" 7. TEQ(T1, T2)\n");
     printf(" 8. TNEQ(T1, T2)\n");
     printf(" 9. TLT(T1, T2)\n");
     printf("10. TGT(T1, T2)\n");
-    printf("11. NextDetik(T)\n");
-    printf("12. NextNDetik(T, N)\n");
-    printf("13. PrevDetik(T)\n");
-    printf("14. PrevNDetik(T, N)\n");
+    printf("11. NextMenit(T)\n");
+    printf("12. NextNMenit(T, N)\n");
+    printf("13. PrevMenit(T)\n");
+    printf("14. PrevNMenit(T, N)\n");
     printf("15. Durasi(T1, T2)\n");
 }
 
-void getHMS(int *H, int *M, int *S)
-/* Membaca H, M, dan S */
+void getDHM(int *D, int *H, int *M)
+/* Membaca D, H, dan M */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
+    printf("Masukkan D: ");scanf("%d", D);
     printf("Masukkan H: ");scanf("%d", H);
     printf("Masukkan M: ");scanf("%d", M);
-    printf("Masukkan S: ");scanf("%d", S);
 }
 
 void getT1(TIME *T1)
