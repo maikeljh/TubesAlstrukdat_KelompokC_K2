@@ -8,10 +8,11 @@ int main(){
     Makanan M;
     int id, lokasi;
     TIME wk, lp;
-    char name[100];
+    Word name;
     // Sampel data makanan:
     id = 1; lokasi = 1; 
-    name[0] = 'A'; name[1] = 'y'; name[2] = 'a'; name[3] = 'm';
+    STARTWORD();
+    name = currentWord;
     CreateTime(&wk, 3, 2, 30);
     CreateTime(&lp, 0, 15, 0);
     CreateMakanan(&M, id, lokasi, name, wk, lp);
