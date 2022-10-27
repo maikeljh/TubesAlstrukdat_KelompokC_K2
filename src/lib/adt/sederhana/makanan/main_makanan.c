@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "makanan.h"
+#include "makanan.c"
 
 int main(){
-	Makanan food;
+	/*Makanan food;
 	int idm;
 	int locate;
 	char bebek[NMax];
@@ -30,5 +30,8 @@ int main(){
 	Minute(wakpeng) = 2;
 	Second(wakpeng) = 1;
 	CreateMakanan(&food, idm, locate, bebek, wakpeng, lepe);
-	TulisMakanan(food);
+	TulisMakanan(food); */
+	Makanan M[100];
+	BacaMakanan(M);
+	TulisListMakanan(M, 6);
 }

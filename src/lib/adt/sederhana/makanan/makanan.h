@@ -5,12 +5,12 @@
 #define __MAKANAN_H__
 
 #include "../../boolean.h"
-#include "../time/time.h"
+#include "../time/time.c"
 #include "../../wordmachine/wordmachine.h"
 
 typedef struct{
 	int ID; // ID Makanan
-	char Nama[NMax]; // Nama makanan 
+	Word Nama; // Nama makanan 
 	TIME WK; // Waktu kedaluwarsa
     int Lokasi; 
 	TIME LP; // Lama pengiriman
@@ -30,13 +30,14 @@ typedef struct{
 #define MenitLP(m) (m).LP.MM
 #define DetikLP(m) (m).LP.SS
 
-void CreateMakanan(Makanan *M, int id, int loc, char x[NMax], TIME wk, TIME lp);
+void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp);
 /* Membuat suatu makanan */
 int getID(Makanan M);
 int getLokasi(Makanan M);
 TIME getWK(Makanan M);
-Time getLP(Makanan M);
-
+TIME getLP(Makanan M);
 
 void TulisMakanan(Makanan M);
+
+void BacaMakanan(Makanan M[]);
 #endif
