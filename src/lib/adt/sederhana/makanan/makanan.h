@@ -12,7 +12,7 @@ typedef struct{
 	int ID; // ID Makanan
 	char Nama[NMax]; // Nama makanan 
 	TIME WK; // Waktu kedaluwarsa
-    int Lokasi;
+    int Lokasi; 
 	TIME LP; // Lama pengiriman
 } Makanan;
 
@@ -32,6 +32,11 @@ typedef struct{
 
 void CreateMakanan(Makanan *M, int id, int loc, char x[NMax], TIME wk, TIME lp);
 /* Membuat suatu makanan */
+int getID(Makanan M);
+int getLokasi(Makanan M);
+TIME getWK(Makanan M);
+Time getLP(Makanan M);
+
 
 void TulisMakanan(Makanan M);
 #endif

@@ -31,6 +31,19 @@ void CreateMakanan(Makanan *M, int id, int loc, char nama[NMax], TIME wk, TIME l
 
 }
 
+int getID(Makanan M){
+	return ID(M);
+}
+int getLokasi(Makanan M){
+	return Lokasi(M);
+}
+TIME getWK(Makanan M){
+	return Kedaluwarsa(M);
+}
+Time getLP(Makanan M){
+	return Pengiriman(M);
+}
+
 void TulisMakanan(Makanan M){
 	printf("ID Makanan 			: %d\n", ID(M));
 	printf("Nama Makanan 			: %s\n", Nama(M));	
