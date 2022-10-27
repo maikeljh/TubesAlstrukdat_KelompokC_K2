@@ -23,12 +23,12 @@ typedef struct{
 #define Kedaluwarsa(m) (m).WK
 #define Lokasi(m) (m).Lokasi
 #define Pengiriman(m) (m).LP
-#define JamWK(m) (m).WK.HH
-#define MenitWK(m) (m).WK.MM
-#define DetikWK(m) (m).WK.SS
-#define JamLP(m) (m).LP.HH
-#define MenitLP(m) (m).LP.MM
-#define DetikLP(m) (m).LP.SS
+#define DayWK(m) (m).WK.DD
+#define HourWK(m) (m).WK.HH
+#define MinuteWK(m) (m).WK.MM
+#define DayLP(m) (m).LP.DD
+#define HourLP(m) (m).LP.HH
+#define MinuteLP(m) (m).LP.MM
 
 void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp);
 /* Membuat suatu makanan */
