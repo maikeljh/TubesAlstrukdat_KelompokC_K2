@@ -11,8 +11,7 @@ int main(){
     Word name;
     // Sampel data makanan:
     id = 1; lokasi = 1; 
-    STARTWORD();
-    name = currentWord;
+    name[0] = 'A'; name[1] = 'y'; name[2] = 'a'; name[3] = 'm';
     CreateTime(&wk, 3, 2, 30);
     CreateTime(&lp, 0, 15, 0);
     CreateMakanan(&M, id, lokasi, name, wk, lp);
