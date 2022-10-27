@@ -84,7 +84,7 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	} else {
 		Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
 		int idx = Tail(*Q)-1;
-		while(idx != Head(*Q)-1 && TIMEToDetik(Kedaluwarsa(X)) < TIMEToDetik(Kedaluwarsa(Elmt(*Q, idx)))){
+		while(idx != Head(*Q)-1 && TIMEToMenit(Kedaluwarsa(X)) < TIMEToMenit(Kedaluwarsa(Elmt(*Q, idx)))){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
@@ -138,31 +138,31 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             printf("%d. ", idx+1);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
-            if (Kedaluwarsa((Q).T[idx]).HH != 0){
-                printf(" %d Hari", Kedaluwarsa((Q).T[idx]).HH);
+            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Kedaluwarsa((Q).T[idx]).MM != 0){
-                printf(" %d Jam", Kedaluwarsa((Q).T[idx]).MM);
+            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Kedaluwarsa((Q).T[idx]).SS != 0){
-                printf(" %d Menit", Kedaluwarsa((Q).T[idx]).SS);
+            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
             idx++;
         }
         printf("%d. ", idx+1);
-        PrintWord(Nama((Q).T[idx]));
+            PrintWord(Nama((Q).T[idx]));
             printf(" -");
-            if (Kedaluwarsa((Q).T[idx]).HH != 0){
-                printf(" %d Hari", Kedaluwarsa((Q).T[idx]).HH);
+            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Kedaluwarsa((Q).T[idx]).MM != 0){
-                printf(" %d Jam", Kedaluwarsa((Q).T[idx]).MM);
+            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Kedaluwarsa((Q).T[idx]).SS != 0){
-                printf(" %d Menit", Kedaluwarsa((Q).T[idx]).SS);
+            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
-        printf("\n");
+            printf("\n");
     }
 }
 

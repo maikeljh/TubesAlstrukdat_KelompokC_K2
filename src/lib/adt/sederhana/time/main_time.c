@@ -1,4 +1,4 @@
-/* Fail: main_time.c */
+/* File: main_time.c */
 /* Driver ADT TIME */
 
 #include <stdio.h>

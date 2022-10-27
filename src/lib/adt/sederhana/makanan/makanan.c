@@ -10,13 +10,14 @@
 #define ID(m) (m).ID
 #define Nama(m) (m).Nama
 #define Kedaluwarsa(m) (m).WK
+#define Lokasi(m) (m).Lokasi
 #define Pengiriman(m) (m).LP
-#define JamWK(m) (m).WK.HH
-#define MenitWK(m) (m).WK.MM
-#define DetikWK(m) (m).WK.SS
-#define JamLP(m) (m).LP.HH
-#define MenitLP(m) (m).LP.MM
-#define DetikLP(m) (m).LP.SS
+#define DayWK(m) (m).WK.DD
+#define HourWK(m) (m).WK.HH
+#define MinuteWK(m) (m).WK.MM
+#define DayLP(m) (m).LP.DD
+#define HourLP(m) (m).LP.HH
+#define MinuteLP(m) (m).LP.MM
 */
 void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp){
 /* Membuat suatu makanan */
@@ -67,8 +68,8 @@ void TulisMakanan(Makanan M){
 	}
 	printf("Lokasi Makanan			: ");
 	PrintWord(namaLokasi);
-	printf("Waktu Kedaluwarsa Makanan	: %d %d %d\n", JamWK(M), MenitWK(M), DetikWK(M));
-	printf("Lama Pengiriman Makanan		: %d %d %d\n", JamLP(M), MenitLP(M), DetikLP(M));
+	printf("Waktu Kedaluwarsa Makanan	: %d %d %d\n", DayWK(M), HourWK(M), MinuteWK(M));
+	printf("Lama Pengiriman Makanan		: %d %d %d\n", DayLP(M), HourLP(M), MinuteLP(M));
 }
 
 int BacaMakanan(Makanan *M){
