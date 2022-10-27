@@ -134,11 +134,35 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             if(idx == MaxEl(Q)){
                 idx %= MaxEl(Q);
             }
-            printf("%d %c\n", Kedaluwarsa((Q).T[idx]), Nama((Q).T[idx]));
+            //TulisTIME(Kedaluwarsa((Q).T[idx]));
+            printf("%d. ", idx+1);
+            PrintWord(Nama((Q).T[idx]));
+            printf(" -");
+            if (Kedaluwarsa((Q).T[idx]).HH != 0){
+                printf(" %d Hari", Kedaluwarsa((Q).T[idx]).HH);
+            }
+            if (Kedaluwarsa((Q).T[idx]).MM != 0){
+                printf(" %d Jam", Kedaluwarsa((Q).T[idx]).MM);
+            }
+            if (Kedaluwarsa((Q).T[idx]).SS != 0){
+                printf(" %d Menit", Kedaluwarsa((Q).T[idx]).SS);
+            }
+            printf("\n");
             idx++;
         }
-        printf("%d %c\n", Kedaluwarsa((Q).T[idx]), Nama((Q).T[idx]));
-        printf("#\n");
+        printf("%d. ", idx+1);
+        PrintWord(Nama((Q).T[idx]));
+            printf(" -");
+            if (Kedaluwarsa((Q).T[idx]).HH != 0){
+                printf(" %d Hari", Kedaluwarsa((Q).T[idx]).HH);
+            }
+            if (Kedaluwarsa((Q).T[idx]).MM != 0){
+                printf(" %d Jam", Kedaluwarsa((Q).T[idx]).MM);
+            }
+            if (Kedaluwarsa((Q).T[idx]).SS != 0){
+                printf(" %d Menit", Kedaluwarsa((Q).T[idx]).SS);
+            }
+        printf("\n");
     }
 }
 

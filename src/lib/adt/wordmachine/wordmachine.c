@@ -1,6 +1,8 @@
 /* File: wordmachine.c */
 /* Definisi Word Machine: Model Akuisisi Versi I */
 #include "wordmachine.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* State Mesin Word */
 boolean EndWord;
@@ -75,6 +77,13 @@ void CopyWord(){
     }  
 };
 
+void PrintWord(Word Kata) {
+    for(int i = 0; i < Kata.Length; i++){
+        printf("%c", Kata.TabWord[i]);
+    }
+    //printf("\n");
+}
+
 void LowerCase(){
 
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
@@ -90,5 +99,31 @@ void LowerCase(){
     }
   }
 };
+
+Word CreateWord(char word[], int length){
+    Word Result;
+    for(int i = 0; i < length; i++){
+        Result.TabWord[i] = word[i];
+    }
+    Result.Length = length;
+    return Result;
+}
+
+boolean isKataSama(Word W1, Word W2){
+    boolean Sama = true;
+    if(W1.Length != W2.Length){
+        Sama = false;
+    } else {
+        for(int i = 0; i < W1.Length; i++){
+            if(W1.TabWord[i] != W2.TabWord[i]){
+                Sama = false;
+                break;
+            }
+        }
+    }
+
+    return Sama;
+}
+
 
 
