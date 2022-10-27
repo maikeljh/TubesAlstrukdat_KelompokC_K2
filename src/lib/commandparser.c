@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include "./adt/wordmachine/wordmachine.c"
 
+void PrintWord(Word Kata) {
+    for(int i = 0; i < Kata.Length; i++){
+        printf("%c", Kata.TabWord[i]);
+    }
+    printf("\n");
+}
+
 Word CreateWord(char word[], int length){
     Word Result;
     for(int i = 0; i < length; i++){
