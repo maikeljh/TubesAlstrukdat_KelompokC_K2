@@ -40,7 +40,7 @@ int getLokasi(Makanan M){
 TIME getWK(Makanan M){
 	return Kedaluwarsa(M);
 }
-Time getLP(Makanan M){
+TIME getLP(Makanan M){
 	return Pengiriman(M);
 }
 

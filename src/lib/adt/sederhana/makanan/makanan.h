@@ -35,7 +35,7 @@ void CreateMakanan(Makanan *M, int id, int loc, char x[NMax], TIME wk, TIME lp);
 int getID(Makanan M);
 int getLokasi(Makanan M);
 TIME getWK(Makanan M);
-Time getLP(Makanan M);
+TIME getLP(Makanan M);
 
 
 void TulisMakanan(Makanan M);

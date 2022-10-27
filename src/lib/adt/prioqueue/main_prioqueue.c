@@ -11,7 +11,7 @@ int main(){
     char name[100];
     // Sampel data makanan:
     id = 1; lokasi = 1; 
-    name[0] = 'A'; nama[1] = 'y'; nama[2] = 'a'; nama[3] = 'm';
+    name[0] = 'A'; name[1] = 'y'; name[2] = 'a'; name[3] = 'm';
     CreateTime(&wk, 3, 2, 30);
     CreateTime(&lp, 0, 15, 0);
     CreateMakanan(&M, id, lokasi, name, wk, lp);
@@ -21,8 +21,11 @@ int main(){
     // printf("Silahkan pilih \n");
 
     // 1. MakeEmpty
-    MakeEmpty(&inventory);
+    MakeEmpty(&inventory, NMax);
     
     // 2. Enqueue makanan (Makanan terdefinisi)
     Enqueue(&inventory, M);
+
+    // 3. Print Isi Prio Queue
+    PrintPrioQueueTime(inventory);
 }
