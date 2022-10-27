@@ -5,9 +5,11 @@
 int main(){
 	Makanan food;
 	int idm;
+	int locate;
 	char bebek[NMax];
 	TIME lepe, wakpeng;
 	idm = 33;
+	locate = 3;
 	bebek[0] = 'B';
 	bebek[1] = 'e';
 	bebek[2] = 'b';
@@ -27,6 +29,6 @@ int main(){
 	Hour(wakpeng) = 3;
 	Minute(wakpeng) = 2;
 	Second(wakpeng) = 1;
-	CreateMakanan(&food, idm, bebek, wakpeng, lepe);
+	CreateMakanan(&food, idm, locate, bebek, wakpeng, lepe);
 	TulisMakanan(food);
 }
