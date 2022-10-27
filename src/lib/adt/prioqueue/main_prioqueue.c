@@ -8,7 +8,7 @@ int main(){
     Makanan M;
     int id, lokasi;
     TIME wk, lp;
-    char name[100];
+    Word name;
     // Sampel data makanan:
     id = 1; lokasi = 1; 
     name[0] = 'A'; name[1] = 'y'; name[2] = 'a'; name[3] = 'm';
