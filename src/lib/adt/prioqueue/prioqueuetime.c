@@ -84,7 +84,7 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	} else {
 		Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
 		int idx = Tail(*Q)-1;
-		while(idx != Head(*Q)-1 && TIMEToDetik(Expire(X)) < TIMEToDetik(Expire(Elmt(*Q, idx)))){
+		while(idx != Head(*Q)-1 && TIMEToDetik(Kedaluwarsa(X)) < TIMEToDetik(Kedaluwarsa(Elmt(*Q, idx)))){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
@@ -134,10 +134,10 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             if(idx == MaxEl(Q)){
                 idx %= MaxEl(Q);
             }
-            printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
+            printf("%d %c\n", Kedaluwarsa((Q).T[idx]), Nama((Q).T[idx]));
             idx++;
         }
-        printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
+        printf("%d %c\n", Kedaluwarsa((Q).T[idx]), Nama((Q).T[idx]));
         printf("#\n");
     }
 }

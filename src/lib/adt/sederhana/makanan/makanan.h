@@ -5,7 +5,7 @@
 #define __MAKANAN_H__
 
 #include "../../boolean.h"
-#include "../time/time.c"
+#include "../time/time.h"
 #include "../../wordmachine/wordmachine.h"
 
 typedef struct{
@@ -40,4 +40,5 @@ TIME getLP(Makanan M);
 void TulisMakanan(Makanan M);
 
 int BacaMakanan(Makanan M[]);
+void TulisListMakanan(Makanan M[], int N);
 #endif

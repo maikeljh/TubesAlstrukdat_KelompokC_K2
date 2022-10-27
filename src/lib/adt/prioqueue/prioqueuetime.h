@@ -10,7 +10,6 @@
 #include "../sederhana/makanan/makanan.h"
 
 #define Nil -1
-#define Max 100
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
@@ -36,7 +35,6 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah Makanan dan Q adalah PrioQueueTime, maka akses elemen : */
-#define Expire(e)     (e).WK
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
