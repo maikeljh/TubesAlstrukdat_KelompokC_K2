@@ -39,5 +39,5 @@ TIME getLP(Makanan M);
 
 void TulisMakanan(Makanan M);
 
-void BacaMakanan(Makanan M[]);
+int BacaMakanan(Makanan M[]);
 #endif

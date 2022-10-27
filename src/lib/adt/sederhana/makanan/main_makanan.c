@@ -33,5 +33,5 @@ int main(){
 	TulisMakanan(food); */
 	Makanan M[100];
 	BacaMakanan(M);
-	TulisListMakanan(M, 6);
+	TulisListMakanan(M, 1);
 }

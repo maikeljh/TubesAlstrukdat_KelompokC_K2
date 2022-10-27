@@ -72,7 +72,7 @@ void TulisMakanan(Makanan M){
 	printf("Lama Pengiriman Makanan		: %d %d %d\n", JamLP(M), MenitLP(M), DetikLP(M));
 }
 
-void BacaMakanan(Makanan *M){
+int BacaMakanan(Makanan *M){
 	int indexMakanan = 0;
 	int N;
 	scanf("%d", &N);
@@ -128,6 +128,7 @@ void BacaMakanan(Makanan *M){
 		M[indexMakanan] = Food;
 		indexMakanan++;
 	}
+	return N;
 }
 
 void TulisListMakanan(Makanan M[], int N){
