@@ -5,7 +5,6 @@
 
 #ifndef prioqueuechar_H
 #define prioqueuechar_H
-#include "../sederhana/time/time.h"
 #include "../boolean.h"
 #include "../sederhana/makanan/makanan.h"
 

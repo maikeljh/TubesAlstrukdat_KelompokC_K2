@@ -1,37 +1,5 @@
 #include <stdio.h>
-#include "./adt/wordmachine/wordmachine.c"
-
-void PrintWord(Word Kata) {
-    for(int i = 0; i < Kata.Length; i++){
-        printf("%c", Kata.TabWord[i]);
-    }
-    printf("\n");
-}
-
-Word CreateWord(char word[], int length){
-    Word Result;
-    for(int i = 0; i < length; i++){
-        Result.TabWord[i] = word[i];
-    }
-    Result.Length = length;
-    return Result;
-}
-
-boolean isKataSama(Word W1, Word W2){
-    boolean Sama = true;
-    if(W1.Length != W2.Length){
-        Sama = false;
-    } else {
-        for(int i = 0; i < W1.Length; i++){
-            if(W1.TabWord[i] != W2.TabWord[i]){
-                Sama = false;
-                break;
-            }
-        }
-    }
-
-    return Sama;
-}
+#include "./adt/wordmachine/wordmachine.h"
 
 // COMMAND AVAILABLE
 /*  1. START

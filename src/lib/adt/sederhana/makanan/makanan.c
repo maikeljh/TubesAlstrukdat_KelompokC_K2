@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "makanan.h"
-#include "../../../commandparser.c"
 
 /*
 #define ID(m) (m).ID
