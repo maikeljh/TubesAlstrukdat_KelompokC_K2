@@ -142,11 +142,17 @@ boolean isNearby(POINT target, POINT S) {
   if (Absis(target) == Absis(S)) {
     if (Ordinat(target)-1 == Ordinat(S) || Ordinat(target)+1 == Ordinat(S)) {
       return true;
+    } else {
+      return false;
     }
   } else if (Ordinat(target) == Ordinat(S)) {
     if (Absis(target)-1 == Absis(S) || Absis(target)+1 == Absis(S)) {
       return true;
+    } else {
+      return false;
     }
+  } else {
+    return false;
   }
 }
 
@@ -158,7 +164,6 @@ int main () {
   char path[50] = "../../config/testPeta.txt";
   bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
   printf("\n");
-
   while(true){
     printf("\nBNMO di posisi: ");
     TulisPOINT(S);
