@@ -6,7 +6,6 @@
 
 #include "../boolean.h"
 #include "charmachine.h"
-#include "charmachine.c"
 
 #define NMax 50
 #define BLANK ' '
@@ -47,7 +46,10 @@ void CopyWord();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+void PrintWord(Word Kata);
 void LowerCase();
+Word CreateWord(char word[], int length);
+boolean isKataSama(Word W1, Word W2);
 
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
 

@@ -6,9 +6,8 @@
 
 #include "../../boolean.h"
 #include "../point/point.c"
-#include "../../prioqueue/prioqueuetime.c"
+#include "../../prioqueue/prioqueuetime.h"
 
-#define NMax 100
 typedef struct { 
 	char Nama[NMax];
     POINT Lokasi;
@@ -16,8 +15,6 @@ typedef struct {
 } Simulator;
 
 /* *** Notasi Akses: Selektor SIMULATOR *** */
-#define Nama(S) (S).Nama
-#define Lokasi(S) (S).Lokasi
 #define Inventory(S) (S).Inventory
         
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */

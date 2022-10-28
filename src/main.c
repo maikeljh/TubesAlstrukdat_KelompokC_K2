@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./lib/commandparser.c"
+#include "./lib/adt/sederhana/makanan/makanan.c"
 
 int main(){
     // KAMUS GLOBAL
     int command;
+    Makanan M[100];
+    int jumlahMakanan;
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -45,6 +47,22 @@ int main(){
             break;
         } else if (command == 2){
             printf("\nTerima kasih telah mempermainkan game kami!\n");
+            return 0;
+        } else {
+            printf("\nCommand salah. Silahkan input command kembali.\n");
+        }
+    }
+
+    // GAME STARTED
+    while(true){
+        printf("MASUKKAN MAKANAN\n");
+        jumlahMakanan = BacaMakanan(M);
+        printf("\nLIST COMMAND:\n");
+        printf("16. CATALOG\n");
+        printf("\nEnter Command: ");
+        command = readCommand();
+        if(command == 16){
+            TulisListMakanan(M,jumlahMakanan);
             break;
         } else {
             printf("\nCommand salah. Silahkan input command kembali.\n");

@@ -1,123 +1,118 @@
-/* File: time.c */
-/* Body ADT TIME */
+/* Fail: time.c */
+/* Implementasi ADT TIME */
 
 #include <stdio.h>
 #include "time.h"
 
 /* ***************************************************************** */
-/* KELOMPOK VALIDASI TERHADAP TYPE                                   */
+/* KELOMPOK VALIDASI TERHADAP TIPE                                   */
 /* ***************************************************************** */
-boolean IsTIMEValid (int H, int M, int S)
-/* Mengirim true jika H,M,S dapat membentuk T yang valid */
-/* dipakai untuk mentest SEBELUM membentuk sebuah Jam */
+boolean IsTIMEValid (int D, int H, int M)
+/* Mengirim true jika D, H, M dapat membentuk TIME yang valid */
+/* Dipakai untuk mengetes SEBELUM membentuk sebuah TIME */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return ((H >= 0 && H <= 23) && (M >= 0 && M <= 59) && (S >= 0 && S <= 59));
+    return ((D >= 0) && (H >= 0 && H <= 23) && (M >= 0 && M <= 59));
 }
 
-/* *** Konstruktor: Membentuk sebuah TIME dari komponen-komponennya *** */
-void CreateTime (TIME * T, int HH, int MM, int SS)
+/* *** Konstruktor: Membentuk Sebuah TIME dari Komponen-komponennya *** */
+void CreateTime (TIME * T, int DD, int HH, int MM)
 /* Membentuk sebuah TIME dari komponen-komponennya yang valid */
-/* Prekondisi : HH, MM, SS valid untuk membentuk TIME */
+/* Prekondisi: DD, HH, MM valid untuk membentuk TIME. */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
+    Day(*T) = DD;
     Hour(*T) = HH;
     Minute(*T) = MM;
-    Second(*T) = SS;
 }
 
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
 void BacaTIME (TIME * T)
-/* I.S. : T tidak terdefinisi */
-/* F.S. : T terdefinisi dan merupakan jam yang valid */
-/* Proses : mengulangi membaca komponen HH, MM, SS sehingga membentuk T */
-/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
-/* Pembacaan dilakukan dengan mengetikkan komponen HH, MM, SS
-   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
-/* Jika TIME tidak valid maka diberikan pesan: "Jam tidak valid", dan pembacaan
-   diulangi hingga didapatkan jam yang valid. */
+/* IS     : T tidak terdefinisi. */
+/* FS     : T terdefinisi dan merupakan TIME yang valid. */
+/* Proses : Mengulangi membaca komponen DD, HH, MM sehingga membentuk T */
+/* yang valid. Tidak mungkin dihasilkan T yang tidak valid. */
+/* Pembacaan dilakukan dengan mengetikkan komponen DD, HH, MM
+   dalam satu baris, masing-masing dipisahkan satu spasi, dan diakhiri enter. */
+/* Jika TIME tidak valid, diberikan pesan "TIME tidak valid.", dan pembacaan
+   diulangi hingga didapatkan TIME yang valid. */
 /* Contoh: 
-   60 3 4
-   Jam tidak valid
+   1 24 3
+   TIME tidak valid.
    1 3 4
-   --> akan terbentuk TIME <1,3,4> */
+   --> Akan terbentuk TIME <1,3,4> */
 {
     /* KAMUS LOKAL */
-    int H, M, S;
+    int D, H, M;
 
     /* ALGORITMA */
     while (true) {
-        scanf("%d %d %d", &H, &M, &S);
-        if (IsTIMEValid(H,M,S))
+        scanf("%d %d %d", &D, &H, &M);
+        if (IsTIMEValid(D,H,M))
             break;
         else
             printf("Jam tidak valid\n");
     }
-    CreateTime(T, H, M, S);
+    CreateTime(T, D, H, M);
 }
    
 void TulisTIME (TIME T)
-/* I.S. : T sembarang */
-/* F.S. : Nilai T ditulis dg format HH:MM:SS */
-/* Proses : menulis nilai setiap komponen T ke layar dalam format HH:MM:SS
-   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/ 
+/* IS     : T sebarang. */
+/* FS     : Nilai T ditulis dengan format DD:HH:MM. */
+/* Proses : Menulis nilai tiap komponen T ke layar dalam format DD:HH:MM
+   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi dan enter */ 
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    printf("%02d:%02d:%02d", Hour(T), Minute(T), Second(T));
+    printf("%02d:%02d:%02d", Day(T), Hour(T), Minute(T));
 }
 
 /* ***************************************************************** */
-/* KELOMPOK KONVERSI TERHADAP TYPE                                   */
+/* KELOMPOK KONVERSI TERHADAP TIPE                                   */
 /* ***************************************************************** */
-long TIMEToDetik (TIME T)
-/* Diberikan sebuah TIME, mengkonversi menjadi jumlah detik dari pukul 0:0:0 */
-/* Rumus : detik = 3600*HH + 60*MM + SS */
-/* Nilai maksimum = 3600*23+59*60+59 */
+long TIMEToMenit (TIME T)
+/* Diberikan sebuah TIME, TIME dikonversi menjadi jumlah menit. */
+/* Rumus: menit = 24 * 60 * DD + 60 * HH + MM */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return (3600 * Hour(T) + 60 * Minute(T) + Second(T)) % 86400;
+    return (24*60*Day(T) + 60*Hour(T) + Minute(T));
 }
 
-TIME DetikToTIME (long N)
-/* Mengirim  konversi detik ke TIME */
-/* Catatan: Jika N >= 86400, maka harus dikonversi dulu menjadi jumlah detik yang 
-   mewakili jumlah detik yang mungkin dalam 1 hari, yaitu dengan rumus: 
-   N1 = N mod 86400, baru N1 dikonversi menjadi TIME */
+TIME MenitToTIME (long N)
+/* Mengirim konversi jumlah menit ke TIME */
 {
     /* KAMUS LOKAL */
-    int hour, minute, detik;
-
-    /* ALGORITMA */
-    N = N % 86400;
-    hour = N / 3600;
-    minute = (N % 3600) / 60;
-    detik = (N % 3600) % 60;
+    int day, hour, minute;
     TIME newTime;
-    CreateTime(&newTime, hour, minute, detik);
+
+    /* ALGORITMA */
+    day = N / (24*60);
+    hour = (N % (24*60)) / 60;
+    minute = (N % (24*60)) % 60;
+    CreateTime(&newTime, day, hour, minute);
     return newTime;
 }
 
 /* ***************************************************************** */
-/* KELOMPOK OPERASI TERHADAP TYPE                                    */
+/* KELOMPOK OPERASI TERHADAP TIPE                                    */
 /* ***************************************************************** */
 /* *** Kelompok Operator Relational *** */
 boolean TEQ (TIME T1, TIME T2)
-/* Mengirimkan true jika T1=T2, false jika tidak */
+/* Mengirimkan true jika T1 = T2 atau false jika tidak */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return ((Hour(T1) == Hour(T2)) && (Minute(T1) == Minute(T2)) && (Second(T1) == Second(T2)));
+    return (TIMEToMenit(T1) == TIMEToMenit(T2));
 }
 
 boolean TNEQ (TIME T1, TIME T2)
@@ -126,100 +121,92 @@ boolean TNEQ (TIME T1, TIME T2)
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return ((Hour(T1) != Hour(T2)) || (Minute(T1) != Minute(T2)) || (Second(T1) != Second(T2)));
+    return (TIMEToMenit(T1) != TIMEToMenit(T2));
 }
 
 boolean TLT (TIME T1, TIME T2)
-/* Mengirimkan true jika T1<T2, false jika tidak */
+/* Mengirimkan true jika T1 < T2 atau false jika tidak */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return (TIMEToDetik(T1) < TIMEToDetik(T2));
+    return (TIMEToMenit(T1) < TIMEToMenit(T2));
 }
 
 boolean TGT (TIME T1, TIME T2)
-/* Mengirimkan true jika T1>T2, false jika tidak */
+/* Mengirimkan true jika T1 > T2 atau false jika tidak */
 {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
-    return (TIMEToDetik(T1) > TIMEToDetik(T2));
+    return (TIMEToMenit(T1) > TIMEToMenit(T2));
 }
 
-/* *** Operator aritmatika TIME *** */
-TIME NextDetik (TIME T)
-/* Mengirim 1 detik setelah T dalam bentuk TIME */
+/* *** Operator Aritmetika TIME *** */
+TIME NextMenit (TIME T)
+/* Mengirim 1 menit setelah T dalam bentuk TIME */
 {
     /* KAMUS LOKAL */
     TIME newTime;
-    long detik;
+    long menit;
 
     /* ALGORITMA */
-    detik = (TIMEToDetik(T) + 1) % 86400;
-    if (detik < 0)
-        detik += 86400;
-    newTime = DetikToTIME(TIMEToDetik(T) + 1 % 86400);
+    menit = TIMEToMenit(T) + 1;
+    newTime = MenitToTIME(menit);
     return newTime;
 }
 
-TIME NextNDetik (TIME T, int N)
-/* Mengirim N detik setelah T dalam bentuk TIME */
+TIME NextNMenit (TIME T, int N)
+/* Mengirim N menit setelah T dalam bentuk TIME */
 {
     /* KAMUS LOKAL */
     TIME newTime;
-    long detik;
+    long menit;
 
     /* ALGORITMA */
-    detik = (TIMEToDetik(T) + N) % 86400;
-    if (detik < 0)
-        detik += 86400;
-    newTime = DetikToTIME(detik);
+    menit = TIMEToMenit(T) + N;
+    newTime = MenitToTIME(menit);
     return newTime;
 }
 
-TIME PrevDetik (TIME T)
-/* Mengirim 1 detik sebelum T dalam bentuk TIME */
+TIME PrevMenit (TIME T)
+/* Mengirim 1 menit sebelum T dalam bentuk TIME */
 {
     /* KAMUS LOKAL */
     TIME newTime;
-    long detik;
+    long menit;
 
     /* ALGORITMA */
-    detik = (TIMEToDetik(T) - 1);
-    if (detik < 0)
-        detik += 86400;
-    newTime = DetikToTIME(detik);
+    menit = TIMEToMenit(T) - 1;
+    newTime = MenitToTIME(menit);
     return newTime;
 }
 
-TIME PrevNDetik (TIME T, int N)
-/* Mengirim N detik sebelum T dalam bentuk TIME */
+TIME PrevNMenit (TIME T, int N)
+/* Mengirim N menit sebelum T dalam bentuk TIME */
 {
     /* KAMUS LOKAL */
     TIME newTime;
-    long detik;
+    long menit;
 
     /* ALGORITMA */
-    detik = (TIMEToDetik(T) - N) % 86400;
-    if (detik < 0)
-        detik += 86400;
-    newTime = DetikToTIME(detik);
+    menit = TIMEToMenit(T) - N;
+    newTime = MenitToTIME(menit);
     return newTime;
 }
 
 /* *** Kelompok Operator Aritmetika *** */
 long Durasi (TIME TAw, TIME TAkh)
-/* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
-/* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
+/* Mengirim dalam menit TAkh - TAw jika TAw < TAkh atau TAw - TAkh */
+/* jika TAw > TAkh dengan kalkulasi */
 {
     /* KAMUS LOKAL */
     long durasi;
 
     /* ALGORITMA */
     if (TGT(TAw, TAkh))
-        durasi = TIMEToDetik(TAkh) - TIMEToDetik(TAw) + 86400;
+        durasi = TIMEToMenit(TAw) - TIMEToMenit(TAkh);
     else
-        durasi = TIMEToDetik(TAkh) - TIMEToDetik(TAw);
+        durasi = TIMEToMenit(TAkh) - TIMEToMenit(TAw);
     return durasi;
 }

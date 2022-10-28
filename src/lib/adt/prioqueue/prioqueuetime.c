@@ -84,7 +84,7 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	} else {
 		Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
 		int idx = Tail(*Q)-1;
-		while(idx != Head(*Q)-1 && TIMEToDetik(Expire(X)) < TIMEToDetik(Expire(Elmt(*Q, idx)))){
+		while(idx != Head(*Q)-1 && TIMEToMenit(Kedaluwarsa(X)) < TIMEToMenit(Kedaluwarsa(Elmt(*Q, idx)))){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
@@ -134,11 +134,35 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             if(idx == MaxEl(Q)){
                 idx %= MaxEl(Q);
             }
-            printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
+            //TulisTIME(Kedaluwarsa((Q).T[idx]));
+            printf("%d. ", idx+1);
+            PrintWord(Nama((Q).T[idx]));
+            printf(" -");
+            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
+            }
+            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
+            }
+            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
+            }
+            printf("\n");
             idx++;
         }
-        printf("%d %c\n", Expire((Q).T[idx]), Nama((Q).T[idx]));
-        printf("#\n");
+        printf("%d. ", idx+1);
+            PrintWord(Nama((Q).T[idx]));
+            printf(" -");
+            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
+            }
+            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
+            }
+            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+                printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
+            }
+            printf("\n");
     }
 }
 
