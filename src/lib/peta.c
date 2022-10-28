@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "./adt/matrix/matrix.c"
-#include "./adt/point/point.c"
+#include "./adt/sederhana/point/point.c"
 #include "./adt/boolean.h"
 #include "./commandparser.c"
 #include "./adt/wordfilemachine/wordfilemachine.c"
+#include "./adt/wordmachine/wordmachine.c"
+#include "./adt/wordmachine/charmachine.c"
 
 /***  UTILITIES ***/
 int pangkat (int x, int y) {
@@ -53,7 +55,7 @@ void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POIN
   
   // membaca peta
   for (i = 1; i< row+1; i++){
-    for (j = 1; j<col+1; j++) { 
+    for (j = 1; j<col+2; j++) { 
       advCharFile();
       element = currentCharFile;
       if (element != '#' && element != '\n') {
@@ -61,23 +63,17 @@ void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POIN
 
         //membaca koordinat masing-masing elemen
         if (element == 'S') {
-          Absis(*S) = (int)i-1;
-          Ordinat(*S) = j-1;
+          CreatePoint(S, i-1, j-1);
         } else if (element == 'T') {
-          Absis(*T) = i-1;
-          Ordinat(*T) = j-1;
+          CreatePoint(T, i-1, j-1);
         } else if (element == 'M') {
-          Absis(*M) = i-1;
-          Ordinat(*M) = j-1;
+          CreatePoint(M, i-1, j-1);
         } else if (element == 'C') {
-          Absis (*C) = i-1;
-          Ordinat (*C) = j-1;
+          CreatePoint(C, i-1, j-1);
         } else if (element == 'F') {
-          Absis(*F) == i-1;
-          Ordinat(*F) = j-1;
+          CreatePoint(F, i-1, j-1);
         } else if (element == 'B') {
-          Absis(*B) = i-1;
-          Ordinat(*B) = j-1;
+          CreatePoint(B, i-1, j-1);
         }
       }
     }
@@ -162,11 +158,11 @@ int main () {
   char path[50] = "../../config/testPeta.txt";
   bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
   printf("\n");
-  STARTWORD();
 
   while(true){
     printf("\nBNMO di posisi: ");
     TulisPOINT(S);
+    printf("\n");
     displayPeta(peta);
     isValid = false;
     while(!isValid){
