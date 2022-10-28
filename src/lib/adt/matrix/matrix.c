@@ -64,6 +64,7 @@ void readMatrix(Matrix *m, int nRow, int nCol){
 
     for(i = 0; i < nRow; i++){
         for(j = 0; j < nCol; j++){
+            printf("Elemen M[%d][%d]: ", i, j);
             scanf("%d", &newElement);
             ELMT(*m, i, j) = newElement;
         }
