@@ -36,7 +36,7 @@ void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POIN
   char element;
 
   startWordFile(fileName);
-  row =wordToInt(currentWordFile);
+  row = wordToInt(currentWordFile);
   advWordFile();
   col = wordToInt(currentWordFile);
 
