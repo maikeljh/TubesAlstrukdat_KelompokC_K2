@@ -48,11 +48,14 @@ void CopyWord();
 
 void PrintWord(Word Kata);
 void LowerCase();
-Word CreateWord(char word[], int length);
-boolean isKataSama(Word W1, Word W2);
-
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
 
 /* F.S. currentword menjadi lowercase di setiap karakternya */
+
+Word CreateWord(char word[], int length);
+
+boolean isKataSama(Word W1, Word W2);
+/* Mengembalikan true jika W1 memiliki length yang sama dengan W2 dan
+   W1 memiliki TabWord yang sama dengan W2 */
 
 #endif

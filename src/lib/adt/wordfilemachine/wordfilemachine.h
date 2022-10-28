@@ -45,4 +45,11 @@ void CopyWordFile();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+boolean isKataFileSama(WordFile W1, WordFile W2);
+/* Mengembalikan true jika W1 memiliki length yang sama dengan W2 dan
+   W1 memiliki TabWord yang sama dengan W2 */
+
+WordFile CreateWordFile(char word[], int length);
+/* Mengembalikan sebuah WordFile yang memiliki TabWord berisi word dan memiliki
+   Length yaitu length */
 #endif

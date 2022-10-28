@@ -23,6 +23,9 @@ void advCharFile()
    F.S. : currentCharFile adalah karakter berikutnya dari currentCharFile yang lama */
 {
   retfile = fscanf(file, "%c", &currentCharFile);
+  if(feof(file)){
+    fclose(file);
+  }
 }
 
 // int main (){
