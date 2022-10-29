@@ -88,12 +88,10 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
-            // Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
-            (*Q).T[(idx+1) % MaxEl(*Q)] = (*Q).T[idx];
+            Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
             idx--;
         }
-        // Elmt(*Q, idx+1) = X;
-		(*Q).T[idx+1] = X;
+        Elmt(*Q, idx+1) = X;
 	}
 }
 
@@ -140,16 +138,17 @@ void PrintPrioQueueTime (PrioQueueTime Q){
                 idx %= MaxEl(Q);
             }
             //TulisTIME(Kedaluwarsa((Q).T[idx]));
+            // Elmt(Q, idx)
             printf("%d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
-            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Hour(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Minute(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
@@ -159,13 +158,13 @@ void PrintPrioQueueTime (PrioQueueTime Q){
         printf("%d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
-            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Hour(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Minute(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
