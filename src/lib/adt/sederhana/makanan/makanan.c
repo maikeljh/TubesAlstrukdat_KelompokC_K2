@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "makanan.h"
-#include "../../wordmachine/wordmachine.c"
-#include "../../wordmachine/charmachine.c"
-#include "../time/time.c"
+#include "../../wordmachine/wordmachine.h"
+#include "../../wordmachine/charmachine.h"
+#include "../time/time.h"
 
 void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp){
 /* Membuat suatu makanan dengan id, location, nama, waktu kedaluwarsa, dan waktu delivery yang terdefinisi */

@@ -2,7 +2,7 @@
 /* Definisi Word Machine: Model Akuisisi Versi I */
 
 #include "wordfilemachine.h"
-#include "math.h"
+#include <math.h>
 
 
 /* State Mesin Word */

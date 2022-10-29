@@ -88,12 +88,10 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
             if(idx == -1){
                 idx = MaxEl(*Q) - 1;
             }
-            // Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
-            (*Q).T[(idx+1) % MaxEl(*Q)] = (*Q).T[idx];
+            Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
             idx--;
         }
-        // Elmt(*Q, idx+1) = X;
-		(*Q).T[idx+1] = X;
+        Elmt(*Q, idx+1) = X;
 	}
 }
 
@@ -109,12 +107,12 @@ void Dequeue (PrioQueueTime * Q, Makanan * X){
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     } else {
-        int i = HEAD(*Q) % MaxEl(*Q);
-        while (i != TAIL(*Q) % MaxEl(*Q)){
+        int i = Head(*Q) % MaxEl(*Q);
+        while (i != Tail(*Q) % MaxEl(*Q)){
             Elmt(*Q, i) = Elmt(*Q, i+1);
             i = (i+1) % MaxEl(*Q);
         }
-        TAIL(*Q) = (TAIL(*Q) - 1) % MaxEl(*Q);
+        Tail(*Q) = (Tail(*Q) - 1) % MaxEl(*Q);
     }
 }
 
@@ -140,16 +138,17 @@ void PrintPrioQueueTime (PrioQueueTime Q){
                 idx %= MaxEl(Q);
             }
             //TulisTIME(Kedaluwarsa((Q).T[idx]));
+            // Elmt(Q, idx)
             printf("%d. ", count);
-            PrintWord(Nama((Q).T[idx]));
+            PrintWord(Nama(Elmt(Q, idx)));
             printf(" -");
-            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Hour(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Minute(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
@@ -159,13 +158,13 @@ void PrintPrioQueueTime (PrioQueueTime Q){
         printf("%d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
-            if (Day(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Hari", Day(Kedaluwarsa((Q).T[idx])));
             }
-            if (Hour(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Hour(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Jam", Hour(Kedaluwarsa((Q).T[idx])));
             }
-            if (Minute(Kedaluwarsa((Q).T[idx])) != 0){
+            if (Minute(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
@@ -179,9 +178,9 @@ int CariMakanan(PrioQueueTime Q, Makanan X, int id){
     boolean found;
     // ALGORITMA 
     found = false;
-    idx = HEAD(Q);
-    while (!found && idx != TAIL(Q) % MaxEl(Q)){
-        if (ID(Elmt(Q, idx) == id)){
+    idx = Head(Q);
+    while (!found && idx != Tail(Q) % MaxEl(Q)){
+        if (ID(Elmt(Q, idx)) == id){
             found = true;
         }
         else{
@@ -198,20 +197,20 @@ void DequeueAt (PrioQueueTime *Q, Makanan * X, int id){
     int idx; // idx dari pemilik id makanan.
     /* ALGORITMA */
     idx = CariMakanan(*Q, *X, id);
-    if (NbElmt(*Q) == 1){
-        HEAD(*Q) = Nil;
-        TAIL(*Q) = Nil;
+    if (NBElmt(*Q) == 1){
+        Head(*Q) = Nil;
+        Tail(*Q) = Nil;
     }
     else /* NbElmt(*Q) > 1*/ {
-        if (idx == HEAD(*Q)){
+        if (idx == Head(*Q)){
             Dequeue(&*Q, &*X);
         }
         else{
-            while (idx != TAIL(*Q) % MaxEl(*Q)){
+            while (idx != Tail(*Q) % MaxEl(*Q)){
                 Elmt(*Q, idx) = Elmt(*Q, idx+1);
                 idx = (idx+1) % MaxEl(*Q); 
             }
-            TAIL(*Q) = (TAIL(*Q) - 1) % MaxEl(*Q);
+            Tail(*Q) = (Tail(*Q) - 1) % MaxEl(*Q);
         }
     }
 }
