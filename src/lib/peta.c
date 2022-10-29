@@ -6,6 +6,7 @@
 #include "./adt/wordfilemachine/wordfilemachine.c"
 #include "./adt/wordmachine/wordmachine.c"
 #include "./adt/wordmachine/charmachine.c"
+#include "./adt/sederhana/time/time.c"
 
 /***  UTILITIES ***/
 int pangkat (int x, int y) {
@@ -101,7 +102,7 @@ boolean isBlocked(Matrix peta, int x, int y) {
   return (ELMT(peta, x, y) != ' ');
 }
 
-void move (Matrix *peta, int direction, POINT *S) {
+void move (Matrix *peta, int direction, POINT *S, boolean *moved) {
   /*Menggerakan S sebanyak satu satuan sesuai arah mata angin*/
   /*S tidak dapat berpindah apabila terhalang benda pada tujuannya*/
   /* 1 = atas
@@ -130,9 +131,10 @@ void move (Matrix *peta, int direction, POINT *S) {
     ELMT(*peta, x,y) = 'S';
     Absis(*S) = x - 1;
     Ordinat(*S) = y - 1;
-    // kaitin sama ADT Time
+    *moved = true;
   } else {
     printf("*BNMO tidak bisa lewat\n\n");
+    *moved = false;
   }
 
 }
@@ -159,64 +161,87 @@ boolean isNearby(POINT target, POINT S) {
 int main () {
   Matrix peta;
   POINT S,T,M,C,F,B;
+  TIME time;
   int command;
-  boolean isValid;
+  boolean isValid, isSucceed;
   char path[50] = "../../config/testPeta.txt";
+
   bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
+  CreateTime(&time,0,0,0);
   printf("\n");
+
   while(true){
     printf("\nBNMO di posisi: ");
     TulisPOINT(S);
     printf("\n");
+    printf("Waktu: ");
+    TulisTIME(time);
+    printf("\n");
     displayPeta(peta);
+    isSucceed = false;
     isValid = false;
     while(!isValid){
       printf("Enter Command: ");
       command = readCommand();
       if(command == 5){
-        move (&peta, 1, &S);
+        move (&peta, 1, &S, &isSucceed);
         isValid = true;
       } else if(command == 6){
-        move (&peta, 2, &S);
+        move (&peta, 2, &S, &isSucceed);
         isValid = true;
       } else if(command == 8){
-        move (&peta, 3, &S);
+        move (&peta, 3, &S, &isSucceed);
         isValid = true;
       } else if(command == 7){
-        move (&peta, 4, &S);
+        move (&peta, 4, &S, &isSucceed);
         isValid = true;
       } else if(command == 3){
         if (isNearby(T,S)) {
           printf("**BUY**\n");
+          isSucceed = true;
+          isValid = true;
         } else {
           printf("Tidak berada dekat telephone.\n");
         }
       } else if(command == 9){
         if (isNearby(M,S)) {
           printf("**MIX**\n");
+          isSucceed = true;
+          isValid = true;
+          
         } else {
           printf("Tidak berada dekat tempat Mix.\n");
         }
       } else if(command == 10){
         if (isNearby(C,S)) {
           printf("**CHOP**\n");
+          isSucceed = true;
+          isValid = true;
         } else {
           printf("Tidak berada dekat tempat Chop.\n");
         }
       } else if(command == 11){
         if (isNearby(F,S)) {
           printf("**FRY**\n");
+          isSucceed = true;
+          isValid = true;
         } else {
           printf("Tidak berada dekat tempat Fry.\n");
         }
       } else if(command == 12){
         if (isNearby(B,S)) {
           printf("**BOIL**\n");
+          isSucceed = true;
+          isValid = true;
         } else {
           printf("Tidak berada dekat tempat Boil.\n");
         }
       } else {
         printf("\nCommand tidak valid. Silahkan input kembali.\n\n");
+      }
+
+      if (isSucceed) {
+        time = NextMenit(time);
       }
     }
   }
