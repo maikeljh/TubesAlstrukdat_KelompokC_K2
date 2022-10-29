@@ -7,6 +7,7 @@ int main(){
     printf("Nama makanan 1: \n");
     STARTWORD();
     PrioQueueTime inventory;
+    MakeEmpty(&inventory, 100);
     Makanan M1, M2;
     int id, lokasi;
     TIME wk, lp;

@@ -109,7 +109,12 @@ void Dequeue (PrioQueueTime * Q, Makanan * X){
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     } else {
-        Head(*Q) = (Head(*Q) + 1) % MaxEl(*Q);
+        int i = HEAD(*Q) % MaxEl(*Q);
+        while (i != TAIL(*Q) % MaxEl(*Q)){
+            Elmt(*Q, i) = Elmt(*Q, i+1);
+            i = (i+1) % MaxEl(*Q);
+        }
+        TAIL(*Q) = (TAIL(*Q) - 1) % MaxEl(*Q);
     }
 }
 
@@ -125,7 +130,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
 */
 	// KAMUS LOKAL
     int idx = Head(Q);
-
+    int count = 1;
     // ALGORITMA
     if(IsEmpty(Q)){
         printf("#\n");
@@ -135,7 +140,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
                 idx %= MaxEl(Q);
             }
             //TulisTIME(Kedaluwarsa((Q).T[idx]));
-            printf("%d. ", idx+1);
+            printf("%d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
             if (Day(Kedaluwarsa((Q).T[idx])) != 0){
@@ -148,9 +153,10 @@ void PrintPrioQueueTime (PrioQueueTime Q){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
             }
             printf("\n");
+            count++;
             idx++;
         }
-        printf("%d. ", idx+1);
+        printf("%d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
             if (Day(Kedaluwarsa((Q).T[idx])) != 0){
@@ -166,3 +172,46 @@ void PrintPrioQueueTime (PrioQueueTime Q){
     }
 }
 
+int CariMakanan(PrioQueueTime Q, Makanan X, int id){
+/* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/
+    // KAMUS LOKAL
+    int idx;
+    boolean found;
+    // ALGORITMA 
+    found = false;
+    idx = HEAD(Q);
+    while (!found && idx != TAIL(Q) % MaxEl(Q)){
+        if (ID(Elmt(Q, idx) == id)){
+            found = true;
+        }
+        else{
+            idx = (idx+1) % MaxEl(Q);
+        }
+    }
+    return idx;
+}
+void DequeueAt (PrioQueueTime *Q, Makanan * X, int id){
+/* Proses: Menghapus X yang memiliki nilai "id" makanan tersebut pada Q. 
+/* I.S. Q tidak mungkin kosong, id makanan valid berada di dalam inventory */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; Q mungkin kosong */
+    /* KAMUS LOKAL */
+    int idx; // idx dari pemilik id makanan.
+    /* ALGORITMA */
+    idx = CariMakanan(*Q, *X, id);
+    if (NbElmt(*Q) == 1){
+        HEAD(*Q) = Nil;
+        TAIL(*Q) = Nil;
+    }
+    else /* NbElmt(*Q) > 1*/ {
+        if (idx == HEAD(*Q)){
+            Dequeue(&*Q, &*X);
+        }
+        else{
+            while (idx != TAIL(*Q) % MaxEl(*Q)){
+                Elmt(*Q, idx) = Elmt(*Q, idx+1);
+                idx = (idx+1) % MaxEl(*Q); 
+            }
+            TAIL(*Q) = (TAIL(*Q) - 1) % MaxEl(*Q);
+        }
+    }
+}
