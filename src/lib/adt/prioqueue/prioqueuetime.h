@@ -89,7 +89,7 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 int CariMakanan(PrioQueueTime Q, Makanan X, int id);
 /* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/
 
-void DequeueAt (PrioQueueTime *Q, Makanan * X, int idx);
+void DequeueAt (PrioQueueTime *Q, Makanan * X, int id);
 /* Proses: Menghapus X pada Q pada indeks ke- idx
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
