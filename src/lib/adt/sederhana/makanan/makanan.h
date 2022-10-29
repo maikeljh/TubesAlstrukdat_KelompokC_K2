@@ -7,7 +7,7 @@
 #include "../../boolean.h"
 #include "../time/time.h"
 #include "../../wordmachine/wordmachine.h"
-#include "../../wordfilemachine/wordfilemachine.c"
+#include "../../wordfilemachine/wordfilemachine.h"
 
 typedef struct{
 	int ID; // ID Makanan
