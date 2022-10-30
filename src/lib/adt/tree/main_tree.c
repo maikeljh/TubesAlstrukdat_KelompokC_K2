@@ -1,6 +1,7 @@
 #include "tree.c"
 
 int main(){
+    /*
     // INISIASI ARRAY OF TREE
     Tree T[100];
 
@@ -32,7 +33,7 @@ int main(){
     // Melakukan penambahan daun sesuai dengan akar
     AddDaunByID(&T1, 21, 11);
     AddDaunByID(&T2, 31, 21);
-    AddDaunByID(&T2, 31, 10);
+    AddDaunByID(&T2, 31, 21);
     AddDaunByID(&T3, 37, 31);
     AddDaunByID(&T3, 37, 15);
 
@@ -55,4 +56,10 @@ int main(){
     printf("Tree Resep Dari Makanan Tersebut adalah ");
     PrintTree(Resep);
     printf("\n");
+    */
+
+   // INISIASI PATH KONFIGURASI FILE MAKANAN
+	char fileName[100] = "../../../../config/resep.txt";
+    Tree Main = BacaResep(fileName);
+    PrintTree(Main);
 }

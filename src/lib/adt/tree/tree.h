@@ -6,6 +6,7 @@
 
 /* Modul lain yang digunakan : */
 #include "../boolean.h"
+#include "../wordfilemachine/wordfilemachine.h"
 
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotype; */
@@ -82,5 +83,14 @@ void insertTree(Tree *P, Tree newP);
 
 Tree mergeResep(Tree P[], int N);
 /* Melakukan merging tree-tree resepnya yang sudah dibuat dari konfigurasi file */
+
+int pangkat (int x, int y);
+/* Mengembalikan nilai dari x pangkat y */
+
+int wordToInt (WordFile str);
+/* Mengembalikan nilai integer dari WordFile yang dibaca */
+
+Tree BacaResep(char fileName[]);
+/* Melakukan baca resep dari file konfigurasi */
 
 #endif
