@@ -1,4 +1,29 @@
-6
+11
+7
+Cabai
+0 3 0
+0 0 10
+Buy
+3
+Bawang
+2 0 0
+0 0 20
+Buy
+19
+Sambal
+3 0 0
+0 0 0
+Mix
+25
+Sambal Goreng
+2 0 0
+0 0 0
+Fry
+40
+Ayam Goreng Extra Sambal
+5 0 0
+0 0 0
+Mix
 11
 Ayam Mentah
 1 0 0
