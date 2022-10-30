@@ -163,13 +163,64 @@ void insertTree(Tree *P, Tree newP){
     }
 }
 
+int indexOfAkar(Tree P[], int N){
+    /* Mencari indeks elemen array of Tree yang merupakan node utama (Akar) dari tree */
+    
+    int Temp[100];
+    int result = -1;
+    int idxNow = 0;
+    int ID;
+    boolean check;
+    Tree PNow;
+    for(int i = 0;i < N; i++){
+        PNow = P[i];
+        addrNode adr = FirstChild(PNow);
+        for(int j = 0; j < BanyakChild(PNow); j++){
+            ID = Akar(adr);
+            check = false;
+            for(int k = 0; k < idxNow;k++){
+                if(Temp[k] == ID){
+                    check = true;
+                    break;
+                }
+            }
+            if(!check){
+                Temp[idxNow] = ID;
+                idxNow++;
+            }
+            adr = Sibling(adr);
+        }
+    }
+    for(int i = 0; i < N; i++){ 
+        check = false;
+        for(int k = 0; k <= idxNow;k++){
+            if(Temp[k] == Akar(P[i])){
+                check = true;
+                break;
+            }
+        }
+        if(!check){
+            result = i;
+            break;
+        }
+    }
+
+    return result;
+}
+
 Tree mergeResep(Tree P[], int N){
     /* Melakukan merging tree-tree resepnya yang sudah dibuat dari konfigurasi file */
-    
-    for(int i = 0;i < N-1;i++){
-        insertTree(&P[i+1], P[i]);
+    int indexAkar = indexOfAkar(P, N);
+
+    for(int i = 0;i < N;i++){
+        for(int j = 0; j < N;j++){
+            if(i != j){
+                insertTree(&P[i], P[j]);
+            }
+        }
     }
-    return P[N-1];
+
+    return P[indexAkar];
 }
 
 int pangkat (int x, int y) {
@@ -195,6 +246,8 @@ int wordToInt (WordFile str) {
 }
 
 Tree BacaResep(char fileName[]){
+    /* Melakukan baca resep dari file konfigurasi */
+
     Tree Main;
     Tree T[100];
     int ID;

@@ -93,4 +93,7 @@ int wordToInt (WordFile str);
 Tree BacaResep(char fileName[]);
 /* Melakukan baca resep dari file konfigurasi */
 
+int indexOfAkar(Tree P[], int N);
+/* Mencari indeks elemen array of Tree yang merupakan node utama (Akar) dari tree */
+
 #endif
