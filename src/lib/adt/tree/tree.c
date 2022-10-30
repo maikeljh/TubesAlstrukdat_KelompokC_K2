@@ -171,3 +171,52 @@ Tree mergeResep(Tree P[], int N){
     }
     return P[N-1];
 }
+
+int pangkat (int x, int y) {
+	/* Mengembalikan nilai dari x pangkat y */
+	
+	int ret = 1;
+	for (int i = 1; i <= y; i++){
+		ret = ret*x;
+	}
+	return ret;
+}
+
+int wordToInt (WordFile str) {
+	/* Mengembalikan nilai integer dari WordFile yang dibaca */
+
+	int val = 0;
+	int k = 0;
+	for (int i= str.Length-1; i >= 0; i--) {
+		val += (str.TabWord[i]-48) * pangkat(10,k);
+		k++;
+	}
+	return val;
+}
+
+Tree BacaResep(char fileName[]){
+    Tree Main;
+    Tree T[100];
+    int ID;
+    int Child;
+    startWordFile(fileName);
+    int N = wordToInt(currentWordFile);
+    advCharFile();
+	advWordFile();
+    for(int i = 0; i < N; i++){
+        ID = wordToInt(currentWordFile);
+        advWordFile();
+        Child = wordToInt(currentWordFile);
+        T[i] = AlokasiTree(ID, 0, NULL);
+        int val;
+        for(int j = 0; j < Child;j++){
+            advWordFile();
+            val = wordToInt(currentWordFile);
+            AddDaunByID(&T[i], ID, val);
+        }
+        advCharFile();
+        advWordFile();
+    }
+    Main = mergeResep(T, N);
+    return Main;
+}
