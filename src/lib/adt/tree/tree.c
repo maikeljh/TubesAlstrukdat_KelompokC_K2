@@ -102,7 +102,25 @@ void PrintTree(Tree P){
 };
 
 /* *** Searching *** */
-boolean SearchTree(Tree P, infotype X);
+Tree SearchTree(Tree P, int ID){
+    if(!IsTreeEmpty(P)){
+        boolean found = false;
+        if(Akar(P) == ID){
+            found = true;
+            return P;
+        } else {
+            addrNode P1 = FirstChild(P);
+            int i = 0;
+            while(i < BanyakChild(P) && !found){
+                SearchTree(P1, ID);
+                P1 = Sibling(P1);
+                i++;
+            }
+        }
+    } else {
+        return NULL;
+    }
+};
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 
 /* *** Operasi lain *** */
@@ -272,4 +290,55 @@ Tree BacaResep(char fileName[]){
     }
     Main = mergeResep(T, N);
     return Main;
+}
+
+void TulisResep(ListMakanan M, Tree Resep){
+    int idxNow = 0;
+    for(int i = 0; i < JumlahMakanan(M); i++){
+        boolean found = false;
+        Word namaLokasi;
+		int Lokasi = getLokasi(Makanan(M, i));
+		Word Mix = CreateWord("MIX", 3);
+		Word Chop = CreateWord("CHOP", 4);
+		Word Fry = CreateWord("FRY", 3);
+		Word Boil = CreateWord("BOIL", 4);
+		if (Lokasi == 9){
+			namaLokasi = Mix;
+            found = true;
+		} else if (Lokasi == 10){
+			namaLokasi = Chop;
+            found = true;
+		} else if (Lokasi == 11){
+			namaLokasi = Fry;
+            found = true;
+		} else if (Lokasi == 12){
+			namaLokasi = Boil;
+            found = true;
+		}
+        if(found){
+            printf("   %d. ", (idxNow+1));
+            idxNow++;
+            PrintWord(Nama(Makanan(M, i)));
+            printf("\n");
+            printf("      ");
+            PrintWord(namaLokasi);
+            printf(" - ");
+            Tree ResepMakanan = SearchTree(Resep, ID(Makanan(M, i)));
+            PrintTree(ResepMakanan);
+            addrNode P = FirstChild(ResepMakanan);
+            for(int j = 0; j < BanyakChild(ResepMakanan); j++){
+                for(int k = 0; k < JumlahMakanan(M); k++){
+                    if(getID(Makanan(M, k)) == Akar(P)){
+                        PrintWord(Nama(Makanan(M,k)));
+                        break;
+                    }
+                }
+                if(i != BanyakChild(ResepMakanan) - 1){
+                    printf(" - ");
+                }
+                P = Sibling(P);
+            }
+            printf("\n");
+        }
+    }
 }

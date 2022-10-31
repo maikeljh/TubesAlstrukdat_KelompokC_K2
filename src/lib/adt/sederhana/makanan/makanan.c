@@ -41,27 +41,27 @@ TIME getLP(Makanan M){
 	return Pengiriman(M);
 }
 
-int pangkat (int x, int y) {
+//int pangkat (int x, int y) {
 	/* Mengembalikan nilai dari x pangkat y */
 	
-	int ret = 1;
+	/*int ret = 1;
 	for (int i = 1; i <= y; i++){
 		ret = ret*x;
 	}
 	return ret;
-}
+}*/
 
-int wordToInt (WordFile str) {
+// int wordToInt (WordFile str) {
 	/* Mengembalikan nilai integer dari WordFile yang dibaca */
 
-	int val = 0;
+	/*int val = 0;
 	int k = 0;
 	for (int i= str.Length-1; i >= 0; i--) {
 		val += (str.TabWord[i]-48) * pangkat(10,k);
 		k++;
 	}
 	return val;
-}
+}*/
 
 void TulisMakanan(Makanan M){
 /* Menuliskan makanan ke layar yang berisi detail lengkap mengenai makanan tersebut */
@@ -191,10 +191,59 @@ void TulisListMakanan(ListMakanan M, int N){
 /* I.S. ListMakanan M terdefinisi */
 /* F.S. Tampilnya informasi detail mengenai ListMakanan M */
 
-	printf("\nList Bahan dan Makanan :\n\n");
 	for(int i = 0; i < N; i++){
-		printf("Makanan ke-%d :\n", i);
-		TulisMakanan(Makanan(M, i));
-		printf("\n");
+		printf("   %d. ", (i+1));
+		PrintWord(Nama(Makanan(M, i)));
+		printf(" - ");
+		if(DayWK(Makanan(M, i)) == 0 && HourWK(Makanan(M, i)) == 0 && MinuteWK(Makanan(M, i)) == 0){
+			printf("0 ");
+		} else {
+			if(DayWK(Makanan(M, i)) > 0){
+				printf("%d hari ", DayWK(Makanan(M, i)));
+			}
+			if(HourWK(Makanan(M, i)) > 0){
+				printf("%d jam ", HourWK(Makanan(M, i)));
+			}
+			if(MinuteWK(Makanan(M, i)) > 0){
+				printf("%d menit ", MinuteWK(Makanan(M, i)));
+			}
+		}
+		printf("- ");
+		Word namaLokasi;
+		int Lokasi = getLokasi(Makanan(M, i));
+		Word Mix = CreateWord("MIX", 3);
+		Word Chop = CreateWord("CHOP", 4);
+		Word Fry = CreateWord("FRY", 3);
+		Word Boil = CreateWord("BOIL", 4);
+		Word Buy = CreateWord("BUY", 3);
+		if(Lokasi == 3){
+			namaLokasi = Buy;
+		} else if (Lokasi == 9){
+			namaLokasi = Mix;
+		} else if (Lokasi == 10){
+			namaLokasi = Chop;
+		} else if (Lokasi == 11){
+			namaLokasi = Fry;
+		} else if (Lokasi == 12){
+			namaLokasi = Boil;
+		}
+		PrintWord(namaLokasi);
+		printf(" - ");
+		if(DayLP(Makanan(M, i)) == 0 && HourLP(Makanan(M, i)) == 0 && MinuteLP(Makanan(M, i)) == 0){
+			printf("0");
+		} else {
+			if(DayLP(Makanan(M, i)) > 0){
+				printf("%d hari ", DayLP(Makanan(M, i)));
+			}
+			if(HourLP(Makanan(M, i)) > 0){
+				printf("%d jam ", HourLP(Makanan(M, i)));
+			}
+			if(MinuteLP(Makanan(M, i)) > 0){
+				printf("%d menit", MinuteLP(Makanan(M, i)));
+			}
+		}
+		if(i != N-1){
+			printf("\n");
+		}
 	}
 }
