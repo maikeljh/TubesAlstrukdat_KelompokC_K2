@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "./lib/adt/sederhana/makanan/makanan.c"
 #include "./lib/adt/tree/tree.c"
-#include "./lib/commandparser.c"
+#include "./lib/peta.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -12,6 +12,10 @@ int main(){
     ListMakanan KumpulanMakanan;
     Tree Resep;
     int jumlahMakanan;
+    Matrix peta;
+    POINT S,T,M,C,F,B;
+    TIME time;
+    boolean isSucceed;
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -59,20 +63,82 @@ int main(){
     }
 
     // GAME STARTED
-    // INISIASI MAKANAN DAN RESEP
+    // INISIASI PETA, MAKANAN, DAN RESEP
     char fileMakanan[100] = "../config/makanan.txt";
     char fileResep[100] = "../config/resep.txt";
+    char path[50] = "../config/testPeta.txt";
+    bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
+    CreateTime(&time,0,0,0);
     KumpulanMakanan = BacaMakanan(fileMakanan);
     Resep = BacaResep(fileResep);
 
     // MAIN PROGRAM
     while(true){
-        printf("\nLIST COMMAND:\n");
+        isSucceed = false;
+        printf("\nBNMO di posisi: ");
+        TulisPOINT(S);
+        printf("\n");
+        printf("Waktu: ");
+        TulisTIME(time);
+        printf("\n");
+        displayPeta(peta);
+        printf("LIST COMMAND:\n");
+        printf("5. MOVE NORTH\n");
+        printf("6. MOVE EAST\n");
+        printf("7. MOVE WEST\n");
+        printf("8. MOVE SOUTH\n");
+        printf("9. MIX\n");
+        printf("10. CHOP\n");
+        printf("11. FRY\n");
+        printf("12. BOIL\n");
         printf("16. CATALOG\n");
         printf("17. COOKBOOK\n");
         printf("\nEnter Command: ");
         command = readCommand();
-        if(command == 16){
+        if(command == 5){
+            move (&peta, 1, &S, &isSucceed);
+        } else if(command == 6){
+            move (&peta, 2, &S, &isSucceed);
+        } else if(command == 8){
+            move (&peta, 3, &S, &isSucceed);
+        } else if(command == 7){
+            move (&peta, 4, &S, &isSucceed);
+        } else if(command == 3){
+            if (isNearby(T,S)) {
+                printf("**BUY**\n");
+                isSucceed = true;
+            } else {
+                printf("Tidak berada dekat telephone.\n");
+            }
+        } else if(command == 9){
+            if (isNearby(M,S)) {
+                printf("**MIX**\n");
+                isSucceed = true;
+            } else {
+                printf("Tidak berada dekat tempat Mix.\n");
+            }
+        } else if(command == 10){
+            if (isNearby(C,S)) {
+                printf("**CHOP**\n");
+                isSucceed = true;
+            } else {
+                printf("Tidak berada dekat tempat Chop.\n");
+            }
+        } else if(command == 11){
+            if (isNearby(F,S)) {
+                printf("**FRY**\n");
+                isSucceed = true;
+            } else {
+                printf("Tidak berada dekat tempat Fry.\n");
+            }
+        } else if(command == 12){
+            if (isNearby(B,S)) {
+                printf("**BOIL**\n");
+                isSucceed = true;
+            } else {
+                printf("Tidak berada dekat tempat Boil.\n");
+            }
+        } else if(command == 16){
             printf("\nList Makanan\n");
             printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
             TulisListMakanan(KumpulanMakanan, JumlahMakanan(KumpulanMakanan));
@@ -86,8 +152,14 @@ int main(){
             TulisResep(KumpulanMakanan, Resep);
             printf("\nPress enter to continue.");
             ADV();
+        } else if(command == 2) {
+            printf("\nTerima kasih telah mempermainkan game kami!\n");
+            return 0;
         } else {
             printf("\nCommand salah. Silahkan input command kembali.\n");
+        }
+        if (isSucceed) {
+            time = NextMenit(time);
         }
     }
 }
