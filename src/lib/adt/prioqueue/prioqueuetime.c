@@ -229,7 +229,7 @@ void Decay (PrioQueueTime *Q){
         }
         PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
         // Semua telah Decay, pengecekkan makanan expired.
-        DequeueExpired(&*Q);
+        DequeueExpired(Q);
     }
 
 }
@@ -238,6 +238,6 @@ void DequeueExpired (PrioQueueTime *Q){
     /* KAMUS LOKAL*/
     /* ALGORITMA */
     while (TIMEToMenit(Kedaluwarsa(InfoHead(*Q))) == 0){
-        Dequeue(*Q);
+        Dequeue(Q);
     }
 }
