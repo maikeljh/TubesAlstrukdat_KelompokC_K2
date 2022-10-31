@@ -48,7 +48,6 @@ void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp);
 
 int getID(Makanan M);
 /* Mengembalikan ID dari Makanan M */
-
 int getLokasi(Makanan M);
 /* Mengembalikan Lokasi dari Makanan M */
 
