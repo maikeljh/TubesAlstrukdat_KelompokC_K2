@@ -1,11 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./lib/adt/sederhana/makanan/makanan.c"
+#include "./lib/adt/tree/tree.c"
+#include "./lib/commandparser.c"
+
+// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
 int main(){
     // KAMUS GLOBAL
     int command;
-    Makanan M[100];
+    ListMakanan KumpulanMakanan;
+    Tree Resep;
     int jumlahMakanan;
     
     // ALGORITMA UTAMA
@@ -54,16 +59,34 @@ int main(){
     }
 
     // GAME STARTED
+    // INISIASI MAKANAN DAN RESEP
+    char fileMakanan[100] = "../config/makanan.txt";
+    char fileResep[100] = "../config/resep.txt";
+    KumpulanMakanan = BacaMakanan(fileMakanan);
+    Resep = BacaResep(fileResep);
+
+    // MAIN PROGRAM
     while(true){
-        printf("MASUKKAN MAKANAN\n");
-        jumlahMakanan = BacaMakanan(M);
         printf("\nLIST COMMAND:\n");
         printf("16. CATALOG\n");
+        printf("17. COOKBOOK\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 16){
-            TulisListMakanan(M,jumlahMakanan);
-            break;
+            printf("\nList Makanan\n");
+            printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
+            TulisListMakanan(KumpulanMakanan, JumlahMakanan(KumpulanMakanan));
+            // Terminate
+            printf("\n\nPress enter to continue.");
+            ADV();
+        } else if(command == 17) {
+            printf("\nList Resep\n");
+            printf("(aksi yang diperlukan - bahan...)\n");
+            PrintTree(Resep);
+            printf("\n");
+            TulisResep(KumpulanMakanan, Resep);
+            printf("\nPress enter to continue.");
+            ADV();
         } else {
             printf("\nCommand salah. Silahkan input command kembali.\n");
         }

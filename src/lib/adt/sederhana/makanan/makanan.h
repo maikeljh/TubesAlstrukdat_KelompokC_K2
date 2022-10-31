@@ -8,6 +8,7 @@
 #include "../time/time.h"
 #include "../../wordmachine/wordmachine.h"
 #include "../../wordfilemachine/wordfilemachine.h"
+#include "../../tree/tree.h"
 
 typedef struct{
 	int ID; // ID Makanan
@@ -57,10 +58,10 @@ TIME getWK(Makanan M);
 TIME getLP(Makanan M);
 /* Mengembalikan waktu delivery dari Makanan M */
 
-int pangkat(int x, int y);
+// int pangkat(int x, int y);
 /* Mengembalikan nilai dari x pangkat y */
 
-int wordToInt (WordFile str);
+// int wordToInt (WordFile str);
 /* Mengembalikan nilai integer dari WordFile yang dibaca */
 
 void TulisMakanan(Makanan M);

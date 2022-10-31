@@ -69,7 +69,7 @@ void PrintTree(Tree P);
    (A(B()())(C()())) adalah pohon dengan akar A dan subpohon pertama (B()()) dan subpohon kedua (C()()) */
 
 /* *** Searching *** */
-boolean SearchTree(Tree P, infotype X);
+Tree SearchTree(Tree P, int ID);
 /* Mengirimkan true jika ada node dari P yang bernilai X */
 
 /* *** Operasi lain *** */
