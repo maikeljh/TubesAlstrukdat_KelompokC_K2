@@ -197,6 +197,7 @@ void DequeueAt (PrioQueueTime *Q, Makanan * X, int id){
     int idx; // idx dari pemilik id makanan.
     /* ALGORITMA */
     idx = CariMakanan(*Q, *X, id);
+    *X = Elmt(*Q, idx);
     if (NBElmt(*Q) == 1){
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
