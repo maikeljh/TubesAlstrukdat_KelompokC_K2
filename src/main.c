@@ -82,7 +82,6 @@ int main(){
         } else if(command == 17) {
             printf("\nList Resep\n");
             printf("(aksi yang diperlukan - bahan...)\n");
-            PrintTree(Resep);
             printf("\n");
             TulisResep(KumpulanMakanan, Resep);
             printf("\nPress enter to continue.");

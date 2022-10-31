@@ -104,18 +104,12 @@ void PrintTree(Tree P){
 /* *** Searching *** */
 Tree SearchTree(Tree P, int ID){
     if(!IsTreeEmpty(P)){
-        boolean found = false;
         if(Akar(P) == ID){
-            found = true;
             return P;
         } else {
-            addrNode P1 = FirstChild(P);
-            int i = 0;
-            while(i < BanyakChild(P) && !found){
-                SearchTree(P1, ID);
-                P1 = Sibling(P1);
-                i++;
-            }
+            Tree Temp = SearchTree(Sibling(P), ID);
+            if(Temp != NULL) return Temp;
+            return SearchTree(FirstChild(P), ID);
         }
     } else {
         return NULL;
@@ -324,7 +318,6 @@ void TulisResep(ListMakanan M, Tree Resep){
             PrintWord(namaLokasi);
             printf(" - ");
             Tree ResepMakanan = SearchTree(Resep, ID(Makanan(M, i)));
-            PrintTree(ResepMakanan);
             addrNode P = FirstChild(ResepMakanan);
             for(int j = 0; j < BanyakChild(ResepMakanan); j++){
                 for(int k = 0; k < JumlahMakanan(M); k++){
@@ -333,7 +326,7 @@ void TulisResep(ListMakanan M, Tree Resep){
                         break;
                     }
                 }
-                if(i != BanyakChild(ResepMakanan) - 1){
+                if(j != BanyakChild(ResepMakanan) - 1){
                     printf(" - ");
                 }
                 P = Sibling(P);
