@@ -86,13 +86,17 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 <time-n> <elemen-n>
 #
 */
-int CariMakanan(PrioQueueTime Q, Makanan X, int id);
+int CariMakanan(PrioQueueTime Q, int id);
 /* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/
 
-void DequeueAt (PrioQueueTime *Q, Makanan * X, int id);
+void DequeueAt (PrioQueueTime *Q, int id);
 /* Proses: Menghapus X pada Q pada indeks ke- idx
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+void Decay (PrioQueueTime *Q);
+/* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
+void DequeueExpired (PrioQueueTime *Q);
+/* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
 #endif
