@@ -95,13 +95,13 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	}
 }
 
-void Dequeue (PrioQueueTime * Q, Makanan * X){
+void Dequeue (PrioQueueTime * Q){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
-	*X = InfoHead(*Q);
+	//*X = InfoHead(*Q);
 
     if(NBElmt(*Q) == 1){
         Head(*Q) = Nil;
@@ -171,7 +171,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
     }
 }
 
-int CariMakanan(PrioQueueTime Q, Makanan X, int id){
+int CariMakanan(PrioQueueTime Q, int id){
 /* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/
     // KAMUS LOKAL
     int idx;
@@ -189,15 +189,15 @@ int CariMakanan(PrioQueueTime Q, Makanan X, int id){
     }
     return idx;
 }
-void DequeueAt (PrioQueueTime *Q, Makanan * X, int id){
+void DequeueAt (PrioQueueTime *Q, int id){
 /* Proses: Menghapus X yang memiliki nilai "id" makanan tersebut pada Q. 
 /* I.S. Q tidak mungkin kosong, id makanan valid berada di dalam inventory */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; Q mungkin kosong */
     /* KAMUS LOKAL */
     int idx; // idx dari pemilik id makanan.
     /* ALGORITMA */
-    idx = CariMakanan(*Q, *X, id);
-    *X = Elmt(*Q, idx);
+    idx = CariMakanan(*Q, id);
+    //*X = Elmt(*Q, idx);
     if (NBElmt(*Q) == 1){
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
@@ -213,5 +213,31 @@ void DequeueAt (PrioQueueTime *Q, Makanan * X, int id){
             }
             Tail(*Q) = (Tail(*Q) - 1) % MaxEl(*Q);
         }
+    }
+}
+
+void Decay (PrioQueueTime *Q){
+/* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
+    /* KAMUS LOKAL*/
+    int i;
+    /* ALGORITMA */
+    if(!IsEmpty(*Q)){
+        i = HEAD(*Q);
+        while (i != TAIL(*Q)){
+            PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
+            i = (i+1) % MaxEl(*Q);
+        }
+        PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
+        // Semua telah Decay, pengecekkan makanan expired.
+        DequeueExpired(&*Q);
+    }
+
+}
+void DequeueExpired (PrioQueueTime *Q){
+/* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
+    /* KAMUS LOKAL*/
+    /* ALGORITMA */
+    while (TIMEToMenit(Kedaluwarsa(InfoHead(*Q))) == 0){
+        Dequeue(*Q);
     }
 }
