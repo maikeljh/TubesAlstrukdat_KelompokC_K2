@@ -22,9 +22,11 @@ int main(){
     POINT S,T,M,C,F,B;
     TIME time;
     boolean isSucceed;
+    boolean wait;
     Simulator Pemain;
     PrioQueueTime Delivery;
     MakeEmpty(&Delivery, 100);
+    int JAM, MENIT;
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -110,28 +112,29 @@ int main(){
     // MAIN PROGRAM
     while(true){
         isSucceed = false;
+        wait = false;
         TulisSimulator(Pemain);
         printf("\n");
         printf("Waktu: ");
         TulisTIME(time);
-        printf("\n");
+        printf("\n\n");
         displayPeta(peta);
         printf("LIST COMMAND:\n");
-        printf("2.  EXIT\n");
-        printf("3.  BUY\n");
-        printf("4.  DELIVERY\n");
-        printf("5.  MOVE NORTH\n");
-        printf("6.  MOVE EAST\n");
-        printf("7.  MOVE WEST\n");
-        printf("8.  MOVE SOUTH\n");
-        printf("9.  MIX\n");
-        printf("10. CHOP\n");
-        printf("11. FRY\n");
-        printf("12. BOIL\n");
-        printf("13. WAIT X Y\n");
-        printf("16. CATALOG\n");
-        printf("17. COOKBOOK\n");
-        printf("18. INVENTORY\n");
+        printf("1.  BUY\n");
+        printf("2.  DELIVERY\n");
+        printf("3.  MOVE NORTH\n");
+        printf("4.  MOVE EAST\n");
+        printf("5.  MOVE WEST\n");
+        printf("6.  MOVE SOUTH\n");
+        printf("7.  MIX\n");
+        printf("8.  CHOP\n");
+        printf("9.  FRY\n");
+        printf("10. BOIL\n");
+        printf("11. WAIT X Y\n");
+        printf("12. CATALOG\n");
+        printf("13. COOKBOOK\n");
+        printf("14. INVENTORY\n");
+        printf("15. EXIT\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
@@ -187,6 +190,46 @@ int main(){
             } else {
                 printf("Tidak berada dekat tempat Boil.\n");
             }
+        } else if(command == 13){
+            ADVWORD();
+            boolean check = true;
+            for(int i = 0; i < currentWord.Length; i++){
+                if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+                    check = false;
+                    break;
+                }   
+            }
+            if(!check){
+                printf("\nCommand salah. Silahkan input command kembali.\n");
+            } else {
+                JAM = wordOnlyToInt(currentWord);
+            }
+
+            if(currentChar == '\n'){
+                printf("\nCommand salah. Silahkan input command kembali.\n");
+            } else {
+                ADVWORD();
+                check = true;
+                for(int i = 0; i < currentWord.Length; i++){
+                    if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+                        check = false;
+                        break;
+                    }   
+                }
+                if(!check){
+                    printf("\nCommand salah. Silahkan input command kembali.\n");
+                } else {
+                    MENIT = wordOnlyToInt(currentWord);
+                }
+
+                if(JAM >= 0 && JAM <= 23 && MENIT >= 0 && MENIT <= 59){
+                    time = NextNMenit(time, JAM * 60 + MENIT);
+                    wait = true;
+                } else {
+                    printf("\nCommand salah. Silahkan input command kembali.\n");
+                }
+            }
+
         } else if(command == 16){
             printf("\nList Makanan\n");
             printf("(nama - durasi kedaluwarsa - aksi yang diperlukan - delivery time)\n");
@@ -212,7 +255,7 @@ int main(){
         } else {
             printf("\nCommand salah. Silahkan input command kembali.\n");
         }
-        if (isSucceed) {
+        if (isSucceed && !wait) {
             time = NextMenit(time);
             Shipping(&Delivery, &Pemain);
             DecayKedaluwarsa(&Inventory(Pemain));
