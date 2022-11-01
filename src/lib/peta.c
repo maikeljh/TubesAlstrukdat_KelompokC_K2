@@ -1,31 +1,4 @@
-#include <stdio.h>
-#include "./adt/matrix/matrix.c"
-#include "./adt/sederhana/point/point.c"
-#include "./adt/boolean.h"
-#include "./commandparser.c"
-#include "./adt/wordfilemachine/wordfilemachine.c"
-#include "./adt/wordmachine/wordmachine.c"
-#include "./adt/wordmachine/charmachine.c"
-#include "./adt/sederhana/time/time.c"
-
-/***  UTILITIES ***/
-int pangkat (int x, int y) {
-  int ret = 1;
-  for (int i = 1; i <= y; i++){
-    ret = ret*x;
-  }
-  return ret;
-}
-
-int wordToInt (WordFile str) {
-   int val = 0;
-   int k = 0;
-   for (int i= str.Length-1; i >= 0; i--) {
-      val += (str.TabWord[i]-48) * pangkat(10,k);
-      k++;
-   }
-   return val;
-}
+/* File : peta.c */
 
 void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/
@@ -158,7 +131,7 @@ boolean isNearby(POINT target, POINT S) {
   }
 }
 
-int main () {
+/*int main () {
   Matrix peta;
   POINT S,T,M,C,F,B;
   TIME time;
@@ -245,4 +218,4 @@ int main () {
       }
     }
   }
-}
+}*/
