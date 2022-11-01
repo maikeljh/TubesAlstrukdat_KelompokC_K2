@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include "./adt/matrix/matrix.c"
-#include "./adt/sederhana/point/point.c"
-#include "./adt/boolean.h"
-#include "./commandparser.c"
+/* File : peta.c */
 
 void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/

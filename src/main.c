@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "./lib/adt/boolean.h"
+#include "./lib/adt/matrix/matrix.c"
+#include "./lib/adt/sederhana/point/point.c"
+#include "./lib/commandparser.c"
 #include "./lib/adt/sederhana/makanan/makanan.c"
 #include "./lib/adt/tree/tree.c"
 #include "./lib/peta.c"
@@ -15,6 +19,7 @@ int main(){
     Matrix peta;
     POINT S,T,M,C,F,B;
     TIME time;
+    CreateTime(&time,0,0,0);
     boolean isSucceed;
     
     // ALGORITMA UTAMA
@@ -68,7 +73,6 @@ int main(){
     char fileResep[100] = "../config/resep.txt";
     char path[50] = "../config/testPeta.txt";
     bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
-    CreateTime(&time,0,0,0);
     KumpulanMakanan = BacaMakanan(fileMakanan);
     Resep = BacaResep(fileResep);
 
@@ -83,14 +87,17 @@ int main(){
         printf("\n");
         displayPeta(peta);
         printf("LIST COMMAND:\n");
-        printf("5. MOVE NORTH\n");
-        printf("6. MOVE EAST\n");
-        printf("7. MOVE WEST\n");
-        printf("8. MOVE SOUTH\n");
-        printf("9. MIX\n");
+        printf("2.  EXIT\n");
+        printf("3.  BUY\n");
+        printf("5.  MOVE NORTH\n");
+        printf("6.  MOVE EAST\n");
+        printf("7.  MOVE WEST\n");
+        printf("8.  MOVE SOUTH\n");
+        printf("9.  MIX\n");
         printf("10. CHOP\n");
         printf("11. FRY\n");
         printf("12. BOIL\n");
+        printf("13. WAIT X Y\n");
         printf("16. CATALOG\n");
         printf("17. COOKBOOK\n");
         printf("\nEnter Command: ");
@@ -148,7 +155,6 @@ int main(){
         } else if(command == 17) {
             printf("\nList Resep\n");
             printf("(aksi yang diperlukan - bahan...)\n");
-            printf("\n");
             TulisResep(KumpulanMakanan, Resep);
             printf("\nPress enter to continue.");
             ADV();
