@@ -95,13 +95,13 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	}
 }
 
-void Dequeue (PrioQueueTime * Q){
+void Dequeue (PrioQueueTime * Q, Makanan *M){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
-	//*X = InfoHead(*Q);
+	*M = InfoHead(*Q);
 
     if(NBElmt(*Q) == 1){
         Head(*Q) = Nil;
@@ -131,7 +131,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
     int count = 1;
     // ALGORITMA
     if(IsEmpty(Q)){
-        printf("#\n");
+        printf("Kosong.\n");
     } else {
         while(idx != Tail(Q)){
             if(idx == MaxEl(Q)){
@@ -139,7 +139,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             }
             //TulisTIME(Kedaluwarsa((Q).T[idx]));
             // Elmt(Q, idx)
-            printf("%d. ", count);
+            printf("   %d. ", count);
             PrintWord(Nama(Elmt(Q, idx)));
             printf(" -");
             if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
@@ -155,7 +155,7 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             count++;
             idx++;
         }
-        printf("%d. ", count);
+        printf("   %d. ", count);
             PrintWord(Nama((Q).T[idx]));
             printf(" -");
             if (Day(Kedaluwarsa(Elmt(Q, idx))) != 0){
@@ -166,6 +166,60 @@ void PrintPrioQueueTime (PrioQueueTime Q){
             }
             if (Minute(Kedaluwarsa(Elmt(Q, idx))) != 0){
                 printf(" %d Menit", Minute(Kedaluwarsa((Q).T[idx])));
+            }
+            printf("\n");
+    }
+}
+
+void PrintDelivery (PrioQueueTime Q){
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+<time-1> <elemen-1>
+...
+<time-n> <elemen-n>
+#
+*/
+	// KAMUS LOKAL
+    int idx = Head(Q);
+    int count = 1;
+    // ALGORITMA
+    if(IsEmpty(Q)){
+        printf("Kosong.\n");
+    } else {
+        while(idx != Tail(Q)){
+            if(idx == MaxEl(Q)){
+                idx %= MaxEl(Q);
+            }
+            //TulisTIME(Kedaluwarsa((Q).T[idx]));
+            // Elmt(Q, idx)
+            printf("   %d. ", count);
+            PrintWord(Nama(Elmt(Q, idx)));
+            printf(" -");
+            if (Day(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Hari", Day(Pengiriman((Q).T[idx])));
+            }
+            if (Hour(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Jam", Hour(Pengiriman((Q).T[idx])));
+            }
+            if (Minute(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Menit", Minute(Pengiriman((Q).T[idx])));
+            }
+            printf("\n");
+            count++;
+            idx++;
+        }
+        printf("   %d. ", count);
+            PrintWord(Nama((Q).T[idx]));
+            printf(" -");
+            if (Day(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Hari", Day(Pengiriman((Q).T[idx])));
+            }
+            if (Hour(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Jam", Hour(Pengiriman((Q).T[idx])));
+            }
+            if (Minute(Pengiriman(Elmt(Q, idx))) != 0){
+                printf(" %d Menit", Minute(Pengiriman((Q).T[idx])));
             }
             printf("\n");
     }
@@ -189,7 +243,8 @@ int CariMakanan(PrioQueueTime Q, int id){
     }
     return idx;
 }
-void DequeueAt (PrioQueueTime *Q, int id){
+
+void DequeueAt (PrioQueueTime *Q, int id, Makanan *M){
 /* Proses: Menghapus X yang memiliki nilai "id" makanan tersebut pada Q. 
 /* I.S. Q tidak mungkin kosong, id makanan valid berada di dalam inventory */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; Q mungkin kosong */
@@ -197,14 +252,14 @@ void DequeueAt (PrioQueueTime *Q, int id){
     int idx; // idx dari pemilik id makanan.
     /* ALGORITMA */
     idx = CariMakanan(*Q, id);
-    //*X = Elmt(*Q, idx);
+    *M = Elmt(*Q, idx);
     if (NBElmt(*Q) == 1){
         Head(*Q) = Nil;
         Tail(*Q) = Nil;
     }
     else /* NbElmt(*Q) > 1*/ {
         if (idx == Head(*Q)){
-            Dequeue(&*Q, &*X);
+            Dequeue(Q, M);
         }
         else{
             while (idx != Tail(*Q) % MaxEl(*Q)){
@@ -216,28 +271,29 @@ void DequeueAt (PrioQueueTime *Q, int id){
     }
 }
 
-void Decay (PrioQueueTime *Q){
+void DecayKedaluwarsa (PrioQueueTime *Q){
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
     /* KAMUS LOKAL*/
     int i;
     /* ALGORITMA */
     if(!IsEmpty(*Q)){
-        i = HEAD(*Q);
-        while (i != TAIL(*Q)){
-            PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
+        i = Head(*Q);
+        while (i != Tail(*Q)){
+            Kedaluwarsa(Elmt(*Q, i)) = PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
             i = (i+1) % MaxEl(*Q);
         }
-        PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
+        Kedaluwarsa(Elmt(*Q, i)) = PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
         // Semua telah Decay, pengecekkan makanan expired.
         DequeueExpired(Q);
     }
-
 }
+
 void DequeueExpired (PrioQueueTime *Q){
 /* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
     /* KAMUS LOKAL*/
+    Makanan M;
     /* ALGORITMA */
-    while (TIMEToMenit(Kedaluwarsa(InfoHead(*Q))) == 0){
-        Dequeue(Q);
+    while (TIMEToMenit(Kedaluwarsa(InfoHead(*Q))) == 0 && !IsEmpty(*Q)){
+        Dequeue(Q, &M);
     }
 }

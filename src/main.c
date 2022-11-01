@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./lib/adt/boolean.h"
+#include "./lib/adt/sederhana/simulator/simulator.c"
 #include "./lib/adt/matrix/matrix.c"
-#include "./lib/adt/sederhana/point/point.c"
 #include "./lib/commandparser.c"
 #include "./lib/adt/sederhana/makanan/makanan.c"
 #include "./lib/adt/tree/tree.c"
 #include "./lib/peta.c"
+#include "./lib/buy.c"
+#include "./lib/delivery.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -19,8 +21,10 @@ int main(){
     Matrix peta;
     POINT S,T,M,C,F,B;
     TIME time;
-    CreateTime(&time,0,0,0);
     boolean isSucceed;
+    Simulator Pemain;
+    PrioQueueTime Delivery;
+    MakeEmpty(&Delivery, 100);
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -57,7 +61,6 @@ int main(){
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 1){
-            printf("\nGAME STARTED.\n");
             break;
         } else if (command == 2){
             printf("\nTerima kasih telah mempermainkan game kami!\n");
@@ -67,7 +70,6 @@ int main(){
         }
     }
 
-    // GAME STARTED
     // INISIASI PETA, MAKANAN, DAN RESEP
     char fileMakanan[100] = "../config/makanan.txt";
     char fileResep[100] = "../config/resep.txt";
@@ -76,11 +78,39 @@ int main(){
     KumpulanMakanan = BacaMakanan(fileMakanan);
     Resep = BacaResep(fileResep);
 
+    // INISIASI LIST BUY
+    ListMakanan ListBuy = CariBuy(KumpulanMakanan);
+
+    // INISIASI WAKTU
+    CreateTime(&time,0,0,0);
+
+    // INISIASI SIMULATOR
+    Word NamaPemain;
+    int idxNama = 0;
+    printf("\nMasukkan Nama Pemain: ");
+    STARTWORD();
+    while(currentChar != '\n'){
+        for (int i = 0; i < currentWord.Length; i++){
+            NamaPemain.TabWord[idxNama] = currentWord.TabWord[i];
+            idxNama++;
+        }
+        NamaPemain.TabWord[idxNama] = ' ';
+        idxNama++;
+        ADVWORD();
+	}
+    for (int i = 0; i < currentWord.Length; i++){
+        NamaPemain.TabWord[idxNama] = currentWord.TabWord[i];
+        idxNama++;
+    }
+    NamaPemain.Length = idxNama;
+    CreateSimulator(&Pemain, NamaPemain, S);
+    printf("\nGAME STARTED.\n");
+
+    // GAME STARTED
     // MAIN PROGRAM
     while(true){
         isSucceed = false;
-        printf("\nBNMO di posisi: ");
-        TulisPOINT(S);
+        TulisSimulator(Pemain);
         printf("\n");
         printf("Waktu: ");
         TulisTIME(time);
@@ -89,6 +119,7 @@ int main(){
         printf("LIST COMMAND:\n");
         printf("2.  EXIT\n");
         printf("3.  BUY\n");
+        printf("4.  DELIVERY\n");
         printf("5.  MOVE NORTH\n");
         printf("6.  MOVE EAST\n");
         printf("7.  MOVE WEST\n");
@@ -100,46 +131,57 @@ int main(){
         printf("13. WAIT X Y\n");
         printf("16. CATALOG\n");
         printf("17. COOKBOOK\n");
+        printf("18. INVENTORY\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
-            move (&peta, 1, &S, &isSucceed);
+            move (&peta, 1, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 6){
-            move (&peta, 2, &S, &isSucceed);
+            move (&peta, 2, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 8){
-            move (&peta, 3, &S, &isSucceed);
+            move (&peta, 3, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 7){
-            move (&peta, 4, &S, &isSucceed);
+            move (&peta, 4, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 3){
-            if (isNearby(T,S)) {
-                printf("**BUY**\n");
+            if (isNearby(T,LokasiSimulator(Pemain))) {
+                ProsesBuy(ListBuy, &Delivery);
                 isSucceed = true;
+                // Terminate
+                printf("\nPress enter to continue.");
+                ADV();
             } else {
                 printf("Tidak berada dekat telephone.\n");
             }
+        } else if(command == 4){
+            printf("\nList Makanan di Perjalanan\n");
+            printf("(nama - waktu sisa delivery)\n");
+            PrintDelivery(Delivery);
+            // Terminate
+            printf("\nPress enter to continue.");
+            ADV();
         } else if(command == 9){
-            if (isNearby(M,S)) {
+            if (isNearby(M,LokasiSimulator(Pemain))) {
                 printf("**MIX**\n");
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Mix.\n");
             }
         } else if(command == 10){
-            if (isNearby(C,S)) {
+            if (isNearby(C,LokasiSimulator(Pemain))) {
                 printf("**CHOP**\n");
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Chop.\n");
             }
         } else if(command == 11){
-            if (isNearby(F,S)) {
+            if (isNearby(F,LokasiSimulator(Pemain))) {
                 printf("**FRY**\n");
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Fry.\n");
             }
         } else if(command == 12){
-            if (isNearby(B,S)) {
+            if (isNearby(B,LokasiSimulator(Pemain))) {
                 printf("**BOIL**\n");
                 isSucceed = true;
             } else {
@@ -158,6 +200,12 @@ int main(){
             TulisResep(KumpulanMakanan, Resep);
             printf("\nPress enter to continue.");
             ADV();
+        } else if(command == 18) {
+            printf("\nList Inventory\n");
+            printf("(nama - waktu sisa kedaluwarsa)\n");
+            PrintPrioQueueTime(Inventory(Pemain));
+            printf("\nPress enter to continue.");
+            ADV();
         } else if(command == 2) {
             printf("\nTerima kasih telah mempermainkan game kami!\n");
             return 0;
@@ -166,6 +214,8 @@ int main(){
         }
         if (isSucceed) {
             time = NextMenit(time);
+            Shipping(&Delivery, &Pemain);
+            DecayKedaluwarsa(&Inventory(Pemain));
         }
     }
 }

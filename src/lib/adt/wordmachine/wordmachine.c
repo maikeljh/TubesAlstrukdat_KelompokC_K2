@@ -125,5 +125,26 @@ boolean isKataSama(Word W1, Word W2){
     return Sama;
 }
 
+int wordOnlyToInt (Word str) {
+	/* Mengembalikan nilai integer dari WordFile yang dibaca */
+	int val = 0;
+	int k = 0;
+	for (int i= str.Length-1; i >= 0; i--) {
+		val += (str.TabWord[i]-48) * pangkatWord(10,k);
+		k++;
+	}
+	return val;
+}
+
+int pangkatWord (int x, int y) {
+	/* Mengembalikan nilai dari x pangkat y */
+	
+	int ret = 1;
+	for (int i = 1; i <= y; i++){
+		ret = ret*x;
+	}
+	return ret;
+}
+
 
 
