@@ -6,20 +6,22 @@
 
 #include "../../boolean.h"
 #include "../point/point.c"
-#include "../../prioqueue/prioqueuetime.h"
+#include "../../prioqueue/prioqueuetime.c"
 
 typedef struct { 
-	char Nama[NMax];
+	Word Nama;
     POINT Lokasi;
     PrioQueueTime Inventory;
 } Simulator;
 
 /* *** Notasi Akses: Selektor SIMULATOR *** */
 #define Inventory(S) (S).Inventory
-        
+#define NamaSimulator(S) (S).Nama
+#define LokasiSimulator(S) (S).Lokasi
+
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk SIMULATOR *** */
-void CreateSimulator (Simulator * S, char Nama[], int x, int y);
+void CreateSimulator (Simulator * S, Word Nama, POINT P);
 /* Membentuk sebuah Simulator dari komponen-komponennya */
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */  

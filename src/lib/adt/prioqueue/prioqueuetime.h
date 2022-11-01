@@ -70,7 +70,7 @@ void Enqueue (PrioQueueTime * Q, Makanan X);
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
-void Dequeue (PrioQueueTime * Q, Makanan * X);
+void Dequeue (PrioQueueTime * Q, Makanan *M);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
@@ -86,17 +86,29 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 <time-n> <elemen-n>
 #
 */
+
+void PrintDelivery (PrioQueueTime Q);
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+<time-1> <elemen-1>
+...
+<time-n> <elemen-n>
+#
+*/
+
 int CariMakanan(PrioQueueTime Q, int id);
 /* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/
 
-void DequeueAt (PrioQueueTime *Q, int id);
+void DequeueAt (PrioQueueTime *Q, int id, Makanan *M);
 /* Proses: Menghapus X pada Q pada indeks ke- idx
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
-void Decay (PrioQueueTime *Q);
+void DecayKedaluwarsa (PrioQueueTime *Q);
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
+
 void DequeueExpired (PrioQueueTime *Q);
 /* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
 #endif

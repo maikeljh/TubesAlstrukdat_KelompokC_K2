@@ -19,6 +19,7 @@
     15. REDO
     16. CATALOG
     17. COOKBOOK
+    18. INVENTORY
 */
 
 int readCommand(){
@@ -42,6 +43,7 @@ int readCommand(){
     Word Redo = CreateWord("REDO", 4);
     Word Catalog = CreateWord("CATALOG", 7);
     Word CookBook = CreateWord("COOKBOOK", 8);
+    Word Inventory = CreateWord("INVENTORY", 9);
     
     STARTWORD();
     if(isKataSama(currentWord, Start)){
@@ -83,6 +85,27 @@ int readCommand(){
         return 16;
     } else if(isKataSama(currentWord, CookBook)){
         return 17;
+    } else if(isKataSama(currentWord, Inventory)){
+        return 18;
+    } else {
+        return -1;
+    }
+}
+
+int readCommandNumber(){
+    int N;
+    STARTWORD();
+    boolean check = true;
+    for(int i = 0; i < currentWord.Length; i++){
+        if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+            check = false;
+            break;
+        }
+    }
+    N = wordOnlyToInt(currentWord);
+
+    if(check){
+        return N;
     } else {
         return -1;
     }

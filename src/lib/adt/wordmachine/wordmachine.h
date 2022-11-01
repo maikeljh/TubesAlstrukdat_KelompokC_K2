@@ -58,4 +58,7 @@ boolean isKataSama(Word W1, Word W2);
 /* Mengembalikan true jika W1 memiliki length yang sama dengan W2 dan
    W1 memiliki TabWord yang sama dengan W2 */
 
+int wordOnlyToInt (Word str);
+int pangkatWord (int x, int y);
+
 #endif
