@@ -46,48 +46,51 @@ int readCommand(){
     Word Inventory = CreateWord("INVENTORY", 9);
     
     STARTWORD();
-    if(isKataSama(currentWord, Start)){
+    if(isKataSama(currentWord, Start) && currentChar == '\n'){
         return 1;
-    } else if(isKataSama(currentWord, Exit)){
+    } else if(isKataSama(currentWord, Exit) && currentChar == '\n'){
         return 2;
-    } else if(isKataSama(currentWord, Buy)){
+    } else if(isKataSama(currentWord, Buy) && currentChar == '\n'){
         return 3;
-    } else if(isKataSama(currentWord, Delivery)){
+    } else if(isKataSama(currentWord, Delivery) && currentChar == '\n'){
         return 4;
     } else if(isKataSama(currentWord, Move)){
         ADVWORD();
-        if(isKataSama(currentWord, North)){
+        if(isKataSama(currentWord, North) && currentChar == '\n'){
             return 5;
-        } else if(isKataSama(currentWord, East)){
+        } else if(isKataSama(currentWord, East) && currentChar == '\n'){
             return 6;
-        } else if(isKataSama(currentWord, West)){
+        } else if(isKataSama(currentWord, West) && currentChar == '\n'){
             return 7;
-        } else if(isKataSama(currentWord, South)){
+        } else if(isKataSama(currentWord, South) && currentChar == '\n'){
             return 8;
         } else {
             return -1;
         }
-    } else if(isKataSama(currentWord, Mix)){
+    } else if(isKataSama(currentWord, Mix) && currentChar == '\n'){
         return 9;
-    } else if(isKataSama(currentWord, Chop)){
+    } else if(isKataSama(currentWord, Chop) && currentChar == '\n'){
         return 10;
-    } else if(isKataSama(currentWord, Fry)){
+    } else if(isKataSama(currentWord, Fry) && currentChar == '\n'){
         return 11;
-    } else if(isKataSama(currentWord, Boil)){
+    } else if(isKataSama(currentWord, Boil) && currentChar == '\n'){
         return 12;
     } else if(isKataSama(currentWord, Wait)){
         return 13; // Perlu Koordinasi Dengan Waktu Permainan
-    } else if(isKataSama(currentWord, Undo)){
+    } else if(isKataSama(currentWord, Undo) && currentChar == '\n'){
         return 14;
-    } else if(isKataSama(currentWord, Redo)){
+    } else if(isKataSama(currentWord, Redo) && currentChar == '\n'){
         return 15;
-    } else if(isKataSama(currentWord, Catalog)){
+    } else if(isKataSama(currentWord, Catalog) && currentChar == '\n'){
         return 16;
-    } else if(isKataSama(currentWord, CookBook)){
+    } else if(isKataSama(currentWord, CookBook) && currentChar == '\n'){
         return 17;
-    } else if(isKataSama(currentWord, Inventory)){
+    } else if(isKataSama(currentWord, Inventory) && currentChar == '\n'){
         return 18;
     } else {
+        while(currentChar != '\n'){
+            ADVWORD();
+        }
         return -1;
     }
 }
@@ -104,9 +107,12 @@ int readCommandNumber(){
     }
     N = wordOnlyToInt(currentWord);
 
-    if(check){
+    if(check && currentChar == '\n'){
         return N;
     } else {
+        while(currentChar != '\n'){
+            ADVWORD();
+        }
         return -1;
     }
 }

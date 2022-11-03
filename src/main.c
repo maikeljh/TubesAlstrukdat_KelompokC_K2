@@ -9,6 +9,7 @@
 #include "./lib/peta.c"
 #include "./lib/buy.c"
 #include "./lib/delivery.c"
+#include "./lib/mix.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -16,6 +17,7 @@ int main(){
     // KAMUS GLOBAL
     int command;
     ListMakanan KumpulanMakanan;
+    ListMakanan ResepMix, ResepFry, ResepBoil, ResepChop;
     Tree Resep;
     int jumlahMakanan;
     Matrix peta;
@@ -79,6 +81,14 @@ int main(){
     bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
     KumpulanMakanan = BacaMakanan(fileMakanan);
     Resep = BacaResep(fileResep);
+    Word Mix = CreateWord("MIX", 3);
+	Word Chop = CreateWord("CHOP", 4);
+	Word Fry = CreateWord("FRY", 3);
+	Word Boil = CreateWord("BOIL", 4);
+    ResepMix = ListResep(KumpulanMakanan, Resep, Mix);
+    ResepFry = ListResep(KumpulanMakanan, Resep, Fry);
+    ResepChop = ListResep(KumpulanMakanan, Resep, Chop);
+    ResepBoil = ListResep(KumpulanMakanan, Resep, Boil);
 
     // INISIASI LIST BUY
     ListMakanan ListBuy = CariBuy(KumpulanMakanan);
@@ -164,28 +174,31 @@ int main(){
             ADV();
         } else if(command == 9){
             if (isNearby(M,LokasiSimulator(Pemain))) {
-                printf("**MIX**\n");
+                ProsesMix(ResepMix, KumpulanMakanan, Resep, Mix, &Pemain);
                 isSucceed = true;
+                // Terminate
+                printf("\nPress enter to continue.");
+                ADV();
             } else {
                 printf("Tidak berada dekat tempat Mix.\n");
             }
         } else if(command == 10){
             if (isNearby(C,LokasiSimulator(Pemain))) {
-                printf("**CHOP**\n");
+                TulisResepKind(ResepChop ,Resep,  Chop);
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Chop.\n");
             }
         } else if(command == 11){
             if (isNearby(F,LokasiSimulator(Pemain))) {
-                printf("**FRY**\n");
+                TulisResepKind(ResepFry, Resep, Fry);
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Fry.\n");
             }
         } else if(command == 12){
             if (isNearby(B,LokasiSimulator(Pemain))) {
-                printf("**BOIL**\n");
+                TulisResepKind(ResepBoil, Resep, Boil);
                 isSucceed = true;
             } else {
                 printf("Tidak berada dekat tempat Boil.\n");
@@ -194,7 +207,7 @@ int main(){
             ADVWORD();
             boolean check = true;
             for(int i = 0; i < currentWord.Length; i++){
-                if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+                if ( currentWord.TabWord[i] < '0' && currentWord.TabWord[i] > '9' ){
                     check = false;
                     break;
                 }   
@@ -211,7 +224,7 @@ int main(){
                 ADVWORD();
                 check = true;
                 for(int i = 0; i < currentWord.Length; i++){
-                    if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+                    if ( currentWord.TabWord[i] < '0' && currentWord.TabWord[i] > '9' ){
                         check = false;
                         break;
                     }   
@@ -259,6 +272,11 @@ int main(){
             time = NextMenit(time);
             Shipping(&Delivery, &Pemain);
             DecayKedaluwarsa(&Inventory(Pemain));
+        } else if(wait) {
+            for(int i = 0; i < JAM * 60 + MENIT; i++){
+                Shipping(&Delivery, &Pemain);
+                DecayKedaluwarsa(&Inventory(Pemain));
+            }
         }
     }
 }
