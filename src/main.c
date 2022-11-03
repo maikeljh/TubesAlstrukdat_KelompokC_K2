@@ -9,6 +9,7 @@
 #include "./lib/peta.c"
 #include "./lib/buy.c"
 #include "./lib/delivery.c"
+#include "./lib/adt/notifikasi/notifikasi.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -25,6 +26,7 @@ int main(){
     boolean wait;
     Simulator Pemain;
     PrioQueueTime Delivery;
+    ListNotif notifikasi;
     MakeEmpty(&Delivery, 100);
     int JAM, MENIT;
     
@@ -117,7 +119,9 @@ int main(){
         printf("\n");
         printf("Waktu: ");
         TulisTIME(time);
-        printf("\n\n");
+        printf("\n");
+        printf("Notifikasi: ");
+        TulisNotif(&notifikasi);
         displayPeta(peta);
         printf("LIST COMMAND:\n");
         printf("1.  BUY\n");
@@ -257,8 +261,8 @@ int main(){
         }
         if (isSucceed && !wait) {
             time = NextMenit(time);
-            Shipping(&Delivery, &Pemain);
-            DecayKedaluwarsa(&Inventory(Pemain));
+            Shipping(&Delivery, &Pemain, &notifikasi);
+            DecayKedaluwarsa(&Inventory(Pemain), &notifikasi);
         }
     }
 }
