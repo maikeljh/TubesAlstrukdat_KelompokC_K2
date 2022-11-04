@@ -378,9 +378,13 @@ ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind){
 }
 
 void TulisResepKind(ListMakanan M, Tree Resep, Word Kind){
-    for(int i = 0; i < JumlahMakanan(M); i++){
-        printf("   %d. ", (i+1));
-        PrintWord(Nama(Makanan(M, i)));
-        printf("\n");
+    if(JumlahMakanan(M) == 0){
+        printf("Tidak ada resep yang dapat dibuat.\n");
+    } else {
+        for(int i = 0; i < JumlahMakanan(M); i++){
+            printf("   %d. ", (i+1));
+            PrintWord(Nama(Makanan(M, i)));
+            printf("\n");
+        }
     }
 }
