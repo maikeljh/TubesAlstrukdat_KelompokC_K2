@@ -7,21 +7,29 @@
 #include "../../boolean.h"
 #include "../point/point.c"
 #include "../../prioqueue/prioqueuetime.c"
+#include "../../matrix/matrix.h"
+#include "../time/time.h"
 
 typedef struct { 
 	Word Nama;
     POINT Lokasi;
     PrioQueueTime Inventory;
+    PrioQueueTime Delivery;
+    TIME Waktu;
+    Matrix Peta;
 } Simulator;
 
 /* *** Notasi Akses: Selektor SIMULATOR *** */
 #define Inventory(S) (S).Inventory
 #define NamaSimulator(S) (S).Nama
 #define LokasiSimulator(S) (S).Lokasi
+#define WaktuSimulator(S) (S).Waktu
+// #define PetaSimulator(S) (S).Peta
+#define DeliverySimulator(S) (S).Delivery
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk SIMULATOR *** */
-void CreateSimulator (Simulator * S, Word Nama, POINT P);
+void CreateSimulator (Simulator * S, Word Nama, POINT P, TIME Waktu);
 /* Membentuk sebuah Simulator dari komponen-komponennya */
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */  

@@ -1,60 +1,57 @@
 /* File: stack.c */
-/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
-/* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
-
 #include "stack.h"
 
-/* ************ Prototype ************ */
-/* *** Konstruktor/Kreator *** */
-void CreateEmpty(Stack *S){
+void CreateUndoStack(Stack *S, Simulator simulator){
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
-/* Ciri stack kosong : TOP bernilai Nil */
+/* F.S. Membuat sebuah stack S dengan 1 element */
+/* InfoTop dari stack adalah kondisi awal pertama kali seluruh konfigurasi dibaca*/
+/* Top = 0*/
 
 // KAMUS LOKAL
 // ALGORITMA
-    Top(*S) = Nil;
+    Top(*S) = 0;
+    InfoTop(*S) = simulator;
 };
 
-/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
-boolean IsEmpty(Stack S){
-/* Mengirim true jika Stack kosong: lihat definisi di atas */
+void CreateRedoStack(Stack *S) {
+/* I.S sembarang*/
+/* F.S Membuat stack kosong dengan Top = Nil*/
+    Top(*S) = Nil;
+}
+
+boolean IsEmptyStack(Stack S){
+/* Mengirim true jika Stack kosong: Top = Nil*/
 
 // KAMUS LOKAL
 // ALGORITMA
-    return (Top(S) == Nil);
+    return (Top(S) == -1);
 }
 
-boolean IsFull(Stack S){
+boolean IsFullStack(Stack S){
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 
 // KAMUS LOKAL
 // ALGORITMA
-    return (Top(S) == MaxEl - 1);
+    return (Top(S) == MaxElement - 1);
 };
 
 
-/* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, infotype X){
+void Push(Stack * S, Simulator simulator){
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 
 // KAMUS LOKAL
 // ALGORITMA
-    if(IsEmpty(*S)){
+    if(IsEmptyStack(*S)){
         Top(*S) = 0;
     } else {
         Top(*S) += 1;
     }
-    InfoTop(*S) = X;
+    InfoTop(*S) = simulator;
 };
 
-
-/* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, infotype* X){
+void Pop(Stack * S, Simulator* X){
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */

@@ -7,7 +7,6 @@
 #define prioqueuechar_H
 #include "../boolean.h"
 #include "../sederhana/makanan/makanan.h"
-#include "../notifikasi/notifikasi.h"
 
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
@@ -106,9 +105,9 @@ void DequeueAt (PrioQueueTime *Q, int id, Makanan *M);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
-void DecayKedaluwarsa (PrioQueueTime *Q, ListNotif *l);
+void DecayKedaluwarsa (PrioQueueTime *Q);
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
 
-void DequeueExpired (PrioQueueTime *Q, ListNotif *l);
+void DequeueExpired (PrioQueueTime *Q);
 /* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
 #endif

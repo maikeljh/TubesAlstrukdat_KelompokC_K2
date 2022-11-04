@@ -1,6 +1,4 @@
-#include "./adt/notifikasi/notifikasi.h"
-
-void DequeueDelivery (PrioQueueTime *Q, Simulator *S, ListNotif *notif){
+void DequeueDelivery (PrioQueueTime *Q, Simulator *S){
 /* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
     /* KAMUS LOKAL*/
     Makanan M;
@@ -8,11 +6,10 @@ void DequeueDelivery (PrioQueueTime *Q, Simulator *S, ListNotif *notif){
     while (TIMEToMenit(Pengiriman(InfoHead(*Q))) <= 0 && !IsEmpty(*Q)){
         Dequeue(Q, &M);
         Enqueue(&Inventory(*S), M);
-        AddNotif(notif, 1, M);
     }
 }
 
-void Shipping (PrioQueueTime *Q, Simulator *S, ListNotif *N){
+void Shipping (PrioQueueTime *Q, Simulator *S){
 /* Proses mengurangi waktu delivery setiap makanan dalam delivery berdasarkan suatu aksi. */
     /* KAMUS LOKAL*/
     int i;
@@ -25,6 +22,6 @@ void Shipping (PrioQueueTime *Q, Simulator *S, ListNotif *N){
         }
         Pengiriman(Elmt(*Q, i)) = PrevMenit(Pengiriman(Elmt(*Q, i)));
         // Semua telah Decay, pengecekkan makanan expired.
-        DequeueDelivery(Q, S, N);
+        DequeueDelivery(Q, S);
     }
 }

@@ -6,13 +6,16 @@
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk SIMULATOR *** */
-void CreateSimulator (Simulator * S, Word Nama, POINT P){
+void CreateSimulator (Simulator * S, Word Nama, POINT P, TIME Waktu){
     /* Membentuk sebuah Simulator dari komponen-komponennya */
-    PrioQueueTime Q;
+    PrioQueueTime Q, D;
     MakeEmpty(&Q, NMax);
+    MakeEmpty(&D, 100);
     NamaSimulator(*S) = Nama;
     LokasiSimulator(*S) = P;
     Inventory(*S) = Q;
+    WaktuSimulator(*S) = Waktu;
+    DeliverySimulator(*S) = D;
 };
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */  
@@ -25,6 +28,9 @@ void TulisSimulator(Simulator S){
     PrintWord(NamaSimulator(S));
     printf(" di posisi: ");
     TulisPOINT(LokasiSimulator(S));
+    printf("\n");
+    printf("Waktu: \n");
+    TulisTIME(WaktuSimulator(S));
 };
        
 /* *** KELOMPOK OPERASI TERHADAP TYPE *** */                           
