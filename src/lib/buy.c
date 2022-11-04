@@ -57,7 +57,7 @@ void ProsesBuy(ListMakanan L, PrioQueueTime *S){
             break;
         } else if(command > 0) {
             if(command <= JumlahMakanan(L)){
-                Enqueue(S, Makanan(L, command-1));
+                EnqueueDelivery(S, Makanan(L, command-1));
                 printf("\nBerhasil memesan ");
                 PrintWord(Nama(Makanan(L, command-1)));
                 printf(". ");

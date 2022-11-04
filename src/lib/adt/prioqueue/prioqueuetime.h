@@ -66,10 +66,17 @@ void DeAlokasi(PrioQueueTime * Q);
 
 /* *** Primitif Add/Delete *** */
 void Enqueue (PrioQueueTime * Q, Makanan X);
-/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time */
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time Kedaluwarsa */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
         TAIL "maju" dengan mekanisme circular buffer; */
+
+void EnqueueDelivery (PrioQueueTime * Q, Makanan X);
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time Lama Pengiriman */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
+        TAIL "maju" dengan mekanisme circular buffer; */
+
 void Dequeue (PrioQueueTime * Q, Makanan *M);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */

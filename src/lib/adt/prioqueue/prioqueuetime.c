@@ -95,6 +95,30 @@ void Enqueue (PrioQueueTime * Q, Makanan X){
 	}
 }
 
+void EnqueueDelivery (PrioQueueTime * Q, Makanan X){
+/* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan time */
+/* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
+/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
+        TAIL "maju" dengan mekanisme circular buffer; */
+
+	if(IsEmpty(*Q)){
+		Head(*Q) = 0;
+		Tail(*Q) = 0;
+		InfoTail(*Q) = X;
+	} else {
+		Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
+		int idx = Tail(*Q)-1;
+		while(idx != Head(*Q)-1 && TIMEToMenit(Pengiriman(X)) < TIMEToMenit(Pengiriman(Elmt(*Q, idx)))){
+            if(idx == -1){
+                idx = MaxEl(*Q) - 1;
+            }
+            Elmt(*Q, (idx+1) % MaxEl(*Q)) = Elmt(*Q, idx);
+            idx--;
+        }
+        Elmt(*Q, idx+1) = X;
+	}
+}
+
 void Dequeue (PrioQueueTime * Q, Makanan *M){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
