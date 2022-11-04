@@ -335,3 +335,56 @@ void TulisResep(ListMakanan M, Tree Resep){
         }
     }
 }
+
+ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind){
+    Word Mix = CreateWord("MIX", 3);
+	Word Chop = CreateWord("CHOP", 4);
+	Word Fry = CreateWord("FRY", 3);
+	Word Boil = CreateWord("BOIL", 4);
+    int idxNow = 0;
+    ListMakanan Result;
+    for(int i = 0; i < JumlahMakanan(M); i++){
+        boolean found = false;
+        Word namaLokasi;
+		int Lokasi = getLokasi(Makanan(M, i));
+		if (Lokasi == 9){
+			namaLokasi = Mix;
+            if(isKataSama(Kind, namaLokasi)){
+                found = true;
+            }
+		} else if (Lokasi == 10){
+			namaLokasi = Chop;
+            if(isKataSama(Kind, namaLokasi)){
+                found = true;
+            }
+		} else if (Lokasi == 11){
+			namaLokasi = Fry;
+            if(isKataSama(Kind, namaLokasi)){
+                found = true;
+            }
+		} else if (Lokasi == 12){
+			namaLokasi = Boil;
+            if(isKataSama(Kind, namaLokasi)){
+                found = true;
+            }
+		}
+        if(found){
+            Makanan(Result, idxNow) = Makanan(M, i);
+            idxNow++;
+        }
+    }
+    JumlahMakanan(Result) = idxNow;
+    return Result;
+}
+
+void TulisResepKind(ListMakanan M, Tree Resep, Word Kind){
+    if(JumlahMakanan(M) == 0){
+        printf("Tidak ada resep yang dapat dibuat.\n");
+    } else {
+        for(int i = 0; i < JumlahMakanan(M); i++){
+            printf("   %d. ", (i+1));
+            PrintWord(Nama(Makanan(M, i)));
+            printf("\n");
+        }
+    }
+}

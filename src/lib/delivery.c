@@ -5,7 +5,7 @@ void DequeueDelivery (PrioQueueTime *Q, Simulator *S, ListNotif *notif){
     /* KAMUS LOKAL*/
     Makanan M;
     /* ALGORITMA */
-    while (TIMEToMenit(Pengiriman(InfoHead(*Q))) == 0 && !IsEmpty(*Q)){
+    while (TIMEToMenit(Pengiriman(InfoHead(*Q))) <= 0 && !IsEmpty(*Q)){
         Dequeue(Q, &M);
         Enqueue(&Inventory(*S), M);
         AddNotif(notif, 1, M);
