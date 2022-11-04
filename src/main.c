@@ -10,6 +10,9 @@
 #include "./lib/buy.c"
 #include "./lib/delivery.c"
 #include "./lib/mix.c"
+#include "./lib/fry.c"
+#include "./lib/chop.c"
+#include "./lib/boil.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -184,22 +187,31 @@ int main(){
             }
         } else if(command == 10){
             if (isNearby(C,LokasiSimulator(Pemain))) {
-                TulisResepKind(ResepChop ,Resep,  Chop);
+                ProsesChop(ResepChop, KumpulanMakanan, Resep, Chop, &Pemain);
                 isSucceed = true;
+                // Terminate
+                printf("\nPress enter to continue.");
+                ADV();
             } else {
                 printf("Tidak berada dekat tempat Chop.\n");
             }
         } else if(command == 11){
             if (isNearby(F,LokasiSimulator(Pemain))) {
-                TulisResepKind(ResepFry, Resep, Fry);
+                ProsesFry(ResepFry, KumpulanMakanan, Resep, Fry, &Pemain);
                 isSucceed = true;
+                // Terminate
+                printf("\nPress enter to continue.");
+                ADV();
             } else {
                 printf("Tidak berada dekat tempat Fry.\n");
             }
         } else if(command == 12){
             if (isNearby(B,LokasiSimulator(Pemain))) {
-                TulisResepKind(ResepBoil, Resep, Boil);
+                ProsesBoil(ResepBoil, KumpulanMakanan, Resep, Boil, &Pemain);
                 isSucceed = true;
+                // Terminate
+                printf("\nPress enter to continue.");
+                ADV();
             } else {
                 printf("Tidak berada dekat tempat Boil.\n");
             }
