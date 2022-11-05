@@ -13,6 +13,7 @@
 #include "./lib/fry.c"
 #include "./lib/chop.c"
 #include "./lib/boil.c"
+#include "./lib/adt/stack/stack.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -28,10 +29,8 @@ int main(){
     TIME time;
     boolean isSucceed;
     boolean wait;
-    Simulator Pemain;
-    PrioQueueTime Delivery;
-    ListNotif notifikasi;
-    MakeEmpty(&Delivery, 100);
+    Simulator Pemain, Temp;
+    Stack Undo, Redo;
     int JAM, MENIT;
     
     // ALGORITMA UTAMA
@@ -119,8 +118,12 @@ int main(){
         idxNama++;
     }
     NamaPemain.Length = idxNama;
-    CreateSimulator(&Pemain, NamaPemain, S);
+    CreateSimulator(&Pemain, NamaPemain, S, time);
     printf("\nGAME STARTED.\n");
+
+    // INISIASI STACK
+    CreateUndoStack(&Undo, Pemain);
+    CreateRedoStack(&Redo);
 
     // GAME STARTED
     // MAIN PROGRAM
@@ -129,12 +132,7 @@ int main(){
         wait = false;
         TulisSimulator(Pemain);
         printf("\n");
-        printf("Waktu: ");
-        TulisTIME(time);
-        printf("\n");
-        printf("Notifikasi: ");
-        TulisNotif(&notifikasi);
-        displayPeta(peta);
+        displayPeta(peta, LokasiSimulator(Pemain));
         printf("LIST COMMAND:\n");
         printf("1.  BUY\n");
         printf("2.  DELIVERY\n");
@@ -154,16 +152,16 @@ int main(){
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
-            move (&peta, 1, &LokasiSimulator(Pemain), &isSucceed);
+            move (peta, 1, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 6){
-            move (&peta, 2, &LokasiSimulator(Pemain), &isSucceed);
+            move (peta, 2, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 8){
-            move (&peta, 3, &LokasiSimulator(Pemain), &isSucceed);
+            move (peta, 3, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 7){
-            move (&peta, 4, &LokasiSimulator(Pemain), &isSucceed);
+            move (peta, 4, &LokasiSimulator(Pemain), &isSucceed);
         } else if(command == 3){
             if (isNearby(T,LokasiSimulator(Pemain))) {
-                ProsesBuy(ListBuy, &Delivery);
+                ProsesBuy(ListBuy, &DeliverySimulator(Pemain));
                 isSucceed = true;
                 // Terminate
                 printf("\nPress enter to continue.");
@@ -174,7 +172,7 @@ int main(){
         } else if(command == 4){
             printf("\nList Makanan di Perjalanan\n");
             printf("(nama - waktu sisa delivery)\n");
-            PrintDelivery(Delivery);
+            PrintDelivery(DeliverySimulator(Pemain));
             // Terminate
             printf("\nPress enter to continue.");
             ADV();
@@ -251,11 +249,27 @@ int main(){
                 }
 
                 if(JAM >= 0 && JAM <= 23 && MENIT >= 0 && MENIT <= 59){
-                    time = NextNMenit(time, JAM * 60 + MENIT);
+                    WaktuSimulator(Pemain) = NextNMenit(WaktuSimulator(Pemain), JAM * 60 + MENIT);
                     wait = true;
                 } else {
                     printf("\nCommand salah. Silahkan input command kembali.\n");
                 }
+            }
+        } else if(command == 14){
+            if (Top(Undo) > 0) {
+                Pop(&Undo, &Temp);
+                Push(&Redo, Temp);
+                Pemain = InfoTop(Undo);
+            } else {
+                printf("Tidak dapat melakukan undo.\n\n");
+            }
+        } else if(command == 15){
+            if (!IsEmptyStack(Redo)) {
+                Pop(&Redo, &Temp);
+                Push(&Undo, Temp);
+                Pemain = InfoTop(Redo);
+            } else {
+                printf("Tidak dapat melakukan redo\n\n");
             }
 
         } else if(command == 16){
@@ -284,14 +298,18 @@ int main(){
             printf("\nCommand salah. Silahkan input command kembali.\n");
         }
         if (isSucceed && !wait) {
-            time = NextMenit(time);
-            Shipping(&Delivery, &Pemain);
+            WaktuSimulator(Pemain) = NextMenit(WaktuSimulator(Pemain));
+            Shipping(&DeliverySimulator(Pemain), &Pemain);
             DecayKedaluwarsa(&Inventory(Pemain));
+            Push(&Undo, Pemain);
+            CreateRedoStack(&Redo);
         } else if(wait) {
             for(int i = 0; i < JAM * 60 + MENIT; i++){
-                Shipping(&Delivery, &Pemain);
+                Shipping(&DeliverySimulator(Pemain), &Pemain);
                 DecayKedaluwarsa(&Inventory(Pemain));
             }
+            Push(&Undo, Pemain);
+            CreateRedoStack(&Redo);
         }
     }
 }
