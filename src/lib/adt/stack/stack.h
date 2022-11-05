@@ -13,7 +13,7 @@
 /* Nil adalah stack dengan elemen kosong . */
 #define Nil -1
 /* Implementasi dalam bahasa C dengan alokasi statik */
-#define MaxElement 10
+#define MaxElement 100
 
 /* TOP adalah alamat elemen puncak */
 typedef int top;   /* indeks Label */
