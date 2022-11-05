@@ -46,6 +46,7 @@ void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Wo
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepMix, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
+                    // AddNotif(NotifiSimulator(*S), 3);
                     break;
                 } else {
                     printf("\nGagal membuat ");

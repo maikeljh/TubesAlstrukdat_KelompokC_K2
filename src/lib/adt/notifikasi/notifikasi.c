@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "notifikasi.h"
 
-void CreateListNotif(ListNotif *l) {
+void MakeEmptyNotif(ListNotif *l) {
   NeffNotif(*l) = 0;
 }
 
@@ -15,21 +15,37 @@ void AddNotif(ListNotif *l, int T, Makanan M){
     ElmtNotif(*l, NeffNotif(*l)-1).makanan= M;
 }
 
-
-void TulisNotif(ListNotif *l) {
-  if (NeffNotif(*l) != 0) {
+void TulisNotif(ListNotif l) {
+  if (NeffNotif(l) != 0) {
     printf("\n");
     int i;
-    for (i = 0; i<NeffNotif(*l); i++) {
-      if (ElmtNotif(*l, i).tipe == 1) {
-        printf("  -%s telah masuk ke dalam inventory\n", ElmtNotif(*l, i).makanan.Nama.TabWord);
-      } else if (ElmtNotif(*l, i).tipe == 2) {
-        printf("  -%s telah kedaluwarsa\n", ElmtNotif(*l, i).makanan.Nama.TabWord);
+    for (i = 0; i<NeffNotif(l); i++) {
+      if (ElmtNotif(l, i).tipe == 1) {
+        printf("  -%s telah masuk ke dalam inventory\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+      } else if (ElmtNotif(l, i).tipe == 2) {
+        printf("  -%s telah kedaluwarsa\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+
+      } else if (ElmtNotif(l, i).tipe == 3) {
+        printf("  -Proses mix %s dibatalkan.\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+      } else if (ElmtNotif(l, i).tipe == 4) {
+        printf("  -Proses chop %s dibatalkan.\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+      } else if (ElmtNotif(l, i).tipe == 5) {
+        printf("  -Proses fry %s dibatalkan.\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+      } else if (ElmtNotif(l, i).tipe == 6) {
+        printf("  -Proses boil %s dibatalkan.\n", ElmtNotif(l, i).makanan.Nama.TabWord);
+
+      } else if (ElmtNotif(l, i).tipe == 7) {
+        printf("  -%s berhasil dikembalikan.\n", ElmtNotif(l, i).makanan.Nama.TabWord);
       }
+      // } else if (ElmtNotif(l, i).tipe == 5) {
+      // } else if (ElmtNotif(l, i).tipe == 5) {
+      // } else if (ElmtNotif(l, i).tipe == 5) {
+      // } else if (ElmtNotif(l, i).tipe == 5) {
+      // }
     }
-    NeffNotif(*l) = 0;
   } else {
     printf("-\n");
   }
 }
+
 

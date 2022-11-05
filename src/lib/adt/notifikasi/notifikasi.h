@@ -4,13 +4,13 @@
 #include "../sederhana/makanan/makanan.h"
 
 typedef struct{
-	int tipe; // tipe notifikasi
 	Makanan makanan; // Nama makanan 
+	int tipe; // tipe notifikasi
 } Notif;
 
 typedef struct{
   int Neff;
-  Notif N[100];
+  Notif N[20];
 } ListNotif;
 /* AKSES (Selektor) */
 
@@ -18,11 +18,11 @@ typedef struct{
 #define NeffNotif(l) (l).Neff
 #define ElmtNotif(l,i) (l).N[i]
 
-void CreateListNotif(ListNotif *L);
+void MakeEmptyNotif(ListNotif *L);
 
 void AddNotif (ListNotif *L, int tipe, Makanan M);
 
-void TulisNotif(ListNotif *l);
+void TulisNotif(ListNotif l);
 
 
 #endif

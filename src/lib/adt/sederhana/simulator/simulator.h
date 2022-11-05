@@ -8,15 +8,16 @@
 #include "../point/point.c"
 #include "../../prioqueue/prioqueuetime.c"
 #include "../../matrix/matrix.h"
+#include "../../notifikasi/notifikasi.h"
 #include "../time/time.h"
 
 typedef struct { 
-	Word Nama;
-    POINT Lokasi;
     PrioQueueTime Inventory;
+    ListNotif Notif;
     PrioQueueTime Delivery;
     TIME Waktu;
-    Matrix Peta;
+	Word Nama;
+    POINT Lokasi;
 } Simulator;
 
 /* *** Notasi Akses: Selektor SIMULATOR *** */
@@ -24,8 +25,8 @@ typedef struct {
 #define NamaSimulator(S) (S).Nama
 #define LokasiSimulator(S) (S).Lokasi
 #define WaktuSimulator(S) (S).Waktu
-// #define PetaSimulator(S) (S).Peta
 #define DeliverySimulator(S) (S).Delivery
+#define NotifiSimulator(S) (S).Notif
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk SIMULATOR *** */

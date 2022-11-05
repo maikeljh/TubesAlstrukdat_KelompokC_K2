@@ -14,6 +14,7 @@
 #include "./lib/chop.c"
 #include "./lib/boil.c"
 #include "./lib/adt/stack/stack.c"
+#include "./lib/adt/notifikasi/notifikasi.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -22,6 +23,7 @@ int main(){
     int command;
     ListMakanan KumpulanMakanan;
     ListMakanan ResepMix, ResepFry, ResepBoil, ResepChop;
+    ListNotif Notifikasi;
     Tree Resep;
     int jumlahMakanan;
     Matrix peta;
@@ -32,6 +34,7 @@ int main(){
     Simulator Pemain, Temp;
     Stack Undo, Redo;
     int JAM, MENIT;
+
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -265,9 +268,9 @@ int main(){
             }
         } else if(command == 15){
             if (!IsEmptyStack(Redo)) {
+                Pemain = InfoTop(Redo);
                 Pop(&Redo, &Temp);
                 Push(&Undo, Temp);
-                Pemain = InfoTop(Redo);
             } else {
                 printf("Tidak dapat melakukan redo\n\n");
             }

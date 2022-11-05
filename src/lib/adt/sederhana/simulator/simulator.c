@@ -9,13 +9,16 @@
 void CreateSimulator (Simulator * S, Word Nama, POINT P, TIME Waktu){
     /* Membentuk sebuah Simulator dari komponen-komponennya */
     PrioQueueTime Q, D;
+    ListNotif N;
     MakeEmpty(&Q, NMax);
     MakeEmpty(&D, 100);
+    MakeEmptyNotif(&N);
     NamaSimulator(*S) = Nama;
     LokasiSimulator(*S) = P;
     Inventory(*S) = Q;
     WaktuSimulator(*S) = Waktu;
     DeliverySimulator(*S) = D;
+    NotifiSimulator(*S) = N;
 };
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */  
@@ -29,8 +32,11 @@ void TulisSimulator(Simulator S){
     printf(" di posisi: ");
     TulisPOINT(LokasiSimulator(S));
     printf("\n");
-    printf("Waktu: \n");
+    printf("Waktu:");
     TulisTIME(WaktuSimulator(S));
+    printf("\n");
+    printf("Notifikasi: ");
+    TulisNotif(NotifiSimulator(S));
 };
        
 /* *** KELOMPOK OPERASI TERHADAP TYPE *** */                           
