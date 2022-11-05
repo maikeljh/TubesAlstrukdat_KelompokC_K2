@@ -30,6 +30,7 @@ int main(){
     boolean wait;
     Simulator Pemain;
     PrioQueueTime Delivery;
+    ListNotif notifikasi;
     MakeEmpty(&Delivery, 100);
     int JAM, MENIT;
     
@@ -130,7 +131,9 @@ int main(){
         printf("\n");
         printf("Waktu: ");
         TulisTIME(time);
-        printf("\n\n");
+        printf("\n");
+        printf("Notifikasi: ");
+        TulisNotif(&notifikasi);
         displayPeta(peta);
         printf("LIST COMMAND:\n");
         printf("1.  BUY\n");

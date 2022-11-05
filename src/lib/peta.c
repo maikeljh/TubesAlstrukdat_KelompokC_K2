@@ -55,11 +55,19 @@ void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POIN
 }
 
 
-void displayPeta(Matrix peta) {
+void displayPeta(Matrix peta, POINT S) {
   /*Menampilkan peta pada layar*/
   int i,j;
   for (i = 0; i <= getLastIdxRow(peta); i++){
     for (j = 0; j <= getLastIdxCol(peta); j++){
+      if (ELMT(peta,i,j) == 'S') {
+        ELMT(peta,i,j) = ' ';
+      }
+
+      if (i == Absis(S)+1 && j == Ordinat(S)+1) {
+        ELMT(peta,i,j) = 'S';
+      }
+
       if (j == getLastIdxCol(peta)) {
         printf("%c\n", ELMT(peta,i,j));
       } else {
@@ -75,7 +83,7 @@ boolean isBlocked(Matrix peta, int x, int y) {
   return (ELMT(peta, x, y) != ' ');
 }
 
-void move (Matrix *peta, int direction, POINT *S, boolean *moved) {
+void move (Matrix peta, int direction, POINT *S, boolean *moved) {
   /*Menggerakan S sebanyak satu satuan sesuai arah mata angin*/
   /*S tidak dapat berpindah apabila terhalang benda pada tujuannya*/
   /* 1 = atas
@@ -99,9 +107,9 @@ void move (Matrix *peta, int direction, POINT *S, boolean *moved) {
     y -= 1;
   }
 
-  if (!isBlocked(*peta, x, y)) {
-    ELMT(*peta, xOld,yOld) = ' ';
-    ELMT(*peta, x,y) = 'S';
+  if (!isBlocked(peta, x, y)) {
+    // ELMT(*peta, xOld,yOld) = ' ';
+    // ELMT(*peta, x,y) = 'S';
     Absis(*S) = x - 1;
     Ordinat(*S) = y - 1;
     *moved = true;
