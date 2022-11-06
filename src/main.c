@@ -125,7 +125,9 @@ int main(){
     printf("\nGAME STARTED.\n");
 
     // INISIASI STACK
-    CreateUndoStack(&Undo, Pemain);
+    Simulator PemainUndoAwal;
+    CreateSimulatorPemain(&PemainUndoAwal, NamaPemain, S, time, DeliverySimulator(Pemain), Inventory(Pemain));
+    CreateUndoStack(&Undo, PemainUndoAwal);
     CreateRedoStack(&Redo);
 
     // GAME STARTED
@@ -261,16 +263,22 @@ int main(){
         } else if(command == 14){
             if (Top(Undo) > 0) {
                 Pop(&Undo, &Temp);
-                Push(&Redo, Temp);
-                Pemain = InfoTop(Undo);
+                Simulator PemainUndoCommand, PemainRedoCommand;
+                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(InfoTop(Undo)), LokasiSimulator(InfoTop(Undo)), WaktuSimulator(InfoTop(Undo)), DeliverySimulator(InfoTop(Undo)), Inventory(InfoTop(Undo)));
+                Pemain = PemainUndoCommand;
+                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(Temp), LokasiSimulator(Temp), WaktuSimulator(Temp), DeliverySimulator(Temp), Inventory(Temp));
+                Push(&Redo, PemainRedoCommand);
             } else {
                 printf("Tidak dapat melakukan undo.\n\n");
             }
         } else if(command == 15){
             if (!IsEmptyStack(Redo)) {
-                Pemain = InfoTop(Redo);
+                Simulator PemainRedoCommand, PemainUndoCommand;
+                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(InfoTop(Redo)), LokasiSimulator(InfoTop(Redo)), WaktuSimulator(InfoTop(Redo)), DeliverySimulator(InfoTop(Redo)), Inventory(InfoTop(Redo)));
+                Pemain = PemainRedoCommand;
                 Pop(&Redo, &Temp);
-                Push(&Undo, Temp);
+                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+                Push(&Undo, PemainUndoCommand);
             } else {
                 printf("Tidak dapat melakukan redo\n\n");
             }
@@ -304,14 +312,18 @@ int main(){
             WaktuSimulator(Pemain) = NextMenit(WaktuSimulator(Pemain));
             Shipping(&DeliverySimulator(Pemain), &Pemain);
             DecayKedaluwarsa(&Inventory(Pemain));
-            Push(&Undo, Pemain);
+            Simulator PemainUndo;
+            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+            Push(&Undo, PemainUndo);
             CreateRedoStack(&Redo);
         } else if(wait) {
             for(int i = 0; i < JAM * 60 + MENIT; i++){
                 Shipping(&DeliverySimulator(Pemain), &Pemain);
                 DecayKedaluwarsa(&Inventory(Pemain));
             }
-            Push(&Undo, Pemain);
+            Simulator PemainUndo;
+            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+            Push(&Undo, PemainUndo);
             CreateRedoStack(&Redo);
         }
     }
