@@ -32,7 +32,7 @@ void TulisSimulator(Simulator S){
     printf(" di posisi: ");
     TulisPOINT(LokasiSimulator(S));
     printf("\n");
-    printf("Waktu:");
+    printf("Waktu: ");
     TulisTIME(WaktuSimulator(S));
     printf("\n");
     printf("Notifikasi: ");
@@ -46,3 +46,28 @@ void UbahLokasiSimulator(Simulator * S, int deltaX, int deltaY){
     /* F.S. Lokasi S digeser sesuai deltaX dan deltaY  */ 
     Geser(&LokasiSimulator(*S), deltaX, deltaY);
 }
+
+void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory){
+    /* Membentuk sebuah Simulator dari komponen-komponennya */
+    PrioQueueTime Q, D;
+    ListNotif N;
+    MakeEmpty(&Q, NMax);
+    MakeEmpty(&D, 100);
+    MakeEmptyNotif(&N);
+    for(int i = 0; i < MaxEl(Delivery); i++){
+        Elmt(D,i) = Elmt(Delivery,i);
+    }
+    Head(D) = Head(Delivery);
+    Tail(D) = Tail(Delivery);
+    Head(Q) = Head(Inventory);
+    Tail(Q) = Tail(Inventory);
+    for(int i = 0; i < MaxEl(Inventory); i++){
+        Elmt(Q,i) = Elmt(Inventory,i);
+    }
+    NamaSimulator(*S) = Nama;
+    LokasiSimulator(*S) = P;
+    Inventory(*S) = Q;
+    WaktuSimulator(*S) = Waktu;
+    DeliverySimulator(*S) = D;
+    NotifiSimulator(*S) = N;
+};
