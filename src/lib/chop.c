@@ -36,6 +36,7 @@ void ProsesChop(ListMakanan ResepChop, ListMakanan KumpulanMakanan, Tree Resep, 
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepChop, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
+                    AddNotif(&NotifSimulator(*S),4, Makanan(ResepChop, command-1));
                     break;
                 } else {
                     printf("\nGagal membuat ");

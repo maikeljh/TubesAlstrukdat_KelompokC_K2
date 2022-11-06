@@ -295,7 +295,7 @@ void DequeueAt (PrioQueueTime *Q, int id, Makanan *M){
     }
 }
 
-void DecayKedaluwarsa (PrioQueueTime *Q){
+void DecayKedaluwarsa (PrioQueueTime *Q, ListNotif *notif){
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
     /* KAMUS LOKAL*/
     int i;
@@ -308,16 +308,17 @@ void DecayKedaluwarsa (PrioQueueTime *Q){
         }
         Kedaluwarsa(Elmt(*Q, i)) = PrevMenit(Kedaluwarsa(Elmt(*Q, i)));
         // Semua telah Decay, pengecekkan makanan expired.
-        DequeueExpired(Q);
+        DequeueExpired(Q, notif);
     }
 }
 
-void DequeueExpired (PrioQueueTime *Q){
+void DequeueExpired (PrioQueueTime *Q, ListNotif *notif){
 /* Proses mengeluarkan makanan kedaluwarsa dari inventory jika ada.*/
     /* KAMUS LOKAL*/
     Makanan M;
     /* ALGORITMA */
     while (TIMEToMenit(Kedaluwarsa(InfoHead(*Q))) == 0 && !IsEmpty(*Q)){
         Dequeue(Q, &M);
+        AddNotif(notif, 11,M);
     }
 }

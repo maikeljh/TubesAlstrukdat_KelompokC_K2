@@ -18,7 +18,7 @@ void CreateSimulator (Simulator * S, Word Nama, POINT P, TIME Waktu){
     Inventory(*S) = Q;
     WaktuSimulator(*S) = Waktu;
     DeliverySimulator(*S) = D;
-    NotifiSimulator(*S) = N;
+    NotifSimulator(*S) = N;
 };
 
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */  
@@ -34,9 +34,8 @@ void TulisSimulator(Simulator S){
     printf("\n");
     printf("Waktu: ");
     TulisTIME(WaktuSimulator(S));
-    printf("\n");
-    printf("Notifikasi: ");
-    TulisNotif(NotifiSimulator(S));
+    printf("\nNotifikasi: \n");
+    TulisNotif(NotifSimulator(S));
 };
        
 /* *** KELOMPOK OPERASI TERHADAP TYPE *** */                           
@@ -47,7 +46,7 @@ void UbahLokasiSimulator(Simulator * S, int deltaX, int deltaY){
     Geser(&LokasiSimulator(*S), deltaX, deltaY);
 }
 
-void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory){
+void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory, ListNotif Notif){
     /* Membentuk sebuah Simulator dari komponen-komponennya */
     PrioQueueTime Q, D;
     ListNotif N;
@@ -64,10 +63,14 @@ void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQ
     for(int i = 0; i < MaxEl(Inventory); i++){
         Elmt(Q,i) = Elmt(Inventory,i);
     }
+    NeffNotif(N) = NeffNotif(Notif);
+    for(int i = 0; i < NeffNotif(Notif); i++){
+        ElmtNotif(N,i) = ElmtNotif(Notif,i);
+    }
     NamaSimulator(*S) = Nama;
     LokasiSimulator(*S) = P;
     Inventory(*S) = Q;
     WaktuSimulator(*S) = Waktu;
     DeliverySimulator(*S) = D;
-    NotifiSimulator(*S) = N;
+    NotifSimulator(*S) = N;
 };
