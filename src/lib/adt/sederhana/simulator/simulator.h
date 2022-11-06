@@ -26,7 +26,7 @@ typedef struct {
 #define LokasiSimulator(S) (S).Lokasi
 #define WaktuSimulator(S) (S).Waktu
 #define DeliverySimulator(S) (S).Delivery
-#define NotifiSimulator(S) (S).Notif
+#define NotifSimulator(S) (S).Notif
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk SIMULATOR *** */

@@ -36,6 +36,7 @@ void ProsesFry(ListMakanan ResepFry, ListMakanan KumpulanMakanan, Tree Resep, Wo
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepFry, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
+                    AddNotif(&NotifSimulator(*S),5, Makanan(ResepFry, command-1));
                     break;
                 } else {
                     printf("\nGagal membuat ");

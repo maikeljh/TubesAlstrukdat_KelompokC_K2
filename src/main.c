@@ -34,7 +34,6 @@ int main(){
     Simulator Pemain, Temp;
     Stack Undo, Redo;
     int JAM, MENIT;
-
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -124,9 +123,12 @@ int main(){
     CreateSimulator(&Pemain, NamaPemain, S, time);
     printf("\nGAME STARTED.\n");
 
+    // INISIASI NOTIFIKASI
+    MakeEmptyNotif(&Notifikasi);
+
     // INISIASI STACK
     Simulator PemainUndoAwal;
-    CreateSimulatorPemain(&PemainUndoAwal, NamaPemain, S, time, DeliverySimulator(Pemain), Inventory(Pemain));
+    CreateSimulatorPemain(&PemainUndoAwal, NamaPemain, S, time, DeliverySimulator(Pemain), Inventory(Pemain), Notifikasi);
     CreateUndoStack(&Undo, PemainUndoAwal);
     CreateRedoStack(&Redo);
 
@@ -136,6 +138,7 @@ int main(){
         isSucceed = false;
         wait = false;
         TulisSimulator(Pemain);
+        MakeEmptyNotif(&NotifSimulator(Pemain));
         printf("\n");
         displayPeta(peta, LokasiSimulator(Pemain));
         printf("LIST COMMAND:\n");
@@ -264,9 +267,10 @@ int main(){
             if (Top(Undo) > 0) {
                 Pop(&Undo, &Temp);
                 Simulator PemainUndoCommand, PemainRedoCommand;
-                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(InfoTop(Undo)), LokasiSimulator(InfoTop(Undo)), WaktuSimulator(InfoTop(Undo)), DeliverySimulator(InfoTop(Undo)), Inventory(InfoTop(Undo)));
+                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(InfoTop(Undo)), LokasiSimulator(InfoTop(Undo)), WaktuSimulator(InfoTop(Undo)), DeliverySimulator(InfoTop(Undo)), Inventory(InfoTop(Undo)), NotifSimulator(Temp));
+                changeNotif(&NotifSimulator(PemainUndoCommand));
                 Pemain = PemainUndoCommand;
-                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(Temp), LokasiSimulator(Temp), WaktuSimulator(Temp), DeliverySimulator(Temp), Inventory(Temp));
+                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(Temp), LokasiSimulator(Temp), WaktuSimulator(Temp), DeliverySimulator(Temp), Inventory(Temp), NotifSimulator(Temp));
                 Push(&Redo, PemainRedoCommand);
             } else {
                 printf("Tidak dapat melakukan undo.\n\n");
@@ -274,10 +278,10 @@ int main(){
         } else if(command == 15){
             if (!IsEmptyStack(Redo)) {
                 Simulator PemainRedoCommand, PemainUndoCommand;
-                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(InfoTop(Redo)), LokasiSimulator(InfoTop(Redo)), WaktuSimulator(InfoTop(Redo)), DeliverySimulator(InfoTop(Redo)), Inventory(InfoTop(Redo)));
+                CreateSimulatorPemain(&PemainRedoCommand, NamaSimulator(InfoTop(Redo)), LokasiSimulator(InfoTop(Redo)), WaktuSimulator(InfoTop(Redo)), DeliverySimulator(InfoTop(Redo)), Inventory(InfoTop(Redo)), NotifSimulator(InfoTop(Redo)));
                 Pemain = PemainRedoCommand;
                 Pop(&Redo, &Temp);
-                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+                CreateSimulatorPemain(&PemainUndoCommand, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain), NotifSimulator(Pemain));
                 Push(&Undo, PemainUndoCommand);
             } else {
                 printf("Tidak dapat melakukan redo\n\n");
@@ -311,20 +315,21 @@ int main(){
         if (isSucceed && !wait) {
             WaktuSimulator(Pemain) = NextMenit(WaktuSimulator(Pemain));
             Shipping(&DeliverySimulator(Pemain), &Pemain);
-            DecayKedaluwarsa(&Inventory(Pemain));
+            DecayKedaluwarsa(&Inventory(Pemain), &NotifSimulator(Pemain));
             Simulator PemainUndo;
-            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain), NotifSimulator(Pemain));
             Push(&Undo, PemainUndo);
             CreateRedoStack(&Redo);
         } else if(wait) {
             for(int i = 0; i < JAM * 60 + MENIT; i++){
                 Shipping(&DeliverySimulator(Pemain), &Pemain);
-                DecayKedaluwarsa(&Inventory(Pemain));
+                DecayKedaluwarsa(&Inventory(Pemain), &NotifSimulator(Pemain));
             }
             Simulator PemainUndo;
-            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain));
+            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain), NotifSimulator(Pemain));
             Push(&Undo, PemainUndo);
             CreateRedoStack(&Redo);
         }
+        
     }
 }
