@@ -155,8 +155,10 @@ int main(){
         printf("11. WAIT X Y\n");
         printf("12. CATALOG\n");
         printf("13. COOKBOOK\n");
-        printf("14. INVENTORY\n");
-        printf("15. EXIT\n");
+        printf("14. UNDO\n");
+        printf("15. REDO\n");
+        printf("16. INVENTORY\n");
+        printf("17. EXIT\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
