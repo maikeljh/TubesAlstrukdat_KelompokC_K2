@@ -5,6 +5,7 @@
     "makanan.h": "c",
     "boolean.h": "c",
     "time.h": "c",
-    "wordfilemachine.h": "c"
+    "wordfilemachine.h": "c",
+    "stdio.h": "c"
   }
 }

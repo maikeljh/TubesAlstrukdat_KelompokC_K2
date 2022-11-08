@@ -377,6 +377,24 @@ ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind){
     return Result;
 }
 
+ListMakanan ListResepAll(ListMakanan M, Tree Resep){
+    int idxNow = 0;
+    ListMakanan Result;
+    for(int i = 0; i < JumlahMakanan(M); i++){
+        boolean found = false;
+		int Lokasi = getLokasi(Makanan(M, i));
+		if (Lokasi == 9 || Lokasi == 10 || Lokasi == 11 || Lokasi == 12 ){
+            found = true;
+		}
+        if(found){
+            Makanan(Result, idxNow) = Makanan(M, i);
+            idxNow++;
+        }
+    }
+    JumlahMakanan(Result) = idxNow;
+    return Result;
+}
+
 void TulisResepKind(ListMakanan M, Tree Resep, Word Kind){
     if(JumlahMakanan(M) == 0){
         printf("Tidak ada resep yang dapat dibuat.\n");

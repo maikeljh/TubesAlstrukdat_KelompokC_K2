@@ -44,7 +44,8 @@ int readCommand(){
     Word Catalog = CreateWord("CATALOG", 7);
     Word CookBook = CreateWord("COOKBOOK", 8);
     Word Inventory = CreateWord("INVENTORY", 9);
-    
+    Word Recommendation = CreateWord("RECOMMENDATION", 14);
+
     STARTWORD();
     if(isKataSama(currentWord, Start) && currentChar == '\n'){
         return 1;
@@ -87,6 +88,8 @@ int readCommand(){
         return 17;
     } else if(isKataSama(currentWord, Inventory) && currentChar == '\n'){
         return 18;
+    } else if(isKataSama(currentWord, Recommendation) && currentChar == '\n'){
+        return 19;
     } else {
         while(currentChar != '\n'){
             ADVWORD();

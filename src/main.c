@@ -15,6 +15,7 @@
 #include "./lib/boil.c"
 #include "./lib/adt/stack/stack.c"
 #include "./lib/adt/notifikasi/notifikasi.c"
+#include "./lib/adt/set/set.c"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -94,6 +95,8 @@ int main(){
     ResepFry = ListResep(KumpulanMakanan, Resep, Fry);
     ResepChop = ListResep(KumpulanMakanan, Resep, Chop);
     ResepBoil = ListResep(KumpulanMakanan, Resep, Boil);
+    ListMakanan ListResep = ListResepAll(KumpulanMakanan, Resep);
+    ListSet ListRekomendasi = BacaRekomendasi(Resep, KumpulanMakanan, ListResep);
 
     // INISIASI LIST BUY
     ListMakanan ListBuy = CariBuy(KumpulanMakanan);
@@ -143,10 +146,10 @@ int main(){
         printf("\n");
         displayPeta(peta, LokasiSimulator(Pemain));
         printf("LIST COMMAND:\n");
-        printf("1.  BUY        | 2.  DELIVERY  | 3.  MOVE NORTH  | 4.  MOVE EAST  | 5.  MOVE WEST |\n");
-        printf("6.  MOVE SOUTH | 7.  MIX       | 8.  CHOP        | 9.  FRY        | 10. BOIL      |\n");
-        printf("11. WAIT X Y   | 12. CATALOG   | 13. COOKBOOK    | 14. UNDO       | 15. REDO      |\n");
-        printf("16. INVENTORY  | 17. EXIT      |\n");
+        printf("1.  BUY        | 2.  DELIVERY       | 3.  MOVE NORTH  | 4.  MOVE EAST  | 5.  MOVE WEST |\n");
+        printf("6.  MOVE SOUTH | 7.  MIX            | 8.  CHOP        | 9.  FRY        | 10. BOIL      |\n");
+        printf("11. WAIT X Y   | 12. CATALOG        | 13. COOKBOOK    | 14. UNDO       | 15. REDO      |\n");
+        printf("16. INVENTORY  | 17. RECOMMENDATION | 17. EXIT        |\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
@@ -294,6 +297,10 @@ int main(){
             printf("\nList Inventory\n");
             printf("(nama - waktu sisa kedaluwarsa)\n");
             PrintPrioQueueTime(Inventory(Pemain));
+            printf("\nPress enter to continue.");
+            ADV();
+        } else if(command == 19) {
+            TulisRekomandasi(KumpulanMakanan, ListRekomendasi, Pemain);
             printf("\nPress enter to continue.");
             ADV();
         } else if(command == 2) {
