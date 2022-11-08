@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "makanan.c"
 
+// cd src/lib/adt/sederhana/makanan
 // gcc main_makanan.c ../../wordfilemachine/wordfilemachine.c ../../wordfilemachine/charfilemachine.c ../time/time.c ../../wordmachine/wordmachine.c ../../wordmachine/charmachine.c -o main_makanan
 
 int main(){
