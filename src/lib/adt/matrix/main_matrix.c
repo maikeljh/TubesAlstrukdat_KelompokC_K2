@@ -5,6 +5,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Directory:
+cd src/lib/adt/matrix
+ Cara Compile: 
+gcc main_matrix.c matrix.c -o mainmatrix
+*/
 int main () {
   // Create matrix
   Matrix m1, m2;

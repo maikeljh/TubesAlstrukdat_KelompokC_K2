@@ -6,7 +6,6 @@
 #ifndef prioqueuechar_H
 #define prioqueuechar_H
 #include "../boolean.h"
-#include "../sederhana/makanan/makanan.h"
 #include "../notifikasi/notifikasi.h"
 
 #define Nil -1
@@ -39,6 +38,7 @@ typedef struct {
 #define Tail(Q)     (Q).TAIL
 #define InfoHead(Q) (Q).T[(Q).HEAD]
 #define InfoTail(Q) (Q).T[(Q).TAIL]
+#define InfoPQT(Q) (Q).T
 #define MaxEl(Q)    (Q).MaxEl
 #define Elmt(Q,i)   (Q).T[(i)]
 
