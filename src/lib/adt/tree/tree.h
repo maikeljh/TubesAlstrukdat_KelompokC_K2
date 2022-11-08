@@ -7,6 +7,7 @@
 /* Modul lain yang digunakan : */
 #include "../boolean.h"
 #include "../wordfilemachine/wordfilemachine.h"
+#include "../sederhana/makanan/makanan.h"
 
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotype; */

@@ -6,7 +6,6 @@
 #ifndef prioqueuechar_H
 #define prioqueuechar_H
 #include "../boolean.h"
-#include "../sederhana/makanan/makanan.h"
 #include "../notifikasi/notifikasi.h"
 
 #define Nil -1

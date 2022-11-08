@@ -2,72 +2,69 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Cara kompilasi driver: 
+gcc main_prioqueue.c prioqueuetime.c ../sederhana/time/time.c ../sederhana/makanan/makanan.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../tree/tree.c ../notifikasi/notifikasi.c -o main
+*/
+Word BacaNama(void);
+    // Membaca input nama makanan dan di assign ke suatu tipe Word yang menyimpan nama makanan tersebut.
+void MenuAwal(void);
+    // Membacakan menu awal yang bisa dilakukan, berkaitan sebuah prioqueue belum terbentuk, fungsi yang dapat digunakan masih terbatas.
+void Menu(void);
+    /* Membacakan Menu utama. Menu ini dapat diakses setelah sebuah prioqueue terbuat, berkaitan dengan hampir seluruh fungsi membutuhkan sebuah
+     sebuah prioqueue terbentuk terlebih dahulu */
+Word BacaNama(void) {
+    // Membaca input nama makanan.
+    int i, idxNama = 0;
+    Word NamaMakanan;
+    STARTWORD();
+    while(currentChar != '\n'){
+        for (i = 0; i < currentWord.Length; i++){
+            NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
+            idxNama++;
+        }
+        NamaMakanan.TabWord[idxNama] = ' ';
+        idxNama++;
+        ADVWORD();
+    }
+    for (i = 0; i < currentWord.Length; i++){
+        NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
+        idxNama++;
+    }
+    NamaMakanan.Length = idxNama;
+    return NamaMakanan;
+}
 int main(){
     /* KAMUS UTAMA */
-    printf("Nama makanan 1: \n");
-    STARTWORD();
-    PrioQueueTime inventory;
-    MakeEmpty(&inventory, 100);
-    Makanan M1, M2;
-    int id, lokasi;
+    Makanan M1;
+    int id, lokasi, cmd, max;
     TIME wk, lp;
     Word NamaMakanan;
-    int idxNama = 0;
-    while(currentChar != '\n'){
-        for (int i = 0; i < currentWord.Length; i++){
-            NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
-            idxNama++;
+    PrioQueueTime inventory;
+    bool created = false;
+
+    while (cmd != 0){
+        while(!created){
+            printf("Silahkan pilih  untuk membuat  sebuah PrioQueue sehingga bisa menguji fungsi lainnya! :"); scanf("%d", &cmd);
+            if (cmd == 1){
+                printf("Input ukuran jumlah penyimpanan maksimum PrioQueue (max elemen): "); scanf("%d", &max);
+                MakeEmpty(&inventory, max);
+                printf("Terbentuk sebuah PrioQueue kosong dengan ukuran maksimum atau jumlah elemen dalam PrioQueue: %d elemen.", max);
+                created = true;
+            }
+            else if (cmd == 0){
+                printf("Terima kasih telah menggunakan driver!");
+                return 0;
+            }
         }
-        NamaMakanan.TabWord[idxNama] = ' ';
-        idxNama++;
-        ADVWORD();
-    }
-    for (int i = 0; i < currentWord.Length; i++){
-        NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
-        idxNama++;
-    }
-    NamaMakanan.Length = idxNama;
-    // Sampel data makanan (Data Bebek):
-    id = 1; lokasi = 1; 
-    CreateTime(&wk, 3, 2, 30);
-    CreateTime(&lp, 0, 15, 0);
-    CreateMakanan(&M1, id, lokasi, NamaMakanan, wk, lp);
-    //
-
-    // Data Sapi:
-    printf("Nama makanan 2: \n");
-    STARTWORD();
-    idxNama = 0;
-    while(currentChar != '\n'){
-        for (int i = 0; i < currentWord.Length; i++){
-            NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
-            idxNama++;
+        if (cmd == 1){
+            printf("Input ukuran jumlah penyimpanan maksimum PrioQueue (max elemen): "); scanf("%d", &max);
+            MakeEmpty(&inventory, max);
+            printf("Terbentuk sebuah PrioQueue kosong dengan ukuran maksimum atau jumlah elemen dalam PrioQueue: %d elemen.", max);
+            created = true;
         }
-        NamaMakanan.TabWord[idxNama] = ' ';
-        idxNama++;
-        ADVWORD();
+        else if (cmd == 2){}
+        else if (cmd == 3){}
     }
-    for (int i = 0; i < currentWord.Length; i++){
-        NamaMakanan.TabWord[idxNama] = currentWord.TabWord[i];
-        idxNama++;
-    }
-    NamaMakanan.Length = idxNama;
-    id = 2; lokasi = 2;
-    CreateTime(&wk, 0, 1, 10);
-    CreateTime(&lp, 0, 10, 0);
-    CreateMakanan(&M2, id, lokasi, NamaMakanan, wk, lp);
-    //
-
-    /* ALGORITMA UTAMA */
-    // printf("Silahkan pilih \n");
-
-    // 1. MakeEmpty
-    MakeEmpty(&inventory, NMax);
-    
-    // 2. Enqueue makanan (Makanan terdefinisi)
-    Enqueue(&inventory, M1);
-    Enqueue(&inventory, M2);
-
-    // 3. Print Isi Prio Queue
-    PrintPrioQueueTime(inventory);
+    printf("Terima kasih telah menggunakan driver!");
+    return 0;
 }
