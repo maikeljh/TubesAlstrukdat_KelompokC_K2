@@ -48,8 +48,8 @@ void MakeEmpty (PrioQueueTime * Q, int Max){
 	/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 	/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
-	(*Q).T = (Makanan*)malloc((Max)*sizeof(Makanan));
-	if ((*Q).T != NULL){
+	InfoPQT(*Q) = (Makanan*)malloc((Max)*sizeof(Makanan));
+	if (InfoPQT(*Q) != NULL){
 		MaxEl(*Q) = Max;
 		Head(*Q) = Nil;
 		Tail(*Q) = Nil;
@@ -67,7 +67,7 @@ void DeAlokasi(PrioQueueTime * Q){
 	MaxEl(*Q) = 0;
 	Head(*Q) = Nil;
 	Tail(*Q) = Nil;
-	free((*Q).T);
+	free(InfoPQT(*Q));
 }
 
 /* *** Primitif Add/Delete *** */
@@ -234,7 +234,7 @@ void PrintDelivery (PrioQueueTime Q){
             idx++;
         }
         printf("   %d. ", count);
-            PrintWord(Nama((Q).T[idx]));
+            PrintWord(Nama(Elmt(Q, idx)));
             printf(" -");
             if (Day(Pengiriman(Elmt(Q, idx))) != 0){
                 printf(" %d Hari", Day(Pengiriman((Q).T[idx])));
@@ -264,6 +264,9 @@ int CariMakanan(PrioQueueTime Q, int id){
         else{
             idx = (idx+1) % MaxEl(Q);
         }
+    }
+    if (!found){
+        idx = -1;
     }
     return idx;
 }

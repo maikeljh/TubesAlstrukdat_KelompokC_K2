@@ -14,7 +14,7 @@ typedef struct{
 	int ID; // ID Makanan
 	Word Nama; // Nama makanan 
 	TIME WK; // Waktu kedaluwarsa
-    int Lokasi; 
+    int Lokasi; // Lokasi Makanan (Representasi Lokasi berbentuk angka)
 	TIME LP; // Lama pengiriman
 	TIME Pengolahan; // Waktu Pengolahan
 } Makanan;
