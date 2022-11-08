@@ -30,7 +30,7 @@ int main(){
     POINT S,T,M,C,F,B;
     TIME time;
     boolean isSucceed;
-    boolean wait;
+    boolean wait, cook;
     Simulator Pemain, Temp;
     Stack Undo, Redo;
     int JAM, MENIT;
@@ -137,28 +137,16 @@ int main(){
     while(true){
         isSucceed = false;
         wait = false;
+        cook = false;
         TulisSimulator(Pemain);
         MakeEmptyNotif(&NotifSimulator(Pemain));
         printf("\n");
         displayPeta(peta, LokasiSimulator(Pemain));
         printf("LIST COMMAND:\n");
-        printf("1.  BUY\n");
-        printf("2.  DELIVERY\n");
-        printf("3.  MOVE NORTH\n");
-        printf("4.  MOVE EAST\n");
-        printf("5.  MOVE WEST\n");
-        printf("6.  MOVE SOUTH\n");
-        printf("7.  MIX\n");
-        printf("8.  CHOP\n");
-        printf("9.  FRY\n");
-        printf("10. BOIL\n");
-        printf("11. WAIT X Y\n");
-        printf("12. CATALOG\n");
-        printf("13. COOKBOOK\n");
-        printf("14. UNDO\n");
-        printf("15. REDO\n");
-        printf("16. INVENTORY\n");
-        printf("17. EXIT\n");
+        printf("1.  BUY        | 2.  DELIVERY  | 3.  MOVE NORTH  | 4.  MOVE EAST  | 5.  MOVE WEST |\n");
+        printf("6.  MOVE SOUTH | 7.  MIX       | 8.  CHOP        | 9.  FRY        | 10. BOIL      |\n");
+        printf("11. WAIT X Y   | 12. CATALOG   | 13. COOKBOOK    | 14. UNDO       | 15. REDO      |\n");
+        printf("16. INVENTORY  | 17. EXIT      |\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
@@ -188,7 +176,7 @@ int main(){
             ADV();
         } else if(command == 9){
             if (isNearby(M,LokasiSimulator(Pemain))) {
-                ProsesMix(ResepMix, KumpulanMakanan, Resep, Mix, &Pemain);
+                ProsesMix(ResepMix, KumpulanMakanan, Resep, Mix, &Pemain, &cook, &JAM, &MENIT);
                 isSucceed = true;
                 // Terminate
                 printf("\nPress enter to continue.");
@@ -198,7 +186,7 @@ int main(){
             }
         } else if(command == 10){
             if (isNearby(C,LokasiSimulator(Pemain))) {
-                ProsesChop(ResepChop, KumpulanMakanan, Resep, Chop, &Pemain);
+                ProsesChop(ResepChop, KumpulanMakanan, Resep, Chop, &Pemain, &cook, &JAM, &MENIT);
                 isSucceed = true;
                 // Terminate
                 printf("\nPress enter to continue.");
@@ -208,7 +196,7 @@ int main(){
             }
         } else if(command == 11){
             if (isNearby(F,LokasiSimulator(Pemain))) {
-                ProsesFry(ResepFry, KumpulanMakanan, Resep, Fry, &Pemain);
+                ProsesFry(ResepFry, KumpulanMakanan, Resep, Fry, &Pemain, &cook, &JAM, &MENIT);
                 isSucceed = true;
                 // Terminate
                 printf("\nPress enter to continue.");
@@ -218,7 +206,7 @@ int main(){
             }
         } else if(command == 12){
             if (isNearby(B,LokasiSimulator(Pemain))) {
-                ProsesBoil(ResepBoil, KumpulanMakanan, Resep, Boil, &Pemain);
+                ProsesBoil(ResepBoil, KumpulanMakanan, Resep, Boil, &Pemain, &cook, &JAM, &MENIT);
                 isSucceed = true;
                 // Terminate
                 printf("\nPress enter to continue.");
@@ -314,10 +302,20 @@ int main(){
         } else {
             printf("\nCommand salah. Silahkan input command kembali.\n");
         }
-        if (isSucceed && !wait) {
+        if (isSucceed && !wait && !cook) {
             WaktuSimulator(Pemain) = NextMenit(WaktuSimulator(Pemain));
             Shipping(&DeliverySimulator(Pemain), &Pemain);
             DecayKedaluwarsa(&Inventory(Pemain), &NotifSimulator(Pemain));
+            Simulator PemainUndo;
+            CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain), NotifSimulator(Pemain));
+            Push(&Undo, PemainUndo);
+            CreateRedoStack(&Redo);
+        } else if(cook) {
+            WaktuSimulator(Pemain) = NextNMenit(WaktuSimulator(Pemain), JAM * 60 + MENIT);
+            for(int i = 0; i < JAM * 60 + MENIT; i++){
+                Shipping(&DeliverySimulator(Pemain), &Pemain);
+                DecayKedaluwarsa(&Inventory(Pemain), &NotifSimulator(Pemain));
+            }
             Simulator PemainUndo;
             CreateSimulatorPemain(&PemainUndo, NamaSimulator(Pemain), LokasiSimulator(Pemain), WaktuSimulator(Pemain), DeliverySimulator(Pemain), Inventory(Pemain), NotifSimulator(Pemain));
             Push(&Undo, PemainUndo);

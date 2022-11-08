@@ -8,7 +8,7 @@
 #include "./adt/wordfilemachine/charfilemachine.c"
 #include "./adt/sederhana/time/time.c"*/
 
-void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S){
+void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
     while(true) {
         Makanan Temp;
         printf("\n======================\n");
@@ -42,11 +42,15 @@ void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Wo
                         DequeueAt(&Inventory(*S), Akar(P), &Temp);
                         P = Sibling(P);
                     }
+                    Kedaluwarsa(Makanan(ResepMix, command-1)) = NextNMenit(Kedaluwarsa(Makanan(ResepMix, command-1)), HourPengolahan(Makanan(ResepMix, command-1)) * 60 + MinutePengolahan(Makanan(ResepMix, command-1)));
                     Enqueue(&Inventory(*S), Makanan(ResepMix, command-1));
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepMix, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
                     AddNotif(&NotifSimulator(*S),3, Makanan(ResepMix, command-1));
+                    *Cook = true;
+                    *JAM = HourPengolahan(Makanan(ResepMix, command-1));
+                    *MENIT = MinutePengolahan(Makanan(ResepMix, command-1));
                     break;
                 } else {
                     printf("\nGagal membuat ");

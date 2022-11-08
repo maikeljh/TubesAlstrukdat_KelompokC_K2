@@ -384,6 +384,20 @@ void TulisResepKind(ListMakanan M, Tree Resep, Word Kind){
         for(int i = 0; i < JumlahMakanan(M); i++){
             printf("   %d. ", (i+1));
             PrintWord(Nama(Makanan(M, i)));
+            printf(" - ");
+            if(DayPengolahan(Makanan(M, i)) == 0 && HourPengolahan(Makanan(M, i)) == 0 && MinutePengolahan(Makanan(M, i)) == 0){
+			    printf("0");
+            } else {
+                if(DayPengolahan(Makanan(M, i)) > 0){
+                    printf("%d hari ", DayPengolahan(Makanan(M, i)));
+                }
+                if(HourPengolahan(Makanan(M, i)) > 0){
+                    printf("%d jam ", HourPengolahan(Makanan(M, i)));
+                }
+                if(MinutePengolahan(Makanan(M, i)) > 0){
+                    printf("%d menit", MinutePengolahan(Makanan(M, i)));
+                }
+            }
             printf("\n");
         }
     }

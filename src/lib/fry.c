@@ -1,4 +1,4 @@
-void ProsesFry(ListMakanan ResepFry, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S){
+void ProsesFry(ListMakanan ResepFry, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
     while(true) {
         Makanan Temp;
         printf("\n======================\n");
@@ -32,11 +32,15 @@ void ProsesFry(ListMakanan ResepFry, ListMakanan KumpulanMakanan, Tree Resep, Wo
                         DequeueAt(&Inventory(*S), Akar(P), &Temp);
                         P = Sibling(P);
                     }
+                    Kedaluwarsa(Makanan(ResepFry, command-1)) = NextNMenit(Kedaluwarsa(Makanan(ResepFry, command-1)), HourPengolahan(Makanan(ResepFry, command-1)) * 60 + MinutePengolahan(Makanan(ResepFry, command-1)));
                     Enqueue(&Inventory(*S), Makanan(ResepFry, command-1));
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepFry, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
                     AddNotif(&NotifSimulator(*S),5, Makanan(ResepFry, command-1));
+                    *Cook = true;
+                    *JAM = HourPengolahan(Makanan(ResepFry, command-1));
+                    *MENIT = MinutePengolahan(Makanan(ResepFry, command-1));
                     break;
                 } else {
                     printf("\nGagal membuat ");

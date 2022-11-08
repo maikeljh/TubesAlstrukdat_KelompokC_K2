@@ -1,4 +1,4 @@
-void ProsesBoil(ListMakanan ResepBoil, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S){
+void ProsesBoil(ListMakanan ResepBoil, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
     while(true) {
         Makanan Temp;
         printf("\n======================\n");
@@ -32,11 +32,15 @@ void ProsesBoil(ListMakanan ResepBoil, ListMakanan KumpulanMakanan, Tree Resep, 
                         DequeueAt(&Inventory(*S), Akar(P), &Temp);
                         P = Sibling(P);
                     }
+                    Kedaluwarsa(Makanan(ResepBoil, command-1)) = NextNMenit(Kedaluwarsa(Makanan(ResepBoil, command-1)), HourPengolahan(Makanan(ResepBoil, command-1)) * 60 + MinutePengolahan(Makanan(ResepBoil, command-1)));
                     Enqueue(&Inventory(*S), Makanan(ResepBoil, command-1));
                     printf("\n");
                     PrintWord(Nama(Makanan(ResepBoil, command-1)));
                     printf(" selesai dibuat dan sudah masuk ke inventory!\n");
                     AddNotif(&NotifSimulator(*S),6, Makanan(ResepBoil, command-1));
+                    *Cook = true;
+                    *JAM = HourPengolahan(Makanan(ResepBoil, command-1));
+                    *MENIT = MinutePengolahan(Makanan(ResepBoil, command-1));
                     break;
                 } else {
                     printf("\nGagal membuat ");
