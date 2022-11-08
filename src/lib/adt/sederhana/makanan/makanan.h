@@ -16,6 +16,7 @@ typedef struct{
 	TIME WK; // Waktu kedaluwarsa
     int Lokasi; 
 	TIME LP; // Lama pengiriman
+	TIME Pengolahan; // Waktu Pengolahan
 } Makanan;
 
 typedef struct{
@@ -30,18 +31,22 @@ typedef struct{
 #define Kedaluwarsa(m) (m).WK
 #define Lokasi(m) (m).Lokasi
 #define Pengiriman(m) (m).LP
+#define Pengolahan(m) (m).Pengolahan
 #define DayWK(m) (m).WK.DD
 #define HourWK(m) (m).WK.HH
 #define MinuteWK(m) (m).WK.MM
 #define DayLP(m) (m).LP.DD
 #define HourLP(m) (m).LP.HH
 #define MinuteLP(m) (m).LP.MM
+#define DayPengolahan(m) (m).Pengolahan.DD
+#define HourPengolahan(m) (m).Pengolahan.HH
+#define MinutePengolahan(m) (m).Pengolahan.MM
 
 /* AKSES List Makanan (Selektor) */
 #define Makanan(L, i) (L).M[i]
 #define JumlahMakanan(L) (L).NMakanan
 
-void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp);
+void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan);
 /* Membuat suatu makanan dengan id, location, nama, waktu kedaluwarsa, dan waktu delivery yang terdefinisi */
 /* I.S. Makanan M sembarang, id, loc, Nama, wk, dan lp terdefinisi */
 /* F.S. Terbuatnya makanan M dengan masukkan sesuai argumen */

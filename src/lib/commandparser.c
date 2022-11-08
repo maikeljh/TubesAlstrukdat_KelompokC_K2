@@ -98,21 +98,25 @@ int readCommand(){
 int readCommandNumber(){
     int N;
     STARTWORD();
-    boolean check = true;
-    for(int i = 0; i < currentWord.Length; i++){
-        if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
-            check = false;
-            break;
-        }
-    }
-    N = wordOnlyToInt(currentWord);
-
-    if(check && currentChar == '\n'){
-        return N;
-    } else {
-        while(currentChar != '\n'){
-            ADVWORD();
-        }
+    if(currentWord.Length == 0){
         return -1;
+    } else {
+        boolean check = true;
+        for(int i = 0; i < currentWord.Length; i++){
+            if ( currentWord.TabWord[i] <= '0' && currentWord.TabWord[i] >= '9' ){
+                check = false;
+                break;
+            }
+        }
+        N = wordOnlyToInt(currentWord);
+
+        if(check && currentChar == '\n'){
+            return N;
+        } else {
+            while(currentChar != '\n'){
+                ADVWORD();
+            }
+            return -1;
+        }
     }
 }

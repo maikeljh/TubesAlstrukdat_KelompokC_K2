@@ -5,6 +5,7 @@ void DequeueDelivery (PrioQueueTime *Q, Simulator *S){
     /* ALGORITMA */
     while (TIMEToMenit(Pengiriman(InfoHead(*Q))) <= 0 && !IsEmpty(*Q)){
         Dequeue(Q, &M);
+        Kedaluwarsa(M) = NextMenit(Kedaluwarsa(M));
         Enqueue(&Inventory(*S), M);
         AddNotif(&NotifSimulator(*S), 1, M);
     }

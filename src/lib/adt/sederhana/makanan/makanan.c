@@ -7,7 +7,7 @@
 #include "../../wordmachine/charmachine.h"
 #include "../time/time.h"
 
-void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp){
+void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan){
 /* Membuat suatu makanan dengan id, location, nama, waktu kedaluwarsa, dan waktu delivery yang terdefinisi */
 /* I.S. Makanan M sembarang, id, loc, Nama, wk, dan lp terdefinisi */
 /* F.S. Terbuatnya makanan M dengan masukkan sesuai argumen */
@@ -18,6 +18,7 @@ void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp){
 	Kedaluwarsa(*M) = wk;
 	Pengiriman(*M) = lp;
     Lokasi(*M) = loc;
+	Pengolahan(*M) = Pengolahan;
 }
 
 int getID(Makanan M){
@@ -41,27 +42,11 @@ TIME getLP(Makanan M){
 	return Pengiriman(M);
 }
 
-//int pangkat (int x, int y) {
-	/* Mengembalikan nilai dari x pangkat y */
-	
-	/*int ret = 1;
-	for (int i = 1; i <= y; i++){
-		ret = ret*x;
-	}
-	return ret;
-}*/
+TIME getPengolahan(Makanan M){
+	/* Mengembalikan waktu delivery dari Makanan M */
 
-// int wordToInt (WordFile str) {
-	/* Mengembalikan nilai integer dari WordFile yang dibaca */
-
-	/*int val = 0;
-	int k = 0;
-	for (int i= str.Length-1; i >= 0; i--) {
-		val += (str.TabWord[i]-48) * pangkat(10,k);
-		k++;
-	}
-	return val;
-}*/
+	return Pengolahan(M);
+}
 
 void TulisMakanan(Makanan M){
 /* Menuliskan makanan ke layar yang berisi detail lengkap mengenai makanan tersebut */
@@ -95,6 +80,7 @@ void TulisMakanan(Makanan M){
 	printf("\n");
 	printf("Waktu Kedaluwarsa Makanan	: %d %d %d\n", DayWK(M), HourWK(M), MinuteWK(M));
 	printf("Lama Pengiriman Makanan		: %d %d %d\n", DayLP(M), HourLP(M), MinuteLP(M));
+	printf("Lama Pengolahan Makanan		: %d %d %d\n", DayPengolahan(M), HourPengolahan(M), MinutePengolahan(M));
 }
 
 ListMakanan BacaMakanan(char fileName[]){
@@ -118,6 +104,7 @@ ListMakanan BacaMakanan(char fileName[]){
 		int idxNama = 0;
 		int EHH, EMM, ESS;
 		int DHH, DMM, DSS;
+		int PHH, PMM, PSS;
 		while(currentCharFile != '\n'){
 			for (int i = 0; i < currentWordFile.Length; i++){
 				NamaMakanan.TabWord[idxNama] = currentWordFile.TabWord[i];
@@ -156,6 +143,16 @@ ListMakanan BacaMakanan(char fileName[]){
 		advCharFile();
 		advWordFile();
 
+		PHH = wordToInt(currentWordFile);
+		advWordFile();
+
+		PMM = wordToInt(currentWordFile);
+		advWordFile();
+		
+		PSS = wordToInt(currentWordFile);
+		advCharFile();
+		advWordFile();
+
 		WordFile Mix = CreateWordFile("Mix", 3);
     	WordFile Chop = CreateWordFile("Chop", 4);
     	WordFile Fry = CreateWordFile("Fry", 3);
@@ -174,10 +171,11 @@ ListMakanan BacaMakanan(char fileName[]){
 		} else {
 			location = - 1; // Jika lokasi tidak valid
 		}
-		TIME WK, WD;
+		TIME WK, WD, WP;
 		CreateTime(&WK, EHH, EMM, ESS);
 		CreateTime(&WD, DHH, DMM, DSS);
-		CreateMakanan(&Food, ID, location, NamaMakanan, WK, WD);
+		CreateTime(&WP, PHH, PMM, PSS);
+		CreateMakanan(&Food, ID, location, NamaMakanan, WK, WD, WP);
 		Makanan(L, indexMakanan) = Food;
 		indexMakanan += 1;
 		advCharFile();
@@ -240,6 +238,20 @@ void TulisListMakanan(ListMakanan M, int N){
 			}
 			if(MinuteLP(Makanan(M, i)) > 0){
 				printf("%d menit", MinuteLP(Makanan(M, i)));
+			}
+		}
+		printf(" - ");
+		if(DayPengolahan(Makanan(M, i)) == 0 && HourPengolahan(Makanan(M, i)) == 0 && MinutePengolahan(Makanan(M, i)) == 0){
+			printf("0");
+		} else {
+			if(DayPengolahan(Makanan(M, i)) > 0){
+				printf("%d hari ", DayPengolahan(Makanan(M, i)));
+			}
+			if(HourPengolahan(Makanan(M, i)) > 0){
+				printf("%d jam ", HourPengolahan(Makanan(M, i)));
+			}
+			if(MinutePengolahan(Makanan(M, i)) > 0){
+				printf("%d menit", MinutePengolahan(Makanan(M, i)));
 			}
 		}
 		if(i != N-1){
