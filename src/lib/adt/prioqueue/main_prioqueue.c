@@ -179,6 +179,9 @@ int main(){
                 }
                 PrintPrioQueueTime(Q);
             }
+            else{
+                printf("PrioQueueTime kosong. Tidak ada elemen yang bisa di Dequeue. Silahkan Enqueue sebuah elemen terlebih dahulu untuk mengakses fungsi ini.\n");
+            }
 
             printf("Tekan enter untuk melanjutkan program. "); STARTWORD(); ADV();
         }
@@ -193,7 +196,7 @@ int main(){
         }
         else if (cmd == 10){
             printf("10. PrintDelivery(Q)\n");
-            printf("Isi PrioQueueTime\n");
+            printf("Isi PrioQueueTime :\n");
             if(!IsEmpty(Q)){
                 printf("(nama - waktu sisa delivery)\n");
             }
@@ -229,7 +232,7 @@ int main(){
                 PrintPrioQueueTime(Q);
             }
             else{
-                printf("PrioQueueTime kosong atau indeks tidak dalam cakupan jumlah elemen PrioQueueTime.\n");
+                printf("PrioQueueTime kosong atau indeks tidak dalam cakupan jumlah elemen PrioQueueTime. Silahkan Enqueue terlebih dahulu apabila kosong.\n");
             }
             printf("Tekan enter untuk melanjutkan program. "); STARTWORD(); ADV();
         }
