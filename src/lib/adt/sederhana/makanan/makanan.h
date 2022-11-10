@@ -21,7 +21,7 @@ typedef struct{
 
 typedef struct{
 	int NMakanan;
-	Makanan M[100];
+	Makanan M[200];
 } ListMakanan;
 
 /* AKSES (Selektor) */

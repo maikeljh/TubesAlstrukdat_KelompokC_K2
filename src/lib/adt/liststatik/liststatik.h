@@ -7,9 +7,10 @@
 #define LISTSTATIK_H
 
 #include "../boolean.h"
+#include "../sederhana/makanan/makanan.h"
 
 /*  Kamus Umum */
-#define CAPACITY 100
+#define CAPACITY 200
 /* Kapasitas penyimpanan */
 #define IDX_MIN 0
 /* Indeks minimum list */
@@ -19,7 +20,7 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef int ElType;  /* type elemen List */
+typedef Makanan ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
    ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */
