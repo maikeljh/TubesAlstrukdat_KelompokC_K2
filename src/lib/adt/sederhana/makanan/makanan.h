@@ -17,6 +17,8 @@ typedef struct{
     int Lokasi; // Lokasi Makanan (Representasi Lokasi berbentuk angka)
 	TIME LP; // Lama pengiriman
 	TIME Pengolahan; // Waktu Pengolahan
+	int Panjang;
+	int Lebar;
 } Makanan;
 
 typedef struct{
@@ -32,6 +34,8 @@ typedef struct{
 #define Lokasi(m) (m).Lokasi
 #define Pengiriman(m) (m).LP
 #define Pengolahan(m) (m).Pengolahan
+#define Panjang(m) (m).Panjang
+#define Lebar(m) (m).Lebar
 #define DayWK(m) (m).WK.DD
 #define HourWK(m) (m).WK.HH
 #define MinuteWK(m) (m).WK.MM

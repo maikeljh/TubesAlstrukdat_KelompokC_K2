@@ -8,6 +8,7 @@
     "wordfilemachine.h": "c",
     "stdio.h": "c",
     "matrix.h": "c",
-    "kulkas.h": "c"
+    "kulkas.h": "c",
+    "point.h": "c"
   }
 }

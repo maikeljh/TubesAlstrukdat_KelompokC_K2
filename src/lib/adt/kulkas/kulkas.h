@@ -9,19 +9,35 @@
 #include "../boolean.h"
 #include "../sederhana/makanan/makanan.h"
 #include "../matrix/matrix.h"
+#include "../sederhana/simulator/simulator.h"
+#include "../sederhana/point/point.h"
 #include <stdio.h>
 
 /* Definisi elemen dan koleksi objek */
 typedef int ElType;  /* type elemen List */
 typedef int IdxType;
+
+typedef struct{
+   Makanan M;
+   POINT P;
+} ElementKulkas;
+
+typedef struct{
+	int NMakanan;
+	ElementKulkas E[200];
+} ListMakananKulkas;
+
 typedef struct {
-   ListMakanan Kulkas;
+   ListMakananKulkas Kulkas;
    Matrix Display;
 } Kulkas;
 
 /* ********** SELEKTOR ********** */
 #define Kulkas(k) (k).Kulkas
 #define MatriksKulkas(k) (k).Display
+#define ElementKulkas(k, i) (k).E[i]
+#define MakananKulkas(k, i) (k).E[i].M
+#define PointMakananKulkas(k,i) (k).E[i].P
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk Matrix *** */
@@ -31,9 +47,9 @@ void createKulkas(Kulkas *K);
 boolean isKulkasFull(Kulkas K);
 
 /* ********** Assignment Kulkas ********** */
-void insertKulkas(Kulkas *K, Makanan M);
+void insertKulkas(Kulkas *K, Makanan M, int i, int j);
 
-void deleteKulkas(Kulkas *K, int ID);
+void deleteKulkas(Kulkas *K, int ID, Makanan *Out);
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void displayKulkas(Kulkas K);
