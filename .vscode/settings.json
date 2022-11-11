@@ -9,6 +9,7 @@
     "stdio.h": "c",
     "matrix.h": "c",
     "kulkas.h": "c",
-    "point.h": "c"
+    "point.h": "c",
+    "prioqueuetime.h": "c"
   }
 }

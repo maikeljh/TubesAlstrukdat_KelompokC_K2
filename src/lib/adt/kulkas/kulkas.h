@@ -7,10 +7,8 @@
 #define KULKAS_H
 
 #include "../boolean.h"
-#include "../sederhana/makanan/makanan.h"
 #include "../matrix/matrix.h"
 #include "../sederhana/simulator/simulator.h"
-#include "../sederhana/point/point.h"
 #include <stdio.h>
 
 /* Definisi elemen dan koleksi objek */
@@ -47,11 +45,16 @@ void createKulkas(Kulkas *K);
 boolean isKulkasFull(Kulkas K);
 
 /* ********** Assignment Kulkas ********** */
-void insertKulkas(Kulkas *K, Makanan M, int i, int j);
+boolean insertKulkas(Kulkas *K, Makanan M, int i, int j);
 
 void deleteKulkas(Kulkas *K, int ID, Makanan *Out);
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void displayKulkas(Kulkas K);
 
+void PrintMakananKulkas(Kulkas K);
+
+int commandKulkas();
+
+void ProsesKulkas(Kulkas *K, Simulator *S);
 #endif

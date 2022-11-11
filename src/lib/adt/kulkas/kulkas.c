@@ -24,7 +24,7 @@ boolean isKulkasFull(Kulkas K){
     Matrix D = MatriksKulkas(K);
     for(int i = 0 ; i < ROW_EFF(D); i++){
         for(int j = 0; j < COL_EFF(D); j++){
-            if(ELMT(D, i , j) != 0){
+            if(ELMT(D, i , j) == 0){
                 full = false;
                 break;
             }
@@ -37,12 +37,17 @@ boolean isKulkasFull(Kulkas K){
     return full;
 }
 
+boolean isKulkasKosong(Kulkas K){
+    return (JumlahMakanan(Kulkas(K)) == 0);
+}
+
 /* ********** Assignment Kulkas ********** */
-void insertKulkas(Kulkas *K, Makanan M, int i, int j){
+boolean insertKulkas(Kulkas *K, Makanan M, int i, int j){
     int A = Lebar(M);
     int B = Panjang(M);
     if(ELMT(MatriksKulkas(*K), i ,j) != 0){
         printf("\nMakanan tidak bisa diisi di lokasi tersebut.\n");
+        return false;
     } else {
         boolean check = true;
         if(i < 1 || i > 10 || j < 1 || j > 20 || i + A - 1 > 10 || j + B - 1 > 20){
@@ -71,37 +76,26 @@ void insertKulkas(Kulkas *K, Makanan M, int i, int j){
             MakananKulkas(Kulkas(*K), JumlahMakanan(Kulkas(*K)) - 1) = M;
             Absis(PointMakananKulkas(Kulkas(*K), JumlahMakanan(Kulkas(*K)) - 1)) = j;
             Ordinat(PointMakananKulkas(Kulkas(*K), JumlahMakanan(Kulkas(*K)) - 1)) = i;
+            return true;
         } else {
             printf("\nMakanan tersebut tidak bisa diisi di lokasi (%d,%d).\n", i, j);
+            return false;
         }
     }
 }
 
-void deleteKulkas(Kulkas *K, int ID, Makanan *Out){
-    boolean isValid = false;
-    int idx;
-    for(int i = 0; i < JumlahMakanan(Kulkas(*K)); i++){
-        if(ID(MakananKulkas(Kulkas(*K), i)) == ID){
-            isValid = true;
-            idx = i;
-            *Out = MakananKulkas(Kulkas(*K), i);
-            break;
+void deleteKulkas(Kulkas *K, int idx, Makanan *Out){
+    *Out = MakananKulkas(Kulkas(*K), idx);
+    POINT P = PointMakananKulkas(Kulkas(*K), idx);
+    for(int x = Ordinat(P); x < Ordinat(P) + Lebar(*Out); x++){
+        for(int y = Absis(P); y < Absis(P) + Panjang(*Out); y++){
+            ELMT(MatriksKulkas(*K), x ,y) = 0;
         }
     }
-    if(isValid){
-        POINT P = PointMakananKulkas(Kulkas(*K), idx);
-        for(int x = Ordinat(P); x < Ordinat(P) + Lebar(*Out); x++){
-            for(int y = Absis(P); y < Absis(P) + Panjang(*Out); y++){
-                ELMT(MatriksKulkas(*K), x ,y) = 0;
-            }
-        }
-        for(int i = idx; i < JumlahMakanan(Kulkas(*K)) - 1; i++){
-            ElementKulkas(Kulkas(*K), i) = ElementKulkas(Kulkas(*K), i+1);
-        }
-        JumlahMakanan(Kulkas(*K)) -= 1;
-    } else {
-        printf("\nTidak ada makanan dengan ID tersebut.\n");
+    for(int i = idx; i < JumlahMakanan(Kulkas(*K)) - 1; i++){
+        ElementKulkas(Kulkas(*K), i) = ElementKulkas(Kulkas(*K), i+1);
     }
+    JumlahMakanan(Kulkas(*K)) -= 1;
 }
 
 /* ********** KELOMPOK TULIS ********** */
@@ -123,11 +117,123 @@ void displayKulkas(Kulkas K){
     }
 }
 
+int commandKulkas(){
+    Word Insert = CreateWord("INSERT", 6);
+    Word Take = CreateWord("TAKE", 4);
+    Word Return = CreateWord("RETURN", 6);
+
+    STARTWORD();
+    if(isKataSama(currentWord, Insert) && currentChar == '\n'){
+        return 1;
+    } else if(isKataSama(currentWord, Take) && currentChar == '\n'){
+        return 2;
+    } else if(isKataSama(currentWord, Return) && currentChar == '\n'){
+        return 3;
+    } else {
+        while(currentChar != '\n'){
+            ADVWORD();
+        }
+        return -1;
+    }
+}
+
+void PrintMakananKulkas(Kulkas K){
+    for(int i = 0; i < JumlahMakanan(Kulkas(K)); i++){
+        printf("   %d. ", i+1);
+        PrintWord(Nama(MakananKulkas(Kulkas(K), i)));
+        printf(" -");
+        if (Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Hari", Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Jam", Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Menit", Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        printf("\n");
+    }
+}
+
 void ProsesKulkas(Kulkas *K, Simulator *S){
-    displayKulkas(*K);
+    int action;
+    int idx;
+    int i, j;
     while(true){
+        displayKulkas(*K);
         printf("\nLIST COMMAND:\n");
-        printf("1. INSERT");
-        printf("2. TAKE");
+        printf("1. INSERT\n");
+        printf("2. TAKE\n");
+        printf("3. RETURN\n");
+        printf("\n");
+        printf("ENTER COMMAND: ");
+        action = commandKulkas();
+        if(action == 1){
+            if(NBElmt(Inventory(*S)) == 0){
+                printf("Inventory kosong.\n");
+            } else {
+                boolean isValid = false;
+                while(!isValid){
+                    printf("\nPilih makanan yang ingin dipindahkan:\n");
+                    PrintPrioQueueTime(Inventory(*S));
+                    printf("\nMasukkan Nomor: ");
+                    scanf("%d", &idx);
+                    if(idx >= 1 && idx <= NBElmt(Inventory(*S))){
+                        isValid = true;
+                    } else {
+                        printf("\nInput salah. Silahkan input command kembali.\n");
+                    }
+                }
+                isValid = false;
+                Makanan Temp;
+                DequeueIdx(&Inventory(*S), idx-1, &Temp);
+                while(!isValid){
+                    displayKulkas(*K);
+                    printf("\nPilih lokasi baris (i): ");
+                    scanf("%d", &i);
+                    printf("\nPilih lokasi kolom (j): ");
+                    scanf("%d", &j);
+                    boolean check = insertKulkas(K, Temp, i, j);
+                    if(check){
+                        isValid = true;
+                    } else {
+                        printf("\nInput salah. Silahkan input command kembali.\n");
+                    }
+                }
+                printf("\nMakanan berhasil dimasukkan ke kulkas!\n");
+                displayKulkas(*K);
+                ADV();
+                break;
+            }
+        } else if(action == 2){
+            if(isKulkasKosong(*K)){
+                printf("Kulkas kosong.\n");
+            } else {
+                boolean isValid = false;
+                while(!isValid){
+                    printf("\nPilih makanan yang ingin diambil:\n");
+                    PrintMakananKulkas(*K);
+                    printf("\nMasukkan Nomor: ");
+                    scanf("%d", &idx);
+                    if(idx >= 1 && idx <= JumlahMakanan(Kulkas(*K))){
+                        isValid = true;
+                    } else {
+                        printf("\nInput salah. Silahkan input command kembali.\n");
+                    }
+                }
+                Makanan Temp;
+                deleteKulkas(K, idx-1, &Temp);
+                Kedaluwarsa(Temp) = NextMenit(Kedaluwarsa(Temp));
+                Enqueue(&Inventory(*S), Temp);
+                printf("\nMakanan berhasil dimasukkan ke inventory!\n");
+                displayKulkas(*K);
+                ADV();
+                break;
+            }
+        } else if(action == 3){
+            break;
+        } else {
+            printf("\nCommand salah. Silahkan input command kembali.\n");
+        }
     }
 }

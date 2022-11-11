@@ -36,7 +36,7 @@ typedef struct {
 } Set;
 
 typedef struct {
-    Set contents[40];
+    Set contents[30];
     int JumlahSet;
 } ListSet;
 

@@ -50,7 +50,7 @@ typedef struct{
 #define Makanan(L, i) (L).M[i]
 #define JumlahMakanan(L) (L).NMakanan
 
-void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan);
+void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan, int panjang, int lebar);
 /* Membuat suatu makanan dengan id, location, nama, waktu kedaluwarsa, dan waktu delivery yang terdefinisi */
 /* I.S. Makanan M sembarang, id, loc, Nama, wk, dan lp terdefinisi */
 /* F.S. Terbuatnya makanan M dengan masukkan sesuai argumen */
