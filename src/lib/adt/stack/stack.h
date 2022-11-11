@@ -7,7 +7,6 @@
 #include "../sederhana/makanan/makanan.h"
 #include "../sederhana/simulator/simulator.h"
 #include "../sederhana/time/time.h"
-#include "../matrix/matrix.h"
 #include "../prioqueue/prioqueuetime.h"
 
 /* Nil adalah stack dengan elemen kosong . */
