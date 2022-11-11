@@ -5,8 +5,8 @@
 #define SIMULATOR_H
 
 #include "../../boolean.h"
-#include "../point/point.c"
-#include "../../prioqueue/prioqueuetime.c"
+#include "../point/point.h"
+#include "../../prioqueue/prioqueuetime.h"
 #include "../../matrix/matrix.h"
 #include "../../notifikasi/notifikasi.h"
 #include "../time/time.h"

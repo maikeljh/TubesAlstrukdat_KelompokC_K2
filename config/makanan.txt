@@ -4,64 +4,75 @@ Cabai
 0 10 20
 0 0 10
 0 0 0
+2 4
 Buy
 3
 Bawang
 0 10 20
 0 0 20
 0 0 0
+1 2
 Buy
 19
 Sambal
 3 0 0
 0 0 0
 0 0 5
+3 4
 Mix
 25
 Sambal Goreng
 2 0 0
 0 0 0
 0 0 15
+1 2
 Fry
 40
 Ayam Goreng Extra Sambal
 5 0 0
 0 0 0
 0 0 10
+3 1
 Mix
 11
 Ayam Mentah
 1 0 0
 0 0 15
 0 0 0
+2 4
 Buy
 21
 Ayam Potong
 0 2 0
 0 0 0
 0 0 5
+2 5
 Chop
 10
 Tepung
 0 10 0
 0 0 30
 0 0 0
+2 1
 Buy
 15
 Minyak Goreng
 0 10 30
 0 1 0
 0 0 0
+3 2
 Buy
 31
 Ayam Tepung
 0 10 30
 0 0 0
 0 0 8
+4 1
 Mix
 37
 Ayam Goreng
 0 10 15
 0 0 0
 0 0 20
+1 3
 Fry

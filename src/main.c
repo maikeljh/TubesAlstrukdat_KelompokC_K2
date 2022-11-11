@@ -16,6 +16,7 @@
 #include "./lib/adt/stack/stack.c"
 #include "./lib/adt/notifikasi/notifikasi.c"
 #include "./lib/adt/set/set.c"
+#include "./lib/adt/kulkas/kulkas.h"
 
 // gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
 
@@ -35,6 +36,7 @@ int main(){
     Simulator Pemain, Temp;
     Stack Undo, Redo;
     int JAM, MENIT;
+    Kulkas K;
     
     // ALGORITMA UTAMA
     printf("\nHello, Welcome to Our Game!\n");
@@ -97,6 +99,7 @@ int main(){
     ResepBoil = ListResep(KumpulanMakanan, Resep, Boil);
     ListMakanan ListResep = ListResepAll(KumpulanMakanan, Resep);
     ListSet ListRekomendasi = BacaRekomendasi(Resep, KumpulanMakanan, ListResep);
+    createKulkas(&K);
 
     // INISIASI LIST BUY
     ListMakanan ListBuy = CariBuy(KumpulanMakanan);
@@ -149,7 +152,7 @@ int main(){
         printf("1.  BUY        | 2.  DELIVERY       | 3.  MOVE NORTH  | 4.  MOVE EAST  | 5.  MOVE WEST |\n");
         printf("6.  MOVE SOUTH | 7.  MIX            | 8.  CHOP        | 9.  FRY        | 10. BOIL      |\n");
         printf("11. WAIT X Y   | 12. CATALOG        | 13. COOKBOOK    | 14. UNDO       | 15. REDO      |\n");
-        printf("16. INVENTORY  | 17. RECOMMENDATION | 17. EXIT        |\n");
+        printf("16. INVENTORY  | 17. RECOMMENDATION | 18. KULKAS      | 19. EXIT       |\n");
         printf("\nEnter Command: ");
         command = readCommand();
         if(command == 5){
@@ -303,6 +306,9 @@ int main(){
             TulisRekomandasi(KumpulanMakanan, ListRekomendasi, Pemain);
             printf("\nPress enter to continue.");
             ADV();
+        } else if(command == 20) {
+            ProsesKulkas(&K, &Pemain);
+            isSucceed = true;
         } else if(command == 2) {
             printf("\nTerima kasih telah mempermainkan game kami!\n");
             return 0;

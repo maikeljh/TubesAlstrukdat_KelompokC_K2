@@ -106,6 +106,11 @@ void DequeueAt (PrioQueueTime *Q, int id, Makanan *M);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+void DequeueIdx(PrioQueueTime *Q, int idx, Makanan *M);
+/* Proses: Menghapus X yang memiliki index "idx" makanan tersebut pada Q. 
+/* I.S. Q tidak mungkin kosong, idx makanan valid berada di dalam inventory */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; Q mungkin kosong */
+
 void DecayKedaluwarsa (PrioQueueTime *Q, ListNotif *l);
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
 

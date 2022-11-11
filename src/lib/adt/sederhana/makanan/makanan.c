@@ -7,7 +7,7 @@
 #include "../../wordmachine/charmachine.h"
 #include "../time/time.h"
 
-void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan){
+void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIME Pengolahan, int panjang, int lebar){
 /* Membuat suatu makanan dengan id, location, nama, waktu kedaluwarsa, dan waktu delivery yang terdefinisi */
 /* I.S. Makanan M sembarang, id, loc, Nama, wk, dan lp terdefinisi */
 /* F.S. Terbuatnya makanan M dengan masukkan sesuai argumen */
@@ -19,6 +19,8 @@ void CreateMakanan(Makanan *M, int id, int loc, Word Nama, TIME wk, TIME lp, TIM
 	Pengiriman(*M) = lp;
     Lokasi(*M) = loc;
 	Pengolahan(*M) = Pengolahan;
+	Panjang(*M) = panjang;
+	Lebar(*M) = lebar;
 }
 
 int getID(Makanan M){
@@ -86,6 +88,7 @@ void TulisMakanan(Makanan M){
 ListMakanan BacaMakanan(char fileName[]){
 	/* Membaca list makanan dari konfigurasi file dan mengembalikannya sebagai list of makanan */
 
+	int Panjang, Lebar;
 	int ID;
 	Word NamaMakanan;
 	int location;
@@ -153,6 +156,13 @@ ListMakanan BacaMakanan(char fileName[]){
 		advCharFile();
 		advWordFile();
 
+		Panjang = wordToInt(currentWordFile);
+		advWordFile();
+
+		Lebar = wordToInt(currentWordFile);
+		advCharFile();
+		advWordFile();
+
 		WordFile Mix = CreateWordFile("Mix", 3);
     	WordFile Chop = CreateWordFile("Chop", 4);
     	WordFile Fry = CreateWordFile("Fry", 3);
@@ -175,7 +185,7 @@ ListMakanan BacaMakanan(char fileName[]){
 		CreateTime(&WK, EHH, EMM, ESS);
 		CreateTime(&WD, DHH, DMM, DSS);
 		CreateTime(&WP, PHH, PMM, PSS);
-		CreateMakanan(&Food, ID, location, NamaMakanan, WK, WD, WP);
+		CreateMakanan(&Food, ID, location, NamaMakanan, WK, WD, WP, Panjang, Lebar);
 		Makanan(L, indexMakanan) = Food;
 		indexMakanan += 1;
 		advCharFile();

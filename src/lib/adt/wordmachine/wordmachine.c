@@ -32,11 +32,7 @@ void STARTWORD(){
     START(); // Menyiapkan pita untuk dibaca
     IgnoreBlanks(); // Mengabaikan BLANK-BLANK
     EndWord = false;
-    if(currentChar == MARK){
-        EndWord = true; // Jika current character = MARK
-    } else {
-        CopyWord(); // Jika terdapat kata lain
-    }
+    CopyWord();
 };
 
 
@@ -49,12 +45,8 @@ void ADVWORD(){
 
     // KAMUS LOKAL
     // ALGORITMA
-    if(currentChar == MARK){
-        EndWord = true; // Jika sudah kata terakhir
-    } else {
         CopyWord(); // Mengakuisisi kata
         IgnoreBlanks(); // Skip blank-blank
-    }
 };
 
 
@@ -70,7 +62,7 @@ void CopyWord(){
     // ALGORITMA
     IgnoreBlanks(); // Skip blank-blank
     currentWord.Length = 0; // Menginisiasi variabel panjang kata
-    while(currentChar != BLANK && currentChar != MARK && currentWord.Length < NMax && currentChar != '\n'){ // Looping ketika character != ' ' dan != MARK dan panjang belum melebihi maksimum
+    while(currentChar != BLANK && currentWord.Length < NMax && currentChar != '\n'){ // Looping ketika character != ' ' dan != MARK dan panjang belum melebihi maksimum
         currentWord.TabWord[currentWord.Length] = currentChar;
         currentWord.Length++;
         ADV();

@@ -298,6 +298,30 @@ void DequeueAt (PrioQueueTime *Q, int id, Makanan *M){
     }
 }
 
+void DequeueIdx(PrioQueueTime *Q, int idx, Makanan *M){
+/* Proses: Menghapus X yang memiliki index "idx" makanan tersebut pada Q. 
+/* I.S. Q tidak mungkin kosong, id makanan valid berada di dalam inventory */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; Q mungkin kosong */
+    /* KAMUS LOKAL */
+    *M = Elmt(*Q, idx);
+    if (NBElmt(*Q) == 1){
+        Head(*Q) = Nil;
+        Tail(*Q) = Nil;
+    }
+    else /* NbElmt(*Q) > 1*/ {
+        if (idx == Head(*Q)){
+            Dequeue(Q, M);
+        }
+        else{
+            while (idx != Tail(*Q) % MaxEl(*Q)){
+                Elmt(*Q, idx) = Elmt(*Q, idx+1);
+                idx = (idx+1) % MaxEl(*Q); 
+            }
+            Tail(*Q) = (Tail(*Q) - 1) % MaxEl(*Q);
+        }
+    }
+}
+
 void DecayKedaluwarsa (PrioQueueTime *Q, ListNotif *notif){
 /* Proses mengurangi waktu kedaluwarsa setiap makanan dalam inventory berdasarkan suatu aksi. */
     /* KAMUS LOKAL*/
