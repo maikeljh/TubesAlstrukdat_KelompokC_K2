@@ -6,7 +6,7 @@ void createSet(Set *himpunan, ListMakanan M){
     Length(*himpunan) = JumlahMakanan(M);
     for(int i = 0; i < JumlahMakanan(M); i++){
         ElementSet Temp;
-        MakananSet(Temp) = Makanan(M, i);
+        MakananSet(Temp) = ID(Makanan(M, i));
         Exist(Temp) = false;
         ElSet(*himpunan, i) = Temp;
     }
@@ -16,7 +16,7 @@ void addSet(Set *himpunan, Makanan M){
     /* I.S himpunan terdefinisi */
     /* F.S Membuat elemen dari set menjadi exist(terdapat pada himpunan) */
     for(int i = 0; i < Length(*himpunan); i++){
-        if(ID(MakananSet(ElSet(*himpunan, i))) == ID(M)){
+        if(MakananSet(ElSet(*himpunan, i)) == ID(M)){
             Exist(ElSet(*himpunan, i)) = true;
             break;
         }
@@ -27,7 +27,7 @@ void removeSet(Set *himpunan, Makanan M){
     /* I.S Himpunan terdefinisi */
     /* F.S Membuat sebuah elemen dari himpunan yaitu M menjadi tidak exist. */
     for(int i = 0; i < Length(*himpunan); i++){
-        if(ID(MakananSet(ElSet(*himpunan, i))) == ID(M)){
+        if(MakananSet(ElSet(*himpunan, i)) == ID(M)){
             Exist(ElSet(*himpunan, i)) = false;
             break;
         }
@@ -41,7 +41,7 @@ boolean isSubset(Set himpunan1, Set himpunan2){
         if(Exist(ElSet(himpunan1, i))){
             subset = false;
             for(int j = 0; j < Length(himpunan2); j++){
-                if(ID(MakananSet(ElSet(himpunan1, i))) == ID(MakananSet(ElSet(himpunan2, j)))){
+                if(MakananSet(ElSet(himpunan1, i)) == MakananSet(ElSet(himpunan2, j))){
                     if(Exist(ElSet(himpunan2, j))){
                         subset = true;
                         break;
@@ -68,7 +68,7 @@ ListSet BacaRekomendasi(Tree Resep, ListMakanan KumpulanMakanan, ListMakanan Lis
         addrNode P = FirstChild(ResepMakanan);
         for(int j = 0; j < BanyakChild(ResepMakanan); j++){
             for(int k = 0; k < Length(RekomendasiEl); k++){
-                if(getID(MakananSet(ElSet(RekomendasiEl, k))) == Akar(P)){
+                if(MakananSet(ElSet(RekomendasiEl, k)) == Akar(P)){
                     Exist(ElSet(RekomendasiEl, k)) = true;
                     break;
                 }
