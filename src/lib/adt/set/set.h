@@ -23,7 +23,7 @@
 /* Indeks tak terdefinisi*/
 
 typedef struct {
-    Makanan M;
+    int ID;
     boolean exist;
 } ElementSet;
 
@@ -36,14 +36,14 @@ typedef struct {
 } Set;
 
 typedef struct {
-    Set contents[30];
+    Set contents[100];
     int JumlahSet;
 } ListSet;
 
 /* ********** SELEKTOR ********** */
 #define ElSet(l, i) (l).contents[(i)]
 #define Exist(el) el.exist
-#define MakananSet(el) el.M
+#define MakananSet(el) el.ID
 #define Length(l) (l).length
 #define Rekomendasi(l) (l).utama
 #define JumlahSet(L) (L).JumlahSet
