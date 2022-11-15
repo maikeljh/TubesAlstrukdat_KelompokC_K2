@@ -46,6 +46,6 @@ void UbahLokasiSimulator(Simulator * S, int deltaX, int deltaY);
 /* I.S. S terdefinisi */
 /* F.S. Lokasi S digeser sesuai deltaX dan deltaY  */ 
 
-void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory, ListNotif Notif){
+void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory, ListNotif Notif);
 /* Membentuk sebuah Simulator dari komponen-komponennya untuk disimpan dalam stack undo/redo */
 #endif

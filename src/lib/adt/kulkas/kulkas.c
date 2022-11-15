@@ -126,6 +126,26 @@ void displayKulkas(Kulkas K){
     }
 }
 
+void PrintMakananKulkas(Kulkas K){
+    /* I.S. K terdefinisi dan bisa jadi kosong */
+    /* F.S. Tercetaknya list makanan yang terdapat di dalam kulkas */
+    for(int i = 0; i < JumlahMakanan(Kulkas(K)); i++){
+        printf("   %d. ", i+1);
+        PrintWord(Nama(MakananKulkas(Kulkas(K), i)));
+        printf(" -");
+        if (Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Hari", Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Jam", Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Menit", Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        printf("\n");
+    }
+}
+
 int commandKulkas(){
     /* Mengembalikkan command berupa integer untuk proses kulkas */
     Word Insert = CreateWord("INSERT", 6);
@@ -144,26 +164,6 @@ int commandKulkas(){
             ADVWORD();
         }
         return -1;
-    }
-}
-
-void PrintMakananKulkas(Kulkas K){
-    /* I.S. K terdefinisi dan bisa jadi kosong */
-    /* F.S. Tercetaknya list makanan yang terdapat di dalam kulkas */
-    for(int i = 0; i < JumlahMakanan(Kulkas(K)); i++){
-        printf("   %d. ", i+1);
-        PrintWord(Nama(MakananKulkas(Kulkas(K), i)));
-        printf(" -");
-        if (Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Hari", Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        if (Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Jam", Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        if (Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Menit", Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        printf("\n");
     }
 }
 
