@@ -103,6 +103,7 @@ void PrintTree(Tree P){
 
 /* *** Searching *** */
 Tree SearchTree(Tree P, int ID){
+    /* Mengembalikkan Tree yang memiliki akar = ID */
     if(!IsTreeEmpty(P)){
         if(Akar(P) == ID){
             return P;
@@ -235,28 +236,6 @@ Tree mergeResep(Tree P[], int N){
     return P[indexAkar];
 }
 
-int pangkat (int x, int y) {
-	/* Mengembalikan nilai dari x pangkat y */
-	
-	int ret = 1;
-	for (int i = 1; i <= y; i++){
-		ret = ret*x;
-	}
-	return ret;
-}
-
-int wordToInt (WordFile str) {
-	/* Mengembalikan nilai integer dari WordFile yang dibaca */
-
-	int val = 0;
-	int k = 0;
-	for (int i= str.Length-1; i >= 0; i--) {
-		val += (str.TabWord[i]-48) * pangkat(10,k);
-		k++;
-	}
-	return val;
-}
-
 Tree BacaResep(char fileName[]){
     /* Melakukan baca resep dari file konfigurasi */
 
@@ -287,6 +266,8 @@ Tree BacaResep(char fileName[]){
 }
 
 void TulisResep(ListMakanan M, Tree Resep){
+    /* I.S. M dan Resep terdefinisi */
+    /* F.S. Mencetak Resep dari kumpulan makanan yang dapat dibuat */
     int idxNow = 0;
     for(int i = 0; i < JumlahMakanan(M); i++){
         boolean found = false;
@@ -337,6 +318,7 @@ void TulisResep(ListMakanan M, Tree Resep){
 }
 
 ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind){
+    /* Mengembalikkan list makanan yang berisi makanan-makanan yang dapat dibuat dengan action Kind */
     Word Mix = CreateWord("MIX", 3);
 	Word Chop = CreateWord("CHOP", 4);
 	Word Fry = CreateWord("FRY", 3);
@@ -378,6 +360,7 @@ ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind){
 }
 
 ListMakanan ListResepAll(ListMakanan M, Tree Resep){
+    /* Mengembalikkan list makanan yang berisi makanan-makanan yang terdapat pada resep */
     int idxNow = 0;
     ListMakanan Result;
     for(int i = 0; i < JumlahMakanan(M); i++){
@@ -396,6 +379,7 @@ ListMakanan ListResepAll(ListMakanan M, Tree Resep){
 }
 
 void TulisResepKind(ListMakanan M, Tree Resep, Word Kind){
+    /* Mencetak list makanan yang dapat dibuat dengan action Kind */
     if(JumlahMakanan(M) == 0){
         printf("Tidak ada resep yang dapat dibuat.\n");
     } else {

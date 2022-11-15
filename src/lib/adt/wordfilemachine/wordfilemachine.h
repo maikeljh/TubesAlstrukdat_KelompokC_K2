@@ -51,4 +51,11 @@ boolean isKataFileSama(WordFile W1, WordFile W2);
 WordFile CreateWordFile(char word[], int length);
 /* Mengembalikan sebuah WordFile yang memiliki TabWord berisi word dan memiliki
    Length yaitu length */
+
+int pangkat (int x, int y);
+/* Mengembalikan nilai dari x pangkat y */
+
+int wordToInt (WordFile str);
+/* Mengembalikan nilai integer dari WordFile yang dibaca */
+
 #endif

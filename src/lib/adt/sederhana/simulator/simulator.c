@@ -47,7 +47,7 @@ void UbahLokasiSimulator(Simulator * S, int deltaX, int deltaY){
 }
 
 void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory, ListNotif Notif){
-    /* Membentuk sebuah Simulator dari komponen-komponennya */
+    /* Membentuk sebuah Simulator dari komponen-komponennya untuk disimpan dalam stack undo/redo */
     PrioQueueTime Q, D;
     ListNotif N;
     MakeEmpty(&Q, NMax);

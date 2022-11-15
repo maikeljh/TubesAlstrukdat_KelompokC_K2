@@ -1,4 +1,7 @@
 void ProsesChop(ListMakanan ResepChop, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
+    /* Melakukan Proses Chop Oleh Player jika Player berada di dekat area Chop*/
+    /* I.S. ResepChop, KumpulanMakanan, Resep, Kind, dan S terdefinisi. Cook, JAM, dan MENIT Sembarang */
+    /* F.S. Terlaksananya Proses Chop oleh Player jika Player berada di dekat area Chop */
     while(true) {
         Makanan Temp;
         printf("\n======================\n");

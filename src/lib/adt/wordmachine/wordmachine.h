@@ -47,18 +47,24 @@ void CopyWord();
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
 void PrintWord(Word Kata);
+/* I.S. Kata terdefinisi sembarang tetapi tidak kosong */
+/* F.S. Mencetak Kata ke layar */
+
 void LowerCase();
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
-
 /* F.S. currentword menjadi lowercase di setiap karakternya */
 
 Word CreateWord(char word[], int length);
+/* Mengembalikkan kata yang dibuat dari array of char word dan int length yang terdefinisi */
 
 boolean isKataSama(Word W1, Word W2);
 /* Mengembalikan true jika W1 memiliki length yang sama dengan W2 dan
    W1 memiliki TabWord yang sama dengan W2 */
 
 int wordOnlyToInt (Word str);
+/* Mengembalikan nilai integer dari WordFile yang dibaca */
+
 int pangkatWord (int x, int y);
+/* Mengembalikan nilai dari x pangkat y */
 
 #endif

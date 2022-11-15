@@ -102,6 +102,7 @@ int readCommand(){
 }
 
 int readCommandNumber(){
+    /* Mengembalikan nilai dari input jika diperlukan input berupa angka */
     int N;
     STARTWORD();
     if(currentWord.Length == 0){

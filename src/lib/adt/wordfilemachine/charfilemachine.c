@@ -3,7 +3,6 @@
 
 char currentCharFile;
 
-
 static FILE *file;
 static int retfile;
 
@@ -27,8 +26,3 @@ void advCharFile()
     fclose(file);
   }
 }
-
-// int main (){
-//   startCharFile("test.txt");
-//   printf("%c", currentCharFile);
-// }

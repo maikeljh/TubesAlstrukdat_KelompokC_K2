@@ -70,16 +70,15 @@ void CopyWord(){
 };
 
 void PrintWord(Word Kata) {
+    /* I.S. Kata terdefinisi sembarang tetapi tidak kosong */
+    /* F.S. Mencetak Kata ke layar */
     for(int i = 0; i < Kata.Length; i++){
         printf("%c", Kata.TabWord[i]);
     }
-    //printf("\n");
 }
 
 void LowerCase(){
-
 /* I.S. currentword terdefinisi sembarang tetapi tidak kosong */
-
 /* F.S. currentword menjadi lowercase di setiap karakternya */
 
   // KAMUS LOKAL
@@ -93,6 +92,7 @@ void LowerCase(){
 };
 
 Word CreateWord(char word[], int length){
+    /* Mengembalikkan kata yang dibuat dari array of char word dan int length yang terdefinisi */
     Word Result;
     for(int i = 0; i < length; i++){
         Result.TabWord[i] = word[i];
@@ -102,6 +102,8 @@ Word CreateWord(char word[], int length){
 }
 
 boolean isKataSama(Word W1, Word W2){
+    /* Mengembalikan true jika W1 memiliki length yang sama dengan W2 dan
+   W1 memiliki TabWord yang sama dengan W2 */
     boolean Sama = true;
     if(W1.Length != W2.Length){
         Sama = false;
@@ -130,7 +132,6 @@ int wordOnlyToInt (Word str) {
 
 int pangkatWord (int x, int y) {
 	/* Mengembalikan nilai dari x pangkat y */
-	
 	int ret = 1;
 	for (int i = 1; i <= y; i++){
 		ret = ret*x;
