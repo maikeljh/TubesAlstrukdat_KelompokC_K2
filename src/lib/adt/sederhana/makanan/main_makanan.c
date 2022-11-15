@@ -3,18 +3,19 @@
 #include "makanan.c"
 
 // cd src/lib/adt/sederhana/makanan
-// gcc main_makanan.c ../../wordfilemachine/wordfilemachine.c ../../wordfilemachine/charfilemachine.c ../time/time.c ../../wordmachine/wordmachine.c ../../wordmachine/charmachine.c -o main_makanan
+// gcc main_makanan.c ../../wordfilemachine/wordfilemachine.c ../../wordfilemachine/charfilemachine.c ../time/time.c ../../wordmachine/wordmachine.c ../../wordmachine/charmachine.c ../../tree/tree.c-o main_makanan
 
 int main(){
 	// INISIASI MAKANAN FOOD
 	Makanan Food;
-	TIME WK, LP;
+	TIME WK, LP, PO;
 
 	// MELAKUKAN CreateMakanan
 	Word yummy = CreateWord("Yummy", 5);
 	CreateTime(&WK, 1, 0, 0);
 	CreateTime(&LP, 2, 10, 0);
-	CreateMakanan(&Food, 1, 3, yummy, WK, LP);
+	CreateTime(&PO, 0, 20, 0);
+	CreateMakanan(&Food, 1, 3, yummy, WK, LP, PO, 2, 3);
 	printf("\n");
 
 	// MELAKUKAN TulisMakanan
