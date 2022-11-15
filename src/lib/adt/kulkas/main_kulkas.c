@@ -44,6 +44,7 @@ int main(){
     deleteKulkas(&K, 0, &Cek);
     displayKulkas(K);
 
+    // Melakukan Operasi Kulkas
     Simulator S;
     POINT P;
     CreateSimulator(&S, Nama, P, WK);

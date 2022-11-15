@@ -18,7 +18,7 @@
 #include "./lib/adt/set/set.c"
 #include "./lib/adt/kulkas/kulkas.h"
 
-// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c -o main
+// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c ./lib/adt/sederhana/point/point.c ./lib/adt/prioqueue/prioqueuetime.c ./lib/adt/kulkas/kulkas.c -o main
 
 int main(){
     // KAMUS GLOBAL
