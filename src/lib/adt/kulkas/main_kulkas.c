@@ -1,5 +1,5 @@
 #include "kulkas.h"
-// gcc main_kulkas.c kulkas.c ../matrix/matrix.c ../sederhana/simulator/simulator.c ../sederhana/time/time.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../notifikasi/notifikasi.c ../sederhana/point/point.c ../prioqueue/prioqueuetime.c -o main
+// gcc main_kulkas.c kulkas.c ../matrix/matrix.c ../sederhana/simulator/simulator.c ../sederhana/time/time.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../notifikasi/notifikasi.c ../sederhana/point/point.c ../prioqueue/prioqueuetime.c -o main_kulkas
 int main(){
     // KAMUS GLOBAL
     Kulkas K;

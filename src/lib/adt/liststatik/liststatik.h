@@ -20,7 +20,7 @@
 /* Nilai elemen tak terdefinisi*/
 
 /* Definisi elemen dan koleksi objek */
-typedef Makanan ElType;  /* type elemen List */
+typedef int ElType;  /* type elemen List */
 typedef int IdxType;
 typedef struct {
    ElType contents[CAPACITY]; /* memori tempat penyimpan elemen (container) */

@@ -1,7 +1,11 @@
 /* File: main_liststatik.c */
 /* Driver ADT List Statik */
 
-#include "liststatik.c"
+
+#include "liststatik.h"
+#include <stdio.h>
+// cd src/lib/adt/liststatik
+// gcc main_liststatik.c liststatik.c -o main_liststatik
 
 int main(){
     // Create List Statik
@@ -101,7 +105,7 @@ int main(){
 
     printf("\n");
     // Mencari Max dan Min
-    int maksimum, minimum;
+    ElType maksimum, minimum;
     extremeValues(L, &maksimum, &minimum);
     printf("Nilai maksimum dari list statik : ");
     printf("%d\n", maksimum);
