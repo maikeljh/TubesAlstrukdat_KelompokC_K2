@@ -1,4 +1,7 @@
 void ProsesBoil(ListMakanan ResepBoil, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
+    /* Melakukan Proses Boil Oleh Player jika Player berada di dekat area Boil*/
+    /* I.S. ResepBoil, KumpulanMakanan, Resep, Kind, dan S terdefinisi. Cook, JAM, dan MENIT Sembarang */
+    /* F.S. Terlaksananya Proses Boil oleh Player jika Player berada di dekat area Boil */
     while(true) {
         Makanan Temp;
         printf("\n======================\n");

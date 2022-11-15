@@ -145,9 +145,9 @@ void PrintPrioQueueTime (PrioQueueTime Q){
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
+<1> <elemen-1>
 ...
-<time-n> <elemen-n>
+<n> <elemen-n>
 #
 */
 	// KAMUS LOKAL
@@ -199,9 +199,9 @@ void PrintDelivery (PrioQueueTime Q){
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
+<1> <elemen-1>
 ...
-<time-n> <elemen-n>
+<n> <elemen-n>
 #
 */
 	// KAMUS LOKAL

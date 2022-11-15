@@ -1,14 +1,7 @@
-/*#include "./adt/sederhana/makanan/makanan.c"
-#include "./adt/tree/tree.c"
-#include "./adt/wordmachine/wordmachine.c"
-#include "./adt/wordmachine/charmachine.c"
-#include "./adt/sederhana/simulator/simulator.c"
-#include "./commandparser.c"
-#include "./adt/wordfilemachine/wordfilemachine.c"
-#include "./adt/wordfilemachine/charfilemachine.c"
-#include "./adt/sederhana/time/time.c"*/
-
 void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
+    /* Melakukan Proses Mix Oleh Player jika Player berada di dekat area MIX*/
+    /* I.S. ResepMix, KumpulanMakanan, Resep, Kind, dan S terdefinisi. Cook, JAM, dan MENIT Sembarang */
+    /* F.S. Terlaksananya Proses Mix oleh Player jika Player berada di dekat area MIX */
     while(true) {
         Makanan Temp;
         printf("\n======================\n");
@@ -90,23 +83,3 @@ void ProsesMix(ListMakanan ResepMix, ListMakanan KumpulanMakanan, Tree Resep, Wo
         }
     }
 }
-
-/*int main(){
-    char fileMakanan[100] = "../../config/makanan.txt";
-    char fileResep[100] = "../../config/resep.txt";
-    Simulator S;
-    Word Nama;
-    Nama.TabWord[0] = 'M';
-    Nama.Length = 1;
-    POINT P;
-    CreatePoint(&P, 1, 1);
-    CreateSimulator(&S, Nama, P);
-    Word Mix = CreateWord("MIX", 3);
-    ListMakanan KumpulanMakanan = BacaMakanan(fileMakanan);
-    Tree Resep = BacaResep(fileResep);
-    ListMakanan ResepMix = ListResep(KumpulanMakanan, Resep, Mix);
-    for(int i = 0; i < JumlahMakanan(KumpulanMakanan); i++){
-        Enqueue(&Inventory(S), Makanan(KumpulanMakanan, i));
-    }
-    ProsesMix(ResepMix, KumpulanMakanan, Resep, Mix, &S);
-}*/

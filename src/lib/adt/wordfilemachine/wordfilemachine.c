@@ -85,4 +85,24 @@ WordFile CreateWordFile(char word[], int length){
     return Result;
 }
 
+int pangkat (int x, int y) {
+	/* Mengembalikan nilai dari x pangkat y */
+	
+	int ret = 1;
+	for (int i = 1; i <= y; i++){
+		ret = ret*x;
+	}
+	return ret;
+}
 
+int wordToInt (WordFile str) {
+	/* Mengembalikan nilai integer dari WordFile yang dibaca */
+
+	int val = 0;
+	int k = 0;
+	for (int i= str.Length-1; i >= 0; i--) {
+		val += (str.TabWord[i]-48) * pangkat(10,k);
+		k++;
+	}
+	return val;
+}

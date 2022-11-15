@@ -1,6 +1,7 @@
 /* File : buy.c */
 
 ListMakanan CariBuy(ListMakanan L){
+    /* Mengembalikan list of makanan yang memiliki command BUY */
     ListMakanan Result;
     int jumlahMakanan = 0;
     for(int i = 0; i < JumlahMakanan(L); i++){
@@ -14,6 +15,8 @@ ListMakanan CariBuy(ListMakanan L){
 }
 
 void TulisBuy(ListMakanan L){
+    /* I.S. L terdefinisi */
+    /* F.S. Tercetaknya List Makanan yang dapat dibuy oleh pemain pada area BUY */
     printf("\n======================\n");
     printf("=        BUY         =\n");
     printf("======================\n");
@@ -49,6 +52,9 @@ void TulisBuy(ListMakanan L){
 }
 
 void ProsesBuy(ListMakanan L, PrioQueueTime *S){
+    /* Melakukan Proses Buy Oleh Player jika Player berada di dekat area Buy */
+    /* I.S. L dan S terdefinisi */
+    /* F.S. Terlaksananya Proses Buy oleh Player jika Player berada di dekat area Buy */
     while(true){
         TulisBuy(L);
         printf("\nEnter Command: ");
