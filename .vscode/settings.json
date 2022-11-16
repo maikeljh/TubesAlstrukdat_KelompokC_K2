@@ -10,6 +10,7 @@
     "matrix.h": "c",
     "kulkas.h": "c",
     "point.h": "c",
-    "prioqueuetime.h": "c"
+    "prioqueuetime.h": "c",
+    "wordmachine.h": "c"
   }
 }

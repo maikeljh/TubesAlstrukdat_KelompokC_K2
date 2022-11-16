@@ -1,4 +1,7 @@
 void ProsesFry(ListMakanan ResepFry, ListMakanan KumpulanMakanan, Tree Resep, Word Kind, Simulator *S, boolean *Cook, int *JAM, int *MENIT){
+    /* Melakukan Proses Fry Oleh Player jika Player berada di dekat area Fry*/
+    /* I.S. ResepFry, KumpulanMakanan, Resep, Kind, dan S terdefinisi. Cook, JAM, dan MENIT Sembarang */
+    /* F.S. Terlaksananya Proses Fry oleh Player jika Player berada di dekat area Fry */
     while(true) {
         Makanan Temp;
         printf("\n======================\n");

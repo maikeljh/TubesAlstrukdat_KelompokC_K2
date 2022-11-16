@@ -8,7 +8,6 @@
 #include "../point/point.h"
 #include "../../prioqueue/prioqueuetime.h"
 #include "../../matrix/matrix.h"
-#include "../../notifikasi/notifikasi.h"
 #include "../time/time.h"
 
 typedef struct { 
@@ -47,4 +46,6 @@ void UbahLokasiSimulator(Simulator * S, int deltaX, int deltaY);
 /* I.S. S terdefinisi */
 /* F.S. Lokasi S digeser sesuai deltaX dan deltaY  */ 
 
+void CreateSimulatorPemain (Simulator * S, Word Nama, POINT P, TIME Waktu, PrioQueueTime Delivery, PrioQueueTime Inventory, ListNotif Notif);
+/* Membentuk sebuah Simulator dari komponen-komponennya untuk disimpan dalam stack undo/redo */
 #endif

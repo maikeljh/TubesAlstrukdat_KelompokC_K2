@@ -71,7 +71,7 @@ void PrintTree(Tree P);
 
 /* *** Searching *** */
 Tree SearchTree(Tree P, int ID);
-/* Mengirimkan true jika ada node dari P yang bernilai X */
+/* Mengembalikkan Tree yang memiliki akar = ID */
 
 /* *** Operasi lain *** */
 void AddDaunByID(Tree *P, infotype ID, infotype X);
@@ -85,16 +85,23 @@ void insertTree(Tree *P, Tree newP);
 Tree mergeResep(Tree P[], int N);
 /* Melakukan merging tree-tree resepnya yang sudah dibuat dari konfigurasi file */
 
-int pangkat (int x, int y);
-/* Mengembalikan nilai dari x pangkat y */
-
-int wordToInt (WordFile str);
-/* Mengembalikan nilai integer dari WordFile yang dibaca */
-
 Tree BacaResep(char fileName[]);
 /* Melakukan baca resep dari file konfigurasi */
 
 int indexOfAkar(Tree P[], int N);
 /* Mencari indeks elemen array of Tree yang merupakan node utama (Akar) dari tree */
+
+void TulisResep(ListMakanan M, Tree Resep);
+/* I.S. M dan Resep terdefinisi */
+/* F.S. Mencetak Resep dari kumpulan makanan yang dapat dibuat */
+
+ListMakanan ListResep(ListMakanan M, Tree Resep, Word Kind);
+/* Mengembalikkan list makanan yang berisi makanan-makanan yang dapat dibuat dengan action Kind */
+
+ListMakanan ListResepAll(ListMakanan M, Tree Resep);
+/* Mengembalikkan list makanan yang berisi makanan-makanan yang terdapat pada resep */
+
+void TulisResepKind(ListMakanan M, Tree Resep, Word Kind);
+/* Mencetak list makanan yang dapat dibuat dengan action Kind */
 
 #endif

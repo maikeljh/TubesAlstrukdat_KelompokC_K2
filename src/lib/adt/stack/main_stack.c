@@ -1,14 +1,16 @@
 /* File: main_stack.c */
 #include <stdio.h>
 #include <stdlib.h>
-#include "stack.c"
-#include "../sederhana/simulator/simulator.c"
-#include "../notifikasi/notifikasi.c"
-#include "../sederhana/time/time.c"
-#include "../wordfilemachine/wordfilemachine.c"
-#include "../wordfilemachine/charfilemachine.c"
-#include "../wordmachine/wordmachine.c"
-#include "../wordmachine/charmachine.c"
+#include "stack.h"
+#include "../sederhana/simulator/simulator.h"
+#include "../notifikasi/notifikasi.h"
+#include "../sederhana/time/time.h"
+#include "../wordfilemachine/wordfilemachine.h"
+#include "../wordfilemachine/charfilemachine.h"
+#include "../wordmachine/wordmachine.h"
+#include "../wordmachine/charmachine.h"
+// cd src/lib/adt/stack
+// gcc main_stack.c stack.c ../sederhana/simulator/simulator.c ../notifikasi/notifikasi.c ../sederhana/time/time.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../sederhana/point/point.c ../prioqueue/prioqueuetime.c -o ../../../../build/lib/adt/main_stack
 
 
 int main() {
@@ -48,4 +50,6 @@ int main() {
   } else {
     printf("Redo stack tidak penuh\n");
   }
+  int kelularinp;
+  printf("\nKetik 0 untuk keluar.\n"); scanf("%d",&kelularinp);
 }

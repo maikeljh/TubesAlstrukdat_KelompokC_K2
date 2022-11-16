@@ -1,8 +1,10 @@
 #include "kulkas.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
-/* *** Konstruktor membentuk Matrix *** */
+/* *** Konstruktor membentuk Kulkas *** */
 void createKulkas(Kulkas *K){
+    /* I.S. K sembarang */
+    /* F.S. Terbentuk Kulkas K kosong  */
     ListMakananKulkas M;
     JumlahMakanan(M) = 0;
     Matrix D;
@@ -20,6 +22,7 @@ void createKulkas(Kulkas *K){
 
 /* *** Selektor: Untuk sebuah kulkas K yang terdefinisi: *** */
 boolean isKulkasFull(Kulkas K){
+    /* Mengembalikkan true jika kulkas sudah penuh (tidak ada value 0 di dalam matriks kulkas )*/
     boolean full = true;
     Matrix D = MatriksKulkas(K);
     for(int i = 0 ; i < ROW_EFF(D); i++){
@@ -38,11 +41,13 @@ boolean isKulkasFull(Kulkas K){
 }
 
 boolean isKulkasKosong(Kulkas K){
+    /* Mengembalikkan true jika kulkas kosong (semua memiliki value 0 di dalam matriks kulkas ) */
     return (JumlahMakanan(Kulkas(K)) == 0);
 }
 
 /* ********** Assignment Kulkas ********** */
 boolean insertKulkas(Kulkas *K, Makanan M, int i, int j){
+    /* Mengembalikkan true jika proses insert kulkas berhasil dan false jika proses gagal */
     int A = Lebar(M);
     int B = Panjang(M);
     if(ELMT(MatriksKulkas(*K), i ,j) != 0){
@@ -85,6 +90,8 @@ boolean insertKulkas(Kulkas *K, Makanan M, int i, int j){
 }
 
 void deleteKulkas(Kulkas *K, int idx, Makanan *Out){
+    /* I.S. K terdefinisi dan tidak kosong, ID terdefinisi, dan Out sembarang */
+    /* F.S. Out menjadi terdefinisi dengan makanan yang memiliki ID 'ID' diambil dari kulkas */
     *Out = MakananKulkas(Kulkas(*K), idx);
     POINT P = PointMakananKulkas(Kulkas(*K), idx);
     for(int x = Ordinat(P); x < Ordinat(P) + Lebar(*Out); x++){
@@ -100,6 +107,8 @@ void deleteKulkas(Kulkas *K, int idx, Makanan *Out){
 
 /* ********** KELOMPOK TULIS ********** */
 void displayKulkas(Kulkas K){
+    /* I.S. K terdefinisi */
+    /* F.S. Tercetaknya matriks kulkas pada layar */
     printf("\n===============KULKAS PEMAIN===============\n");
     for(int i = 0; i < ROW_EFF(MatriksKulkas(K)) + 2; i++) {
         for(int j = 0; j < COL_EFF(MatriksKulkas(K)) + 2; j++) {
@@ -117,7 +126,28 @@ void displayKulkas(Kulkas K){
     }
 }
 
+void PrintMakananKulkas(Kulkas K){
+    /* I.S. K terdefinisi dan bisa jadi kosong */
+    /* F.S. Tercetaknya list makanan yang terdapat di dalam kulkas */
+    for(int i = 0; i < JumlahMakanan(Kulkas(K)); i++){
+        printf("   %d. ", i+1);
+        PrintWord(Nama(MakananKulkas(Kulkas(K), i)));
+        printf(" -");
+        if (Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Hari", Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Jam", Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        if (Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
+            printf(" %d Menit", Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
+        }
+        printf("\n");
+    }
+}
+
 int commandKulkas(){
+    /* Mengembalikkan command berupa integer untuk proses kulkas */
     Word Insert = CreateWord("INSERT", 6);
     Word Take = CreateWord("TAKE", 4);
     Word Return = CreateWord("RETURN", 6);
@@ -137,25 +167,9 @@ int commandKulkas(){
     }
 }
 
-void PrintMakananKulkas(Kulkas K){
-    for(int i = 0; i < JumlahMakanan(Kulkas(K)); i++){
-        printf("   %d. ", i+1);
-        PrintWord(Nama(MakananKulkas(Kulkas(K), i)));
-        printf(" -");
-        if (Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Hari", Day(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        if (Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Jam", Hour(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        if (Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))) != 0){
-            printf(" %d Menit", Minute(Kedaluwarsa(MakananKulkas(Kulkas(K), i))));
-        }
-        printf("\n");
-    }
-}
-
 void ProsesKulkas(Kulkas *K, Simulator *S){
+    /* I.S. K terdefinisi dan S terdefinisi */
+    /* F.S. Melakukan proses kulkas */
     int action;
     int idx;
     int i, j;

@@ -1,10 +1,9 @@
-#include "tree.c"
+#include "tree.h"
+#include <stdio.h>
+
+// gcc main_tree.c tree.c ../sederhana/makanan/makanan.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../sederhana/time/time.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c -o main_tree
 
 int main(){
-    /*
-    // INISIASI ARRAY OF TREE
-    Tree T[100];
-
     // Melakukan alokasi Node
     addrNode P1,P2,P3,P4,P5;
     P1 = AlokNode(11);
@@ -12,10 +11,6 @@ int main(){
     P3 = AlokNode(10);
     P4 = AlokNode(31);
     P5 = AlokNode(15);
-
-    addrNode P11[1] = {P1};
-    addrNode P22[2] = {P2,P3};
-    addrNode P33[2] = {P4,P5};
 
     // Melakukan Alokasi Tree
     Tree T1, T2, T3;
@@ -25,14 +20,13 @@ int main(){
 
     // Memeriksa apakah tree kosong atau tidak
     if(IsTreeEmpty(T1)){
-        printf("Tree Kosong\n");
+        printf("Tree 1 Kosong\n");
     } else {
-        printf("Tree tidak kosong\n");
+        printf("Tree 1 tidak kosong\n");
     }
 
     // Melakukan penambahan daun sesuai dengan akar
     AddDaunByID(&T1, 21, 11);
-    AddDaunByID(&T2, 31, 21);
     AddDaunByID(&T2, 31, 21);
     AddDaunByID(&T3, 37, 31);
     AddDaunByID(&T3, 37, 15);
@@ -49,6 +43,7 @@ int main(){
     printf("\n");
 
     // Melakukan Merge Resep
+    Tree T[3];
     T[0] = T1;
     T[1] = T2;
     T[2] = T3;
@@ -56,10 +51,13 @@ int main(){
     printf("Tree Resep Dari Makanan Tersebut adalah ");
     PrintTree(Resep);
     printf("\n");
-    */
-
-   // INISIASI PATH KONFIGURASI FILE MAKANAN
+    
+    // Melakukan membaca tree resep dari konfigurasi
 	char fileName[100] = "../../../../config/resep.txt";
     Tree Main = BacaResep(fileName);
+    printf("Tree Resep Dari Konfigurasi Resep adalah ");
     PrintTree(Main);
+    printf("\n");
+    int iptkeluar;
+    printf("Ketik 0 untuk keluar.\n"); scanf("%d", &iptkeluar);
 }

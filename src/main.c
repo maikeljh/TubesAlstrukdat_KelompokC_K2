@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./lib/adt/boolean.h"
-#include "./lib/adt/sederhana/simulator/simulator.c"
-#include "./lib/adt/matrix/matrix.c"
+#include "./lib/adt/sederhana/simulator/simulator.h"
+#include "./lib/adt/matrix/matrix.h"
 #include "./lib/commandparser.c"
-#include "./lib/adt/sederhana/makanan/makanan.c"
-#include "./lib/adt/tree/tree.c"
+#include "./lib/adt/sederhana/makanan/makanan.h"
+#include "./lib/adt/tree/tree.h"
 #include "./lib/peta.c"
 #include "./lib/buy.c"
 #include "./lib/delivery.c"
@@ -13,9 +13,9 @@
 #include "./lib/fry.c"
 #include "./lib/chop.c"
 #include "./lib/boil.c"
-#include "./lib/adt/stack/stack.c"
-#include "./lib/adt/notifikasi/notifikasi.c"
-#include "./lib/adt/set/set.c"
+#include "./lib/adt/stack/stack.h"
+#include "./lib/adt/notifikasi/notifikasi.h"
+#include "./lib/adt/set/set.h"
 #include "./lib/adt/kulkas/kulkas.h"
 #include "./lib/adt/wordmachine/wordmachine.h"
 #include "./lib/adt/wordmachine/charmachine.h"
@@ -25,7 +25,7 @@
 #include "./lib/adt/sederhana/point/point.h"
 #include "./lib/adt/prioqueue/prioqueuetime.h"
 
-// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c ./lib/adt/sederhana/point/point.c ./lib/adt/prioqueue/prioqueuetime.c ./lib/adt/kulkas/kulkas.c -o main
+// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c ./lib/adt/sederhana/point/point.c ./lib/adt/prioqueue/prioqueuetime.c  ./lib/adt/kulkas/kulkas.c ./lib/adt/sederhana/simulator/simulator.c ./lib/adt/matrix/matrix.c ./lib/adt/sederhana/makanan/makanan.c ./lib/adt/tree/tree.c ./lib/adt/notifikasi/notifikasi.c ./lib/adt/set/set.c -o ../build/main
 
 int main(){
     // KAMUS GLOBAL

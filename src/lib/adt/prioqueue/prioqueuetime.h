@@ -82,13 +82,21 @@ void PrintPrioQueueTime (PrioQueueTime Q);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
 /* F.S. Q tercetak ke layar dengan format:
-<time-1> <elemen-1>
+<1> <elemen-1>
 ...
-<time-n> <elemen-n>
+<n> <elemen-n>
 #
 */
 
 void PrintDelivery (PrioQueueTime Q);
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format:
+<1> <elemen-1>
+...
+<n> <elemen-n>
+#
+*/
 
 int CariMakanan(PrioQueueTime Q, int id);
 /* Mencari lokasi makanan (indeks) dalam inventory makanan dengan ID makanan*/

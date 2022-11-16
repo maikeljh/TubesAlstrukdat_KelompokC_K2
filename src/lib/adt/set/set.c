@@ -1,5 +1,5 @@
 #include "set.h"
-
+#include <stdio.h>
 void createSet(Set *himpunan, ListMakanan M){
     /* I.S himpunan sembarang dan M terdefinisi */
     /* F.S Membuat himpunan dengan elemen-elemen dari M */
