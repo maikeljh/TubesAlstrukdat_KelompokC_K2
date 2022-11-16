@@ -1,7 +1,11 @@
 /*File: main_point.c*/
 /*Driver ADT point*/
 
-#include "point.c"
+
+// cd/src/lib/adt/sederhana/point
+// gcc main_point.c point.c -o ../../../../../build/lib/adt/sederhana/main_point
+#include "point.h"
+#include <stdio.h>
 
 int main () {
   // Create point
@@ -36,13 +40,13 @@ int main () {
 
   // NextX
   printf("\n*** Mengirim salinan P dengan absis ditambah satu ***\n");
-  R = NextX (P);
+  R = NextX(P);
   printf("R: ");
   TulisPOINT(R);
 
   // NextY
   printf("\n\n*** Mengirim salinan P dengan ordinat ditambah satu ***\n");
-  R = NextY (P);
+  R = NextY(P);
   printf("R: ");
   TulisPOINT(R);
   

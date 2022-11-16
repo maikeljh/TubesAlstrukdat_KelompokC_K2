@@ -24,5 +24,6 @@ void AddNotif (ListNotif *L, int tipe, Makanan M);
 
 void TulisNotif(ListNotif l);
 
+void changeNotif (ListNotif *l);
 
 #endif

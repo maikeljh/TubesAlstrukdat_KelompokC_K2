@@ -58,4 +58,6 @@ int main(){
     printf("Tree Resep Dari Konfigurasi Resep adalah ");
     PrintTree(Main);
     printf("\n");
+    int iptkeluar;
+    printf("Ketik 0 untuk keluar.\n"); scanf("%d", &iptkeluar);
 }

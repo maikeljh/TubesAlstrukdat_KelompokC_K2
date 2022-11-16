@@ -48,7 +48,8 @@ boolean NEQ (POINT P1, POINT P2);
 /* *** KELOMPOK OPERASI LAIN TERHADAP TYPE *** */                           
 POINT NextX (POINT P);
 /* Mengirim salinan P dengan absis ditambah satu */              
-
+POINT NextY (POINT P);
+/* Mengirim salinan P dengan ordinat ditambah satu */
 void Geser (POINT *P, int deltaX, int deltaY);
 /* I.S. P terdefinisi */
 /* F.S. P digeser, absisnya sebesar deltaX dan ordinatnya sebesar deltaY */
