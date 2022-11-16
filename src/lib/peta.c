@@ -114,7 +114,7 @@ void move (Matrix peta, int direction, POINT *S, boolean *moved) {
     Ordinat(*S) = y - 1;
     *moved = true;
   } else {
-    printf("*BNMO tidak bisa lewat\n\n");
+    printf("\n Pemain tidak bisa lewat\n\n");
     *moved = false;
   }
 
