@@ -4,6 +4,11 @@
 // cd src/lib/adt/wordmachine
 // gcc main_wordmachine.c wordmachine.c charmachine.c -o main_wordmachine
 
+<<<<<<< HEAD
+=======
+// gcc main_wordmachine.c wordmachine.c charmachine.c -o main_wordmachine
+
+>>>>>>> 1fa1daa48e965329f5f6bec65f1e7c113ada20ef
 int main(){
     printf("\n ** STARTWORD() mulai. Silahkan masukan input kalimat atau kata untuk dibaca pita. **\n");
     printf("\nKalimat yang akan dibaca pita: ");
