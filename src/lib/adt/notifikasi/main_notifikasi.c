@@ -1,9 +1,9 @@
-#include "notifikasi.c"
-#include "../wordfilemachine/wordfilemachine.c"
-#include "../wordfilemachine/charfilemachine.c"
-#include "../wordmachine/wordmachine.c"
-#include "../wordmachine/charmachine.c"
-
+#include "notifikasi.h"
+#include "../wordfilemachine/wordfilemachine.h"
+#include "../wordfilemachine/charfilemachine.h"
+#include "../wordmachine/wordmachine.h"
+#include "../wordmachine/charmachine.h"
+#include <stdio.h>
 int main() {
   Makanan Mangga, Pisang, Jeruk;
   Word mangga, pisang, jeruk;

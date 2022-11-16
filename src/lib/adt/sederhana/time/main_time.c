@@ -1,6 +1,8 @@
 /* File: main_time.c */
 /* Driver ADT TIME */
 
+// cd/src/lib/adt/sederhana/time
+// gcc main_time.c time.c -o ../../../../../build/lib/adt/sederhana/main_time
 #include <stdio.h>
 #include "time.h"
 

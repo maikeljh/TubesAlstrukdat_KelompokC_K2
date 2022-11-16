@@ -5,7 +5,7 @@
 #include "liststatik.h"
 #include <stdio.h>
 // cd src/lib/adt/liststatik
-// gcc main_liststatik.c liststatik.c -o main_liststatik
+// gcc main_liststatik.c liststatik.c -o ../../../../build/lib/adt/main_liststatik
 
 int main(){
     // Create List Statik

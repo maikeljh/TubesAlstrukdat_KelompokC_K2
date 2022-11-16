@@ -1,4 +1,8 @@
-#include "set.c"
+#include "set.h"
+#include <stdio.h>
+
+// cd src/lib/adt/set
+// gcc main_set.c set.c ../sederhana/makanan/makanan.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../sederhana/time/time.c ../tree/tree.c ../sederhana/simulator/simulator.c ../notifikasi/notifikasi.c -o ../../../../build/lib/adt/main_set
 
 int main(){
     Set SetMakanan, SetMakanan2;

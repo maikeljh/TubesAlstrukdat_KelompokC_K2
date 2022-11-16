@@ -8,7 +8,7 @@
 /* Directory:
 cd src/lib/adt/matrix
  Cara Compile: 
-gcc main_matrix.c matrix.c -o mainmatrix
+gcc main_matrix.c matrix.c -o ../../../../build/lib/adt/main_matrix
 */
 int main () {
   // Create matrix

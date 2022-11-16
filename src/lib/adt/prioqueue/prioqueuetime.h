@@ -13,13 +13,6 @@
 
 /* Definisi elemen dan address */
 
-
-//typedef struct {
-//    TIME time;  /* [1..100], waktu dengan nilai 1..100 (1 adalah waktu adalah terendah) */
-//    char Info[Max];  /* elemen karakter */
-//} infotype; // infotype = makanan
-
-
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype PrioQueueChar : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */

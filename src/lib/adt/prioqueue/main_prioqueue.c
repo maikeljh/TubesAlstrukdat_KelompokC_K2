@@ -17,7 +17,7 @@ void Menu(void);
 int main(){
     /* KAMUS UTAMA */
     Makanan M;
-    int id, lokasi, cmd, max, length;
+    int id, lokasi, cmd, max, length, panjang, lebar;
     long wk, lp, dp;
     TIME wk2, lp2, dp2;
     Word NamaMakanan;
@@ -113,11 +113,13 @@ int main(){
                 printf("Keterangan: Detil informasi makanan tidak penting. input sesuai aturan saja karena hanya dalam driver.\n");
                 printf("Input nama makanan: "); STARTWORD(); NamaMakanan = BacaNama();
                 printf("Input ID Makanan (integer): "); scanf("%d", &id);
-                printf("Input Waktu Kedaluwarsa dalam satuan menit (long integer): "), scanf("%li", &wk); wk2 = MenitToTIME(wk);
-                printf("Input Lama Pengiriman dalam satuan menit (long integer): "), scanf("%li", &lp); lp2 = MenitToTIME(lp);
+                printf("Input Waktu Kedaluwarsa dalam satuan menit (long integer): "); scanf("%li", &wk); wk2 = MenitToTIME(wk);
+                printf("Input Lama Pengiriman dalam satuan menit (long integer): "); scanf("%li", &lp); lp2 = MenitToTIME(lp);
                 printf("Input Lokasi (integer): "); scanf("%d", &lokasi);
-                printf("Input Durasi Pengolahan dalam satuan menit(long integer): "), scanf("%li", &dp); dp2 = MenitToTIME(dp);
-                CreateMakanan(&M, id, lokasi, NamaMakanan, wk2, lp2, dp2);
+                printf("Input Durasi Pengolahan dalam satuan menit(long integer): "); scanf("%li", &dp); dp2 = MenitToTIME(dp);
+                printf("Input panjang makanan (integer): "); scanf("%d", &panjang);
+                printf("Input lebar makanan (integer): "); scanf("%d", &lebar);
+                CreateMakanan(&M, id, lokasi, NamaMakanan, wk2, lp2, dp2, panjang, lebar);
                 printf("Isi PrioQueueTime sebelum Enqueue: \n");
                 if(!IsEmpty(Q)){
                     printf("(nama - waktu sisa kedaluwarsa)\n");
@@ -146,7 +148,9 @@ int main(){
                 printf("Input Lama Pengiriman dalam satuan menit (long integer): "), scanf("%li", &lp); lp2 = MenitToTIME(lp);
                 printf("Input Lokasi (integer): "); scanf("%d", &lokasi);
                 printf("Input Durasi Pengolahan dalam satuan menit(long integer): "), scanf("%li", &dp); dp2 = MenitToTIME(dp);
-                CreateMakanan(&M, id, lokasi, NamaMakanan, wk2, lp2, dp2);
+                printf("Input panjang makanan (integer): "); scanf("%d", &panjang);
+                printf("Input lebar makanan (integer): "); scanf("%d", &lebar);
+                CreateMakanan(&M, id, lokasi, NamaMakanan, wk2, lp2, dp2, panjang, lebar);
                 printf("Isi PrioQueueTime sebelum EnqueueDelivery: \n");
                 if(!IsEmpty(Q)){
                     printf("(nama - waktu sisa delivery)\n");

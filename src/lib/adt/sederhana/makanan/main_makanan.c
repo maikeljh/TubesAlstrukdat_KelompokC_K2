@@ -3,7 +3,7 @@
 #include "makanan.c"
 
 // cd src/lib/adt/sederhana/makanan
-// gcc main_makanan.c ../../wordfilemachine/wordfilemachine.c ../../wordfilemachine/charfilemachine.c ../time/time.c ../../wordmachine/wordmachine.c ../../wordmachine/charmachine.c ../../tree/tree.c-o main_makanan
+// gcc main_prioqueue.c prioqueuetime.c ../sederhana/time/time.c ../notifikasi/notifikasi.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../sederhana/makanan/makanan.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../tree/tree.c -o ../../../../build/lib/adt/main_prioqueue
 
 int main(){
 	// INISIASI MAKANAN FOOD
