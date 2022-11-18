@@ -17,6 +17,21 @@ Berikut daftar isi dalam program ini:
 ## Prosedur Pemakaian Program
 > Program ini dikompilasi menggunakan C compiler *(gcc)*
 
+Perhatikan bahwa sebagian besar interface pada program menggunakan modul *pcolor* yang (mungkin saja) tidak kompatibel dengan komputer Anda (Interface Text akan menjadi berantakan).
+
+1. Untuk mengompilasi program jalankan
+```
+./build/main
+```
+2. Untuk menjalankan program melalui bash, jalankan
+```
+
+```
+3. Untuk mengompilasi sebuah modul ADT, jalankan
+```
+./build
+```
+
 # Kontributor
 Program ini dibuat dalam rangka memenuhi salah satu tugas besar mata kuliah Algoritma dan Struktur Data. Program ini dibuat oleh (K02 Kelompok )
 1. Maggie Zeta Rosida `(13521117)`<br>
