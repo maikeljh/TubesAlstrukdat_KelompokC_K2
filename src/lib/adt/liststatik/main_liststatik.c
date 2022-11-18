@@ -4,34 +4,30 @@
 #include "liststatik.h"
 #include <stdio.h>
 // cd src/lib/adt/liststatik
-// gcc main_liststatik.c liststatik.c -o ../../../../build/lib/adt/main_liststatik
+// gcc main_liststatik.c liststatik.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../sederhana/time/time.c ../sederhana/makanan/makanan.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c -o ../../../../build/lib/adt/non_sederhana/main_liststatik
 
 int main(){
     // Create List Statik
     ListStatik L;
     CreateListStatik(&L);
 
-    // Read List Statik
-    readList(&L);
-
-    printf("\n");
     // Print List Statik
     printf("List Statik yang terbentuk : ");
     printList(L);
-
     printf("\n");
+
     // Jumlah Elemen List Statik
-    printf("\nJumlah Elemen : %d\n", listLength(L));
-
+    printf("\nJumlah Elemen : %d\n", Length(L));
     printf("\n");
+
     // First Indeks List Statik
     printf("First Index : %d\n", getFirstIdx(L));
-
     printf("\n");
+
     // Last Indeks List Statik
-    printf("First Index : %d\n", getLastIdx(L));
-
+    printf("Last Index : %d\n", getLastIdx(L));
     printf("\n");
+
     // Cek indeks valid atau tidak
     int indeks;
     printf("Masukkan indeks yang ingin diperiksa : ");
@@ -41,129 +37,85 @@ int main(){
     } else {
         printf("Indeks tidak valid!\n");
     }
-
     printf("\n");
+
     // Cek indeks valid atau tidak
     if(isIdxValid(L, indeks)){
         printf("Indeks terdefinisi!\n");
     } else {
         printf("Indeks tidak terdefinisi!\n");
     }
-
     printf("\n");
+
     // Cek List Statik Empty atau tidak
     if(isEmpty(L)){
         printf("List kosong\n");
     } else {
         printf("List tidak kosong!\n");
     }
-
     printf("\n");
+
     // Cek List Statik Full atau tidak
     if(isFull(L)){
         printf("List penuh\n");
     } else {
         printf("List tidak penuh!\n");
     }
-
     printf("\n");
-    // Cek Plus Minus List Statik
-    ListStatik L2 = L, L3;
-    L3 = plusMinusList(L, L2, false);
-    printf("List Statik 1 : ");
+
+    // Melakukan insertFirst pada List Statik
+    Makanan Food;
+    TIME WK, LP, PO;
+    Word yummy = CreateWord("Yummy", 5);
+	CreateTime(&WK, 1, 0, 0);
+	CreateTime(&LP, 2, 10, 0);
+	CreateTime(&PO, 0, 20, 0);
+	CreateMakanan(&Food, 1, 3, yummy, WK, LP, PO, 2, 3);
+    printf("Insert pada awal List Statik : \n");
+    insertFirst(&L, Food);
     printList(L);
-    printf("\n");
-    printf("List Statik 2 : ");
-    printList(L2);
-    printf("\n");
-    printf("Hasil pengurangan List Statik : ");
-    printList(L3);
-    printf("\n");
 
-    L3 = plusMinusList(L, L2, true);
-    printf("Hasil penjumlahan List Statik : ");
-    printList(L3);
-    printf("\n");
-
-    printf("\n");
-    // Cek Is Equal List Statik
-    if(isListEqual(L,L2)){
-        printf("List 1 dan List 2 sama\n");
-    } else {
-        printf("List 1 dan List 2 tidak sama!\n");
-    }
-
-    printf("\n");
     // Cek Indeks Of
-    int val;
-    printf("Masukkan value yang ingin dicari indeksnya : ");
-    scanf("%d", &val);
-    indeks = indexOf(L, val);
+    indeks = indexOf(L, Food);
     printf("Indeks elemen tersebut : ");
     printf("%d\n", indeks);
-
-    printf("\n");
-    // Mencari Max dan Min
-    ElType maksimum, minimum;
-    extremeValues(L, &maksimum, &minimum);
-    printf("Nilai maksimum dari list statik : ");
-    printf("%d\n", maksimum);
-    printf("Nilai minimum dari list statik : ");
-    printf("%d\n", minimum);
-
-    printf("\n");
-    // Melakukan insertFirst pada List Statik
-    printf("Insert 1 pada awal List Statik : ");
-    insertFirst(&L, 1);
-    printList(L);
     printf("\n");
 
-    printf("\n");
     // Melakukan insertAt pada List Statik
-    printf("Insert 1 pada indeks 1 List Statik : ");
-    insertAt(&L, 1, 1);
+    printf("Insert 1 pada indeks 1 List Statik : \n");
+    insertAt(&L, Food, 1);
     printList(L);
     printf("\n");
 
     printf("\n");
     // Melakukan insertLast pada List Statik
-    printf("Insert 2 pada akhir List Statik : ");
-    insertLast(&L, 2);
+    printf("Insert 2 pada akhir List Statik : \n");
+    insertLast(&L, Food);
     printList(L);
     printf("\n");
 
     printf("\n");
     // Melakukan deleteFirst pada List Statik
-    printf("Delete elemen awal List Statik : ");
-    deleteFirst(&L, &val);
+    printf("Delete elemen awal List Statik : \n");
+    deleteFirst(&L, &Food);
     printList(L);
     printf("\n");
 
     printf("\n");
     // Melakukan deleteAt pada List Statik
-    printf("Delete elemen indeks ke-1 List Statik : ");
-    deleteAt(&L, &val, 1);
+    printf("Delete elemen indeks ke-1 List Statik : \n");
+    deleteAt(&L, &Food, 1);
     printList(L);
     printf("\n");
 
     printf("\n");
     // Melakukan deleteLast pada List Statik
-    printf("Delete elemen akhir List Statik : ");
-    deleteLast(&L, &val);
+    printf("Delete elemen akhir List Statik : \n");
+    deleteLast(&L, &Food);
     printList(L);
     printf("\n");
-
     printf("\n");
-    // Melakukan sortList dengan terurut membesar pada List Statik
-    printf("Sort List Statik Membesar : ");
-    sortList(&L, true);
-    printList(L);
-    printf("\n");
-
-    printf("\n");
-    // Melakukan sortList dengan terurut mengecil pada List Statik
-    printf("Sort List Statik Mengecil : ");
-    sortList(&L, false);
-    printList(L);
-    printf("\n");
+    int iptklr;
+    printf("\nKetik 0 untuk keluar."); 
+    scanf("%d", &iptklr);
 }

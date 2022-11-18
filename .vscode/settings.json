@@ -11,6 +11,7 @@
     "kulkas.h": "c",
     "point.h": "c",
     "prioqueuetime.h": "c",
-    "wordmachine.h": "c"
+    "wordmachine.h": "c",
+    "charmachine.h": "c"
   }
 }

@@ -1,4 +1,5 @@
 /* File : peta.c */
+#include <stdio.h>
 
 void bacaPeta (char fileName[], Matrix *peta, POINT *S, POINT *T, POINT *M, POINT *C, POINT *F, POINT *B) {
   /*I.S. Matriks peta terdefinisi*/

@@ -59,4 +59,7 @@ int main () {
   Geser(&P, delX, delY);
   printf("P: ");
   TulisPOINT(P);
+  int iptklr;
+  printf("\nKetik 0 untuk keluar."); 
+  scanf("%d", &iptklr);
 }
