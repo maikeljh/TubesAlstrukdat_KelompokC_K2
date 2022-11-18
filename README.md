@@ -36,10 +36,10 @@ Program ini dibuat dalam rangka memenuhi salah satu tugas besar mata kuliah Algo
 <tr><td>1.</td><td>START</td><td>Selesai</td></tr>
 <tr><td>2.</td><td>BUY</td><td>Selesai</td></tr>
 <tr><td>3.</td><td>DELIVERY</td><td>Selesai</td></tr>
-<tr><td>4.</td><td>MOVE_NORTH</td><td>Selesai</td></tr>
-<tr><td>5.</td><td>MOVE_EAST</td><td>Selesai</td></tr>
-<tr><td>6.</td><td>MOVE_WEST</td><td>Selesai</td></tr>
-<tr><td>7.</td><td>MOVE_SOUTH</td><td>Selesai</td></tr>
+<tr><td>4.</td><td>MOVE NORTH</td><td>Selesai</td></tr>
+<tr><td>5.</td><td>MOVE EAST</td><td>Selesai</td></tr>
+<tr><td>6.</td><td>MOVE WEST</td><td>Selesai</td></tr>
+<tr><td>7.</td><td>MOVE SOUTH</td><td>Selesai</td></tr>
 <tr><td>8.</td><td>MIX</td><td>Selesai</td></tr>
 <tr><td>9.</td><td>CHOP</td><td>Selesai</td></tr>
 <tr><td>10.</td><td>FRY</td><td>Selesai</td></tr>
