@@ -8,7 +8,7 @@
 /* Directory:
 cd src/lib/adt/matrix
  Cara Compile: 
-gcc main_matrix.c matrix.c -o ../../../../build/lib/adt/main_matrix
+gcc main_matrix.c matrix.c -o ../../../../build/lib/adt/non_sederhana/main_matrix
 */
 int main () {
   // Create matrix
@@ -48,4 +48,7 @@ int main () {
   // Display Matrix
   printf("**Display matriks M yang telah dibaca (readMatrix) **\n");
   displayMatrix(m2);
+  int iptklr;
+  printf("\nKetik 0 untuk keluar."); 
+  scanf("%d", &iptklr);
 }

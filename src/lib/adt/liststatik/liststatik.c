@@ -2,6 +2,7 @@
 /* Body ADT List Statik */
 
 #include "liststatik.h"
+
 #include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */
@@ -9,35 +10,14 @@
 void CreateListStatik(ListStatik *l){
     /* I.S. l sembarang */
     /* F.S. Terbentuk List l kosong dengan kapasitas CAPACITY */
-    /* Proses: Inisialisasi semua elemen List l dengan MARK */
+    /* Proses: Terbentuk List l dengan length 0 */
 
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    IdxType idx;
-    for(idx = IDX_MIN; idx < CAPACITY; idx++) {
-        ELMT(*l, idx) = MARK;
-    }
+    Length(*l) = 0;
 };
-
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
-/* *** Banyaknya elemen *** */
-int listLength(ListStatik l){
-    /* Mengirimkan banyaknya elemen efektif List */
-    /* Mengirimkan nol jika List kosong */
-    
-    /* KAMUS LOKAL */
-    int count = 0;
-
-    /* ALGORITMA */
-    while(ELMT(l, count) != MARK && count < CAPACITY){
-        count++;
-    }
-
-    return count;
-};
-
-
 /* *** Selektor INDEKS *** */
 IdxType getFirstIdx(ListStatik l){
     /* Prekondisi : List l tidak kosong */
@@ -54,9 +34,12 @@ IdxType getLastIdx(ListStatik l){
 
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return (listLength(l) - 1);
+    if(isEmpty(l)){
+        return 0;
+    } else {
+        return (Length(l) - 1);
+    }
 };
-
 
 /* ********** Test Indeks yang valid ********** */
 boolean isIdxValid(ListStatik l, IdxType i){
@@ -74,9 +57,8 @@ boolean isIdxEff(ListStatik l, IdxType i){
 
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return ((i >= IDX_MIN) && (i < listLength(l)));
+    return ((i >= IDX_MIN) && (i < Length(l)));
 };
-
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test List kosong *** */
@@ -85,7 +67,7 @@ boolean isEmpty(ListStatik l){
 
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return (listLength(l) == 0);
+    return (Length(l) == 0);
 };
 
 /* *** Test List penuh *** */
@@ -94,127 +76,8 @@ boolean isFull(ListStatik l){
 
     /* KAMUS LOKAL */
     /* ALGORITMA */
-    return (listLength(l) == CAPACITY);
+    return (Length(l) == CAPACITY);
 };
-
-
-/* ********** BACA dan TULIS dengan INPUT/OUTPUT device ********** */
-/* *** Mendefinisikan isi List dari pembacaan *** */
-void readList(ListStatik *l){
-    /* I.S. l sembarang */
-    /* F.S. List l terdefinisi */
-    /* Proses: membaca banyaknya elemen l dan mengisi nilainya */
-    /* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-    /*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
-    /*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-    /* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
-            Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
-    /*    Jika n = 0; hanya terbentuk List kosong */
-
-    /* KAMUS LOKAL */
-    int n;
-    IdxType idx;
-    ElType element;
-
-    /* ALGORITMA */
-    CreateListStatik(l);
-
-    while(true){
-        printf("Silahkan input jumlah elemen : ");
-        scanf("%d", &n);
-        if(n >= IDX_MIN && n <= CAPACITY){
-            break;
-        } else {
-            printf("Jumlah elemen tidak valid. Silahkan input kembali.\n");
-            continue;
-        }
-    }
-
-    for(idx = 0; idx < n; idx++){
-        printf("Elemen ke-%d: ", idx+1);
-        scanf("%d", &element);
-        ELMT(*l, idx) = element;
-    }
-
-};
-
-void printList(ListStatik l){
-    /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-    siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-    karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
-    /* I.S. l boleh kosong */
-    /* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-    /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-    /* Jika List kosong : menulis [] */
-
-    /* KAMUS LOKAL */
-    IdxType idx;
-
-    /* ALGORITMA */
-    printf("[");
-
-    if(isEmpty(l)){
-        printf("]");
-    } else {
-        for(idx = getFirstIdx(l); idx <= getLastIdx(l); idx++){
-            if(idx != getLastIdx(l)){
-                printf("%d,", ELMT(l, idx));
-            } else {
-                printf("%d", ELMT(l, idx));
-            }
-        }
-        printf("]");
-    }
-};
-
-
-/* ********** OPERATOR ARITMATIKA ********** */
-/* *** Aritmatika List : Penjumlahan, pengurangan, perkalian, ... *** */
-ListStatik plusMinusList(ListStatik l1, ListStatik l2, boolean plus){
-    /* Prekondisi : l1 dan l2 berukuran sama dan tidak kosong */
-    /* Jika plus = true, mengirimkan  l1+l2, yaitu setiap elemen l1 dan l2 pada 
-        indeks yang sama dijumlahkan */
-    /* Jika plus = false, mengirimkan l1-l2, yaitu setiap elemen l1 dikurangi 
-        elemen l2 pada indeks yang sama */
-
-    /* KAMUS LOKAL */
-    IdxType idx;
-    ListStatik newList;
-
-    /* ALGORITMA */
-    CreateListStatik(&newList);
-    for(idx = IDX_MIN; idx <= getLastIdx(l1); idx++){
-        if(plus) {
-            ELMT(newList, idx) = ELMT(l1, idx) + ELMT(l2, idx);
-        } else {
-            ELMT(newList, idx) = ELMT(l1, idx) - ELMT(l2, idx);
-        }
-    }
-
-    return newList;
-};
-
-/* ********** OPERATOR RELASIONAL ********** */
-/* *** Operasi pembandingan List: *** */
-boolean isListEqual(ListStatik l1, ListStatik l2){
-    /* Mengirimkan true jika l1 sama dengan l2 yaitu jika ukuran l1 = l2 dan semua 
-    elemennya sama */
-
-    /* KAMUS LOKAL */
-    IdxType idx;
-    boolean equal = true;
-
-    /* ALGORITMA */
-    for(idx = IDX_MIN; idx <= getLastIdx(l1); idx++){
-        if(ELMT(l1, idx) != ELMT(l2, idx)){
-            equal = false;
-            break;
-        }
-    }
-
-    return equal;
-};
-
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
@@ -232,7 +95,7 @@ int indexOf(ListStatik l, ElType val){
         return IDX_UNDEF;
     } else {
         for(idx = IDX_MIN; idx <= getLastIdx(l); idx++){
-            if(ELMT(l, idx) == val){
+            if(ID(ELMT(l, idx)) == ID(val)){
                 return idx;
             }
         }
@@ -241,29 +104,24 @@ int indexOf(ListStatik l, ElType val){
     }
 };
 
-/* ********** NILAI EKSTREM ********** */
-void extremeValues(ListStatik l, ElType *max, ElType *min){
-    /* I.S. List l tidak kosong */
-    /* F.S. Max berisi nilai terbesar dalam l;
-            Min berisi nilai terkecil dalam l */
-    
+void printList(ListStatik l){
+    /* Proses : Menuliskan isi List dengan traversal */
+    /* I.S. l boleh kosong */
+    /* F.S. Menulis Isi dari List */
+
     /* KAMUS LOKAL */
     IdxType idx;
 
     /* ALGORITMA */
-    *max = ELMT(l, IDX_MIN);
-    *min = ELMT(l, IDX_MIN);
-
-    for(idx = IDX_MIN + 1; idx <= getLastIdx(l); idx++){
-        if(ELMT(l, idx) > *max){
-            *max = ELMT(l, idx);
-        }
-        if(ELMT(l, idx) < *min){
-            *min = ELMT(l, idx);
+    if(isEmpty(l)){
+        printf("List kosong.");
+    } else {
+        for(idx = getFirstIdx(l); idx <= getLastIdx(l); idx++){
+            TulisMakanan(ELMT(l, idx));
+            printf("\n");
         }
     }
 };
-
 
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
@@ -284,6 +142,7 @@ void insertFirst(ListStatik *l, ElType val){
         }
         ELMT(*l, IDX_MIN) = val;
     }
+    Length(*l) += 1;
 };
 
 /* *** Menambahkan elemen pada index tertentu *** */
@@ -301,6 +160,7 @@ void insertAt(ListStatik *l, ElType val, IdxType idx){
     }
 
     ELMT(*l, idx) = val;
+    Length(*l) += 1;
 };
 
 
@@ -317,6 +177,7 @@ void insertLast(ListStatik *l, ElType val){
     } else {
         ELMT(*l, getLastIdx(*l) + 1) = val;
     }
+    Length(*l) += 1;
 };
 
 
@@ -339,7 +200,7 @@ void deleteFirst(ListStatik *l, ElType *val){
         ELMT(*l, idx) = ELMT(*l, idx + 1);
     }
 
-    ELMT(*l, getLastIdx(*l)) = MARK;
+    Length(*l) -= 1;
 };
 
 /* *** Menghapus elemen pada index tertentu *** */
@@ -360,7 +221,7 @@ void deleteAt(ListStatik *l, ElType *val, IdxType idx){
         ELMT(*l, i) = ELMT(*l, i + 1);
     }
     
-    ELMT(*l, getLastIdx(*l)) = MARK;
+    Length(*l) -= 1;
 };
 
 /* *** Menghapus elemen terakhir *** */
@@ -374,51 +235,5 @@ void deleteLast(ListStatik *l, ElType *val){
     /* KAMUS LOKAL */
     /* ALGORITMA */
     *val = ELMT(*l, getLastIdx(*l));
-    ELMT(*l, getLastIdx(*l)) = MARK;
+    Length(*l) -= 1;
 };
-
-
-/* ********** SORTING ********** */
-void sortList(ListStatik *l, boolean asc){
-    /* I.S. l boleh kosong */
-    /* F.S. Jika asc = true, l terurut membesar */
-    /*      Jika asc = false, l terurut mengecil */
-    /* Proses : Mengurutkan l dengan salah satu algoritma sorting,
-    algoritma bebas */
-
-    /* KAMUS LOKAL */
-    IdxType i, j, minimal, maksimal;
-    ElType tempElmt;
-
-    /* ALGORITMA */
-    if(asc){
-        for(i = IDX_MIN; i < getLastIdx(*l); i++){
-            minimal = i;
-
-            for(j = i + 1; j <= getLastIdx(*l); j++){
-                if(ELMT(*l, j) < ELMT(*l, minimal)){
-                    minimal = j;
-                }
-            }
-
-            tempElmt = ELMT(*l, i);
-            ELMT(*l, i) = ELMT(*l, minimal);
-            ELMT(*l, minimal) = tempElmt;
-        }
-    } else {
-        for(i = IDX_MIN; i < getLastIdx(*l); i++){
-            maksimal = i;
-
-            for(j = i + 1; j <= getLastIdx(*l); j++){
-                if(ELMT(*l, j) > ELMT(*l, maksimal)){
-                    maksimal = j;
-                }
-            }
-
-            tempElmt = ELMT(*l, i);
-            ELMT(*l, i) = ELMT(*l, maksimal);
-            ELMT(*l, maksimal) = tempElmt;
-        }
-    }
-};
-

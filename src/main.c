@@ -25,7 +25,7 @@
 #include "./lib/adt/sederhana/point/point.h"
 #include "./lib/adt/prioqueue/prioqueuetime.h"
 
-// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c ./lib/adt/sederhana/point/point.c ./lib/adt/prioqueue/prioqueuetime.c  ./lib/adt/kulkas/kulkas.c ./lib/adt/sederhana/simulator/simulator.c ./lib/adt/matrix/matrix.c ./lib/adt/sederhana/makanan/makanan.c ./lib/adt/tree/tree.c ./lib/adt/notifikasi/notifikasi.c ./lib/adt/set/set.c -o ../build/main
+// gcc main.c ./lib/adt/wordmachine/wordmachine.c ./lib/adt/wordmachine/charmachine.c ./lib/adt/wordfilemachine/wordfilemachine.c ./lib/adt/wordfilemachine/charfilemachine.c ./lib/adt/sederhana/time/time.c ./lib/adt/sederhana/point/point.c ./lib/adt/prioqueue/prioqueuetime.c  ./lib/adt/kulkas/kulkas.c ./lib/adt/sederhana/simulator/simulator.c ./lib/adt/matrix/matrix.c ./lib/adt/sederhana/makanan/makanan.c ./lib/adt/tree/tree.c ./lib/adt/notifikasi/notifikasi.c ./lib/adt/set/set.c ./lib/adt/stack/stack.c -o ../build/main
 
 int main(){
     // KAMUS GLOBAL
