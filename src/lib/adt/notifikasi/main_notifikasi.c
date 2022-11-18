@@ -4,6 +4,9 @@
 #include "../wordmachine/wordmachine.h"
 #include "../wordmachine/charmachine.h"
 #include <stdio.h>
+
+// gcc main_notifikasi.c notifikasi.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c -o ../../../../build/lib/adt/non_sederhana/main_notifikasi
+
 int main() {
   Makanan Mangga, Pisang, Jeruk;
   Word mangga, pisang, jeruk;
@@ -15,8 +18,6 @@ int main() {
   Pisang.Nama = pisang;
   jeruk = CreateWord("jeruk", 5);
   Jeruk.Nama = jeruk;
-  // pisang.Nama = "Pisang";
-  // jeruk.Nama = "Jeruk";
 
   //membuat list notifikasi
   MakeEmptyNotif(&L);
@@ -49,4 +50,7 @@ int main() {
   printf("Notifikasi:\n");
 
   TulisNotif(L);
+  int iptklr;
+  printf("\nKetik 0 untuk keluar."); 
+  scanf("%d", &iptklr);
 }

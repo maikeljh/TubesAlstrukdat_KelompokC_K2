@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "makanan.c"
+#include "makanan.h"
 
 // cd src/lib/adt/sederhana/makanan
-// gcc main_prioqueue.c prioqueuetime.c ../sederhana/time/time.c ../notifikasi/notifikasi.c ../wordmachine/wordmachine.c ../wordmachine/charmachine.c ../sederhana/makanan/makanan.c ../wordfilemachine/wordfilemachine.c ../wordfilemachine/charfilemachine.c ../tree/tree.c -o ../../../../build/lib/adt/main_prioqueue
+// gcc main_makanan.c makanan.c ../time/time.c ../../notifikasi/notifikasi.c ../../wordmachine/wordmachine.c ../../wordmachine/charmachine.c ../../wordfilemachine/wordfilemachine.c ../../wordfilemachine/charfilemachine.c ../../tree/tree.c -o ../../../../../build/lib/adt/sederhana/main_makanan
 
 int main(){
 	// INISIASI MAKANAN FOOD
@@ -11,6 +11,7 @@ int main(){
 	TIME WK, LP, PO;
 
 	// MELAKUKAN CreateMakanan
+	printf("/* Melakukan CreateMakanan */\n");
 	Word yummy = CreateWord("Yummy", 5);
 	CreateTime(&WK, 1, 0, 0);
 	CreateTime(&LP, 2, 10, 0);
@@ -19,15 +20,18 @@ int main(){
 	printf("\n");
 
 	// MELAKUKAN TulisMakanan
+	printf("/* Melakukan TulisMakanan */\n");
 	TulisMakanan(Food);
 	printf("\n");
 
 	// MELAKUKAN getID
+	printf("/* Melakukan getID */\n");
 	int ID = getID(Food);
 	printf("ID dari Makanan tersebut adalah %d\n", ID);
 	printf("\n");
 
 	// MELAKUKAN getLokasi
+	printf("/* Melakukan getLokasi */\n");
 	Word namaLokasi;
 	Word Mix = CreateWord("Mix", 3);
     Word Chop = CreateWord("Chop", 4);
@@ -51,39 +55,38 @@ int main(){
 	printf("\n\n");
 
 	// MELAKUKAN getWK
+	printf("/* Melakukan getWK */\n");
 	WK = getWK(Food);
 	printf("Waktu kedaluwarsa dari Makanan tersebut adalah ");
 	TulisTIME(WK);
 	printf("\n");
 	printf("\n");
 
-	// MELAKUKAN getWK
+	// MELAKUKAN getLP
+	printf("/* Melakukan getLP */\n");
 	LP = getLP(Food);
 	printf("Lama Pengiriman dari Makanan tersebut adalah ");
 	TulisTIME(LP);
 	printf("\n");
 	printf("\n");
 
-	// MELAKUKAN pangkat
-	printf("2 pangkat 3 bernilai %d\n", pangkat(2,3));
-	printf("\n");
-
-	// MELAKUKAN wordToInt
-	WordFile W = CreateWordFile("20", 2);
-	int number = wordToInt(W);
-	printf("Nilai dari kata tersebut adalah %d\n", number);
-	printf("\n");
-
 	// INISIASI LIST MAKANAN M
 	ListMakanan M;
 
 	// INISIASI PATH KONFIGURASI FILE MAKANAN
-	char fileName[100] = "../../../../../config/makanan.txt";
+	char fileName[100] = "../../../../config/makanan.txt";
 
 	// MELAKUKAN MEMBACA MAKANAN
+	printf("/* Melakukan BacaMakanan */\n");
 	M = BacaMakanan(fileName);
+	printf("\n");
 
 	// MENAMPILKAN LIST MAKANAN DARI KONFIGURASI FILE
-	printf("Berikut adalah contoh output dari TulisListMakanan\n", number);
+	printf("/* Melakukan TulisListMakanan */\n");
+	printf("\nBerikut adalah contoh output dari TulisListMakanan\n");
 	TulisListMakanan(M, JumlahMakanan(M));
+	printf("\n");
+	int n;
+    printf("\nKetik 0 untuk exit. ");
+    scanf("%d", &n); 
 }
