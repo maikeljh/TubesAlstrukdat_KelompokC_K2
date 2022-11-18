@@ -1,7 +1,6 @@
 /* File: main_liststatik.c */
 /* Driver ADT List Statik */
 
-
 #include "liststatik.h"
 #include <stdio.h>
 // cd src/lib/adt/liststatik

@@ -25,10 +25,6 @@ typedef struct {
   top TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 
-typedef struct {
-  Kulkas K[10]; /* tabel penyimpan elemen */
-  top TOP;
-} StackKulkas;
 /* Definisi stack S kosong : S.TOP = Nil */
 /* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
 /* Jika S adalah Stack maka akses elemen : */
