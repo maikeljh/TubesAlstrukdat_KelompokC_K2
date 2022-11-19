@@ -12,7 +12,7 @@
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotype; */
 typedef struct Node *addrNode;
-struct Node{
+typedef struct Node{
     int ID;
     int children;
     addrNode firstChild;

@@ -222,7 +222,7 @@ int main(){
         }
         else if (cmd == 12){
             printf("12. DequeueAt(&Q, id, &M)\n");
-            printf("Input indeks (letak) makanan dalam PrioQueueTime yang ingin di Dequeue: "), scanf("%d", id);
+            printf("Input indeks (letak) makanan dalam PrioQueueTime yang ingin di Dequeue: "), scanf("%d", &id);
             if(!IsEmpty(Q) && id < max){
                 printf("Isi PrioQueueTime sebelum DequeueAt: \n");
                 printf("(nama - waktu sisa kedaluwarsa)\n");
