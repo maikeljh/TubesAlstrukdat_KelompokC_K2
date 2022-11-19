@@ -12,8 +12,8 @@ int main(){
     Tree Resep;
 
 	// INISIASI PATH KONFIGURASI FILE MAKANAN
-	char fileName[100] = "../../../../config/makanan.txt";
-    char fileResep[100] = "../../../../config/resep.txt";
+	char fileName[100] = "config/makanan.txt";
+    char fileResep[100] = "config/resep.txt";
 
 	// MELAKUKAN MEMBACA MAKANAN
     printf("/* Melakukan Proses BacaMakanan dan BacaResep */\n");

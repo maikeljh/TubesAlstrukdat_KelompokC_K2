@@ -74,7 +74,7 @@ int main(){
 	ListMakanan M;
 
 	// INISIASI PATH KONFIGURASI FILE MAKANAN
-	char fileName[100] = "../../../../config/makanan.txt";
+	char fileName[100] = "config/makanan.txt";
 
 	// MELAKUKAN MEMBACA MAKANAN
 	printf("/* Melakukan BacaMakanan */\n");
