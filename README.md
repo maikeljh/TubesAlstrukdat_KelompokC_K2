@@ -15,36 +15,54 @@ Berikut daftar isi dalam program ini:
 * Folder `config` berisi data makanan, resep, serta pemetaan map BNMO bersimulasi yang telah ditentukan.
 
 ## Prosedur Pemakaian Program
-> Program ini dikompilasi menggunakan C compiler *(gcc)*
+> Notes : Program ini dikompilasi menggunakan *Makefile*. Direkomendasikan untuk selalu mengompilasi ulang program sebelum menggunakan.
 
-Perhatikan bahwa sebagian besar interface pada program menggunakan modul *pcolor* yang (mungkin saja) tidak kompatibel dengan komputer Anda (Interface Text akan menjadi berantakan).
+Pastikan bahwa gcc sudah diinstall pada OS Anda (gunakan gcc MinGW).
 
-1. Untuk mengompilasi program jalankan
-```
-./build/main
-```
-2. Untuk menjalankan program melalui bash, jalankan
-```
+Berikut daftar isi prosedur pemakaian program ini:
 
+1. Untuk mengompilasi program utama, jalankan
 ```
-3. Untuk mengompilasi sebuah modul ADT, jalankan
+make main
 ```
-./build
+2. Untuk mengonpilasi seluruh program, jalankan
 ```
-
+make all
+```
+3. Untuk mengompilasi seluruh modul ADT, jalankan
+```
+make adt
+```
+4. Untuk menjalankan main program, jalankan
+```
+./build/main.exe
+```
+5. Untuk mengompilasi sebuah ADT 
+```
+make adt_<nama ADT>
+```
+6. Untuk menjalankan driver ADT sederhana, jalankan
+```
+./build/lib/adt/sederhana/main_<nama ADT>
+```
+7. Untuk menjalankan driver ADT tidak sederhana, jalankan
+```
+./build/lib/adt/non_sederhana/main_<nama ADT>
+```
 # Kontributor
 Program ini dibuat dalam rangka memenuhi salah satu tugas besar mata kuliah Algoritma dan Struktur Data. Program ini dibuat oleh (K02 Kelompok )
 1. Maggie Zeta Rosida `(13521117)`<br>
-
+Inisiasi, Splash Screen, Laporan
 2. Febryan Arota Hia `(13521120)`<br>
-
+Peta, ADT Notifikasi, ADT Matrix, ADT Point, ADT Stack, Driver-Driver ADT, Laporan
 3. Michael Jonathan Halim `(13521124)`<br>
-
+Main Program, ADT Tree, ADT Set, ADT Kulkas, Bonus, ADT - ADT Lainnya, Fry, Chop, Boil, Mix, Delivery, Command-Command Lainnya, Laporan
 4. Kenneth Dave Bahana `(13521145)`<br>
-
+ADT PrioQueueTime, ADT Makanan, ADT Kulkas, Driver-Driver ADT, Laporan, Makefile, README 
 5. Naufal Baldemar Ardanni `(13521154)`<br>
-
+ADT Time, Laporan
 6. Irgiansyah Mondo `(13521167)`<br>
+Buy, Wait, Laporan
 
 # Fitur/Command
 
