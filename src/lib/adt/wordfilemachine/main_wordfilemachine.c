@@ -16,9 +16,9 @@ int main(){
     POINT S,T,M,C,F,B;
     Tree Resep;
 
-    char fileMakanan[100] = "../../../../config/makanan.txt";
-    char fileResep[100] = "../../../../config/resep.txt";
-    char path[50] = "../../../../config/testPeta.txt";
+    char fileMakanan[100] = "config/makanan.txt";
+    char fileResep[100] = "config/resep.txt";
+    char path[50] = "config/testPeta.txt";
 
     printf("\n/* Membaca Konfigurasi File Makanan */\n");
     KumpulanMakanan = BacaMakanan(fileMakanan);
