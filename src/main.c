@@ -90,9 +90,9 @@ int main(){
     }
 
     // INISIASI PETA, MAKANAN, DAN RESEP
-    char fileMakanan[100] = "../config/makanan.txt";
-    char fileResep[100] = "../config/resep.txt";
-    char path[50] = "../config/testPeta.txt";
+    char fileMakanan[100] = "config/makanan.txt";
+    char fileResep[100] = "config/resep.txt";
+    char path[50] = "config/testPeta.txt";
     bacaPeta(path,&peta, &S, &T, &M, &C, &F, &B);
     KumpulanMakanan = BacaMakanan(fileMakanan);
     Resep = BacaResep(fileResep);
