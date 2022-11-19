@@ -1,4 +1,4 @@
-11
+12
 7
 Cabai
 0 10 20
@@ -76,3 +76,10 @@ Ayam Goreng
 0 0 20
 1 3
 Fry
+69
+Ayam Rebus
+0 10 15
+0 0 0
+0 0 20
+1 3
+Boil
