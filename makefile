@@ -36,7 +36,7 @@ all:
 
 	$(CC) $(dir_s)main_makanan.exe $(dir)sederhana/makanan/main_makanan.c $(dir_makanan) $(dir_time) $(dir_notifikasi) $(dir_wordm) $(dir_charm) $(dir_wordflm) $(dir_charflm) $(dir_tree)
 
-	$(CC) $(dir_s)main-point.exe $(dir)sederhana/point/main_point.c $(dir_point)
+	$(CC) $(dir_s)main_point.exe $(dir)sederhana/point/main_point.c $(dir_point)
 
 	$(CC) $(dir_s)main_simulator.exe $(dir)sederhana/simulator/main_simulator.c $(dir_simulator) $(dir_prioqueue) $(dir_wordm) $(dir_charm) $(dir_time) $(dir_point) $(dir_notifikasi)
 
@@ -65,7 +65,7 @@ adt:
 
 	$(CC) $(dir_s)main_makanan.exe $(dir)sederhana/makanan/main_makanan.c $(dir_makanan) $(dir_time) $(dir_notifikasi) $(dir_wordm) $(dir_charm) $(dir_wordflm) $(dir_charflm) $(dir_tree)
 
-	$(CC) $(dir_s)main-point.exe $(dir)sederhana/point/main_point.c $(dir_point)
+	$(CC) $(dir_s)main_point.exe $(dir)sederhana/point/main_point.c $(dir_point)
 
 	$(CC) $(dir_s)main_simulator.exe $(dir)sederhana/simulator/main_simulator.c $(dir_simulator) $(dir_prioqueue) $(dir_wordm) $(dir_charm) $(dir_time) $(dir_point) $(dir_notifikasi)
 

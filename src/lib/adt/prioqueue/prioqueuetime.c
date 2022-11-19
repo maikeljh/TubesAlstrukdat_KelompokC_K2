@@ -265,6 +265,9 @@ int CariMakanan(PrioQueueTime Q, int id){
             idx = (idx+1) % MaxEl(Q);
         }
     }
+    if (ID(Elmt(Q, idx)) == id){
+        found = true;
+    }
     if (!found){
         idx = -1;
     }

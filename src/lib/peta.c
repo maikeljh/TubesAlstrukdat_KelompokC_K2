@@ -81,7 +81,7 @@ void displayPeta(Matrix peta, POINT S) {
 
 boolean isBlocked(Matrix peta, int x, int y) {
   /*Memeriksa apakah koordinat x,y pada peta dapat dilewati*/
-  return (ELMT(peta, x, y) != ' ');
+  return (ELMT(peta, x, y) != ' ' && ELMT(peta, x, y) != 'S');
 }
 
 void move (Matrix peta, int direction, POINT *S, boolean *moved) {
