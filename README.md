@@ -35,7 +35,10 @@ make adt
 ```
 4. Untuk menjalankan main program, jalankan
 ```
-./build/main.exe
+cd build
+```
+```
+./main.exe
 ```
 5. Untuk mengompilasi sebuah ADT 
 ```
@@ -43,11 +46,17 @@ make adt_<nama ADT>
 ```
 6. Untuk menjalankan driver ADT sederhana, jalankan
 ```
-./build/lib/adt/sederhana/main_<nama ADT>
+cd build
+```
+```
+./lib/adt/sederhana/main_<nama ADT>.exe
 ```
 7. Untuk menjalankan driver ADT tidak sederhana, jalankan
 ```
-./build/lib/adt/non_sederhana/main_<nama ADT>
+cd build
+```
+```
+./lib/adt/non_sederhana/main_<nama ADT>.exe
 ```
 # Kontributor
 Program ini dibuat dalam rangka memenuhi salah satu tugas besar mata kuliah Algoritma dan Struktur Data. Program ini dibuat oleh (K02 Kelompok )
