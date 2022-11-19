@@ -7,7 +7,7 @@ Game ini adalah penerapan *abstract data type* dalam bahasa C.
 
 ## Struktur Folder
 Berikut daftar isi dalam program ini:
-* Folder `doc` berisi laporan dan notulensi rapat internal kelompok
+* Folder `doc` berisi laporan
 * Folder `src` berisi source program. Pada folder ini terdiri atas:
   * file program utama `main.c`
   * Folder `lib` berisi pustaka, driver pustaka, dan file header ADT
